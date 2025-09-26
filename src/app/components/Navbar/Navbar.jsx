@@ -28,7 +28,7 @@ export default function Navbar() {
           }
         });
       },
-      { threshold: 0.5, rootMargin: "-100px 0px -100px 0px" }
+      { threshold: 0.3, rootMargin: "-50px 0px -50px 0px" }
     );
 
     sections.forEach((section) => {
@@ -136,7 +136,7 @@ export default function Navbar() {
 
             {/* Resume/CV Download Button */}
             <motion.a
-              href="/resume.pdf"
+              href="/shovu_resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
@@ -218,7 +218,7 @@ export default function Navbar() {
                 ))}
                 <motion.a
                   variants={itemVariants}
-                  href="/resume.pdf"
+                  href="/shovu_resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`block px-4 py-3 text-lg font-medium transition-colors border-t ${

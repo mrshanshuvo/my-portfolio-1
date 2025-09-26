@@ -27,19 +27,19 @@ export default function Contact() {
     {
       icon: FaEnvelope,
       label: "Email",
-      value: "your.email@domain.com",
-      link: "mailto:your.email@domain.com",
+      value: "mrshanshuvo@gmail.com",
+      link: "mailto:mrshanshuvo@gmail.com",
     },
     {
       icon: FaPhone,
       label: "Phone",
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
+      value: "+88017 94280136",
+      link: "tel:+8801794280136",
     },
     {
       icon: FaMapMarkerAlt,
       label: "Location",
-      value: "Dhaka, Bangladesh",
+      value: "12/C/1, Girza Road, Borobagh, Mirpur, Dhaka, Bangladesh",
       link: null,
     },
   ];
@@ -48,19 +48,19 @@ export default function Contact() {
     {
       icon: FaLinkedin,
       label: "LinkedIn",
-      url: "https://linkedin.com/in/yourusername",
+      url: "https://linkedin.com/in/shahidhasanshovu",
       color: "hover:text-blue-600",
     },
     {
       icon: FaGithub,
       label: "GitHub",
-      url: "https://github.com/yourusername",
+      url: "https://github.com/mrshanshuvo",
       color: "hover:text-gray-900 dark:hover:text-white",
     },
     {
       icon: FaTwitter,
       label: "Twitter",
-      url: "https://twitter.com/yourusername",
+      url: "https://twitter.com/mrshanshuvo",
       color: "hover:text-blue-400",
     },
   ];
@@ -234,7 +234,7 @@ export default function Contact() {
                   id="name"
                   name="name"
                   required
-                  placeholder="John Doe"
+                  placeholder="Shahid Hasan Shovu"
                   className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all"
                 />
               </div>
@@ -250,7 +250,7 @@ export default function Contact() {
                   id="email"
                   name="email"
                   required
-                  placeholder="john@example.com"
+                  placeholder="shahid@example.com"
                   className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all"
                 />
               </div>
@@ -266,7 +266,7 @@ export default function Contact() {
                   name="message"
                   required
                   rows="5"
-                  placeholder="Hello! I'd like to discuss..."
+                  placeholder="Hello! I’d like to discuss a project collaboration or a web development task."
                   className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none transition-all"
                 ></textarea>
               </div>
