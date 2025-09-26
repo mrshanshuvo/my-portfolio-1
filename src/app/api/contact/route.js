@@ -1,26 +1,51 @@
 import nodemailer from "nodemailer";
 
-// Helper: verify Google reCAPTCHA v2
+/**
+ * Verify Google reCAPTCHA v2 token
+ * @param {string} token - reCAPTCHA token from client
+ * @returns {Promise<boolean>} - true if human, false otherwise
+ */
 async function verifyRecaptcha(token) {
-  const res = await fetch(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
-    { method: "POST" }
-  );
-  const data = await res.json();
-  if (!data.success) {
-    console.error("reCAPTCHA verification failed:", data["error-codes"]);
+  try {
+    const res = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+      { method: "POST" }
+    );
+    const data = await res.json();
+
+    if (!data.success) {
+      console.warn("reCAPTCHA verification failed:", data["error-codes"]);
+    }
+
+    return data.success; // v2 only returns success/failure
+  } catch (err) {
+    console.error("Error verifying reCAPTCHA:", err);
+    return false;
   }
-  return data.success; // v2 only checks success
 }
 
+/**
+ * Contact API POST handler
+ * Expects JSON: { name, email, message, honeypot, recaptchaToken }
+ */
 export async function POST(req) {
   try {
     const { name, email, message, honeypot, recaptchaToken } = await req.json();
 
     // ----------------- Spam protection -----------------
     if (honeypot) {
-      // Bot detected via hidden field
+      // Bot detected via hidden field – silently accept
       return new Response(JSON.stringify({ success: true }), { status: 200 });
+    }
+
+    if (!recaptchaToken) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "reCAPTCHA token is missing.",
+        }),
+        { status: 400 }
+      );
     }
 
     const isHuman = await verifyRecaptcha(recaptchaToken);
@@ -50,7 +75,7 @@ export async function POST(req) {
       );
     }
 
-    // Sanitize message (basic)
+    // ----------------- Sanitize message -----------------
     const sanitizedMessage = message.replace(/<\/?[^>]+(>|$)/g, "");
 
     // ----------------- Nodemailer setup -----------------
@@ -62,7 +87,7 @@ export async function POST(req) {
       },
     });
 
-    // Send email
+    // ----------------- Send email -----------------
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       replyTo: email,
@@ -79,7 +104,7 @@ export async function POST(req) {
   } catch (error) {
     console.error("Contact API Error:", error);
     return new Response(
-      JSON.stringify({ success: false, error: "Something went wrong." }),
+      JSON.stringify({ success: false, error: "Internal server error." }),
       { status: 500 }
     );
   }
