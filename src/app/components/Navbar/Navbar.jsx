@@ -97,15 +97,15 @@ export default function Navbar() {
             onClick={() => smoothScroll("home")}
             className="flex items-center space-x-2 group"
           >
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">S</span>
+            <div className="w-12 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-lg">SHS</span>
             </div>
             <span
               className={`font-bold text-xl transition-colors ${
                 scrolled ? "text-gray-900 dark:text-white" : "text-white"
               } group-hover:text-blue-500`}
             >
-              Shuvo
+              Shovu
             </span>
           </motion.button>
 

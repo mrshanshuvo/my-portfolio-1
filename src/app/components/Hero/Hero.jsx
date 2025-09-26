@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
+import Image from "next/image";
+import src from "../../../../public/20240812_1611281.jpg";
 
 export default function Hero() {
   const scrollToProjects = () => {
@@ -15,12 +17,12 @@ export default function Hero() {
   const socialLinks = [
     {
       icon: FaGithub,
-      href: "https://github.com/yourusername",
+      href: "https://github.com/mrshanshuvo",
       label: "GitHub",
     },
     {
       icon: FaLinkedin,
-      href: "https://linkedin.com/in/yourusername",
+      href: "https://linkedin.com/in/shahidhasanshovu",
       label: "LinkedIn",
     },
     {
@@ -30,7 +32,7 @@ export default function Hero() {
     },
     {
       icon: FaEnvelope,
-      href: "mailto:your.email@domain.com",
+      href: "mailto:mrshanshuvo@gmail.com",
       label: "Email",
     },
   ];
@@ -61,24 +63,24 @@ export default function Hero() {
             transition={{ type: "spring", stiffness: 300 }}
             className="relative inline-block mb-8"
           >
-            <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1">
-              <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden border-4 border-gray-900">
-                {/* Replace with your actual image */}
-                <div className="w-full h-full bg-gray-700 flex items-center justify-center text-white text-4xl font-bold">
-                  S
-                </div>
+            {/* Gradient border */}
+            <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-lg">
+              {/* Profile image */}
+              <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden border-4 border-gray-900 relative">
+                <Image
+                  src={src}
+                  alt={"Shuvo's Profile Picture"}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 14rem, 16rem"
+                />
               </div>
             </div>
+
+            {/* Animated pulsating ring */}
             <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 0.8, 0.5],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="absolute inset-0 rounded-full border-2 border-blue-400"
             />
           </motion.div>
