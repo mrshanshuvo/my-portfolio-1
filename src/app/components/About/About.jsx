@@ -1,6 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import {
   FaCode,
@@ -64,23 +63,12 @@ export default function About() {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
   return (
@@ -103,7 +91,7 @@ export default function About() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Content */}
           <motion.div
             variants={containerVariants}
@@ -134,10 +122,29 @@ export default function About() {
                 , and more. I love transforming complex problems into simple,
                 beautiful, and intuitive solutions.
               </p>
+            </motion.div>
+
+            {/* Personal Journey + Hobbies */}
+            <motion.div variants={itemVariants} className="mb-8">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                A Bit About My Journey
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
+                I started my programming journey in high school, experimenting
+                with Python and building small apps for fun. Over time, I
+                discovered a passion for full-stack development and machine
+                learning, which led me to work on projects like MCMS, ProFast,
+                and WhereIsIt.
+              </p>
+              <p className="text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
+                I enjoy creating intuitive web applications that solve real
+                problems and learning new technologies that push my limits.
+                Every project is a chance to grow and challenge myself.
+              </p>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                When I'm not coding, you'll find me exploring new technologies,
-                contributing to open-source projects, or sharing knowledge with
-                the developer community.
+                Outside coding, I love reading tech blogs, exploring AI
+                innovations, playing badminton, and traveling to discover new
+                cultures.
               </p>
             </motion.div>
 
@@ -170,7 +177,7 @@ export default function About() {
               {education.map((edu, index) => (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm"
+                  className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm mb-4"
                 >
                   <h5 className="font-semibold text-gray-900 dark:text-white">
                     {edu.degree}
@@ -199,7 +206,6 @@ export default function About() {
                 Technical Skills
               </h4>
 
-              {/* Skills Grid */}
               <div className="space-y-6">
                 {skills.map((skill, index) => (
                   <motion.div
@@ -209,7 +215,10 @@ export default function About() {
                   >
                     <div className="flex justify-between items-center mb-2">
                       <div className="flex items-center gap-3">
-                        <skill.icon className="text-blue-600 text-xl" />
+                        <skill.icon
+                          className="text-blue-600 text-xl"
+                          aria-label={skill.name}
+                        />
                         <div>
                           <span className="font-medium text-gray-900 dark:text-white">
                             {skill.name}
@@ -224,7 +233,6 @@ export default function About() {
                       </span>
                     </div>
 
-                    {/* Progress Bar */}
                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                       <motion.div
                         initial={{ width: 0 }}
@@ -232,7 +240,7 @@ export default function About() {
                           isInView ? { width: `${skill.level}%` } : { width: 0 }
                         }
                         transition={{ duration: 1, delay: index * 0.1 }}
-                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
+                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full will-change-transform"
                       />
                     </div>
                   </motion.div>
@@ -240,7 +248,6 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* Call to Action */}
             <motion.div
               variants={itemVariants}
               className="text-center lg:text-left"
@@ -268,11 +275,10 @@ export default function About() {
               Technologies I Work With
             </h4>
           </div>
-          <div className="flex overflow-hidden space-x-12 py-4">
+          <div className="overflow-hidden relative group">
             <motion.div
-              animate={{
-                x: [0, -1000],
-              }}
+              className="flex space-x-12 py-4"
+              animate={{ x: [0, -1000] }}
               transition={{
                 x: {
                   repeat: Infinity,
@@ -281,7 +287,7 @@ export default function About() {
                   ease: "linear",
                 },
               }}
-              className="flex space-x-12"
+              whileHover={{ x: 0 }} // pause on hover
             >
               {[
                 "React",
