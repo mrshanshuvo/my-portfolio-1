@@ -100,13 +100,13 @@ export default function Navbar() {
             <div className="w-12 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-lg">SHS</span>
             </div>
-            <span
+            {/* <span
               className={`font-bold text-xl transition-colors ${
                 scrolled ? "text-gray-900 dark:text-white" : "text-white"
               } group-hover:text-blue-500`}
             >
               Shovu
-            </span>
+            </span> */}
           </motion.button>
 
           {/* Desktop Navigation */}
