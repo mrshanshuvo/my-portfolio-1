@@ -40,7 +40,7 @@ export default function Navbar() {
   }, []);
 
   const smoothScroll = (sectionId) => {
-    setIsOpen(false);
+    setIsOpen(false); // closes menu
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -57,7 +57,7 @@ export default function Navbar() {
   const menuVariants = {
     closed: {
       opacity: 0,
-      height: 0,
+      maxHeight: 0, // instead of height: 0
       transition: {
         duration: 0.3,
         ease: "easeInOut",
@@ -65,7 +65,7 @@ export default function Navbar() {
     },
     open: {
       opacity: 1,
-      height: "auto",
+      maxHeight: 500, // instead of height: "auto"; adjust if menu is taller
       transition: {
         duration: 0.3,
         ease: "easeInOut",
@@ -100,13 +100,6 @@ export default function Navbar() {
             <div className="w-12 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-lg">SHS</span>
             </div>
-            {/* <span
-              className={`font-bold text-xl transition-colors ${
-                scrolled ? "text-gray-900 dark:text-white" : "text-white"
-              } group-hover:text-blue-500`}
-            >
-              Shovu
-            </span> */}
           </motion.button>
 
           {/* Desktop Navigation */}
@@ -193,7 +186,7 @@ export default function Navbar() {
               initial="closed"
               animate="open"
               exit="closed"
-              className={`md:hidden overflow-hidden rounded-lg mt-2 ${
+              className={`md:hidden z-50 overflow-hidden rounded-lg mt-2 ${
                 scrolled
                   ? "bg-white/95 backdrop-blur-md shadow-xl"
                   : "bg-gray-900/95 backdrop-blur-md"
