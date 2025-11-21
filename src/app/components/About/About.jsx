@@ -240,7 +240,7 @@ export default function About() {
                           isInView ? { width: `${skill.level}%` } : { width: 0 }
                         }
                         transition={{ duration: 1, delay: index * 0.1 }}
-                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full will-change-transform"
+                        className="bg-linear-to-r from-blue-500 to-purple-600 h-2 rounded-full will-change-transform"
                       />
                     </div>
                   </motion.div>

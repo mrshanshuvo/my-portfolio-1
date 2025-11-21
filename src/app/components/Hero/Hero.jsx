@@ -40,7 +40,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen pt-30 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900"
+      className="min-h-screen pt-30 flex items-center justify-center relative overflow-hidden bg-linear-to-br from-gray-900 via-blue-900 to-gray-900"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -64,7 +64,7 @@ export default function Hero() {
             className="relative inline-block mb-8"
           >
             {/* Gradient border */}
-            <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-lg">
+            <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-linear-to-r from-blue-500 to-purple-600 p-1 shadow-lg">
               {/* Profile image */}
               <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden border-4 border-gray-900 relative">
                 <Image
@@ -93,7 +93,7 @@ export default function Hero() {
             className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4"
           >
             Hi, I'm{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500">
               Shuvo
             </span>
           </motion.h1>
@@ -148,7 +148,7 @@ export default function Hero() {
               }}
               whileTap={{ scale: 0.95 }}
               onClick={scrollToProjects}
-              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg transition-all duration-200 flex items-center gap-2"
+              className="px-8 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg transition-all duration-200 flex items-center gap-2"
             >
               View My Work
               <motion.span

@@ -97,7 +97,7 @@ export default function Navbar() {
             onClick={() => smoothScroll("home")}
             className="flex items-center space-x-2 group"
           >
-            <div className="w-12 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+            <div className="w-12 h-10 bg-linear-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-lg">SHS</span>
             </div>
           </motion.button>

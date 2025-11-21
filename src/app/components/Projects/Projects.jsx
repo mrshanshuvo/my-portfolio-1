@@ -49,7 +49,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={ref}
-      className="relative py-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 overflow-hidden"
+      className="relative py-24 bg-linear-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 overflow-hidden"
     >
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -78,15 +78,15 @@ export default function Projects() {
 
           <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
             Featured{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Projects
             </span>
           </h2>
 
           <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="w-12 h-1 bg-gradient-to-r from-transparent to-blue-600 rounded-full"></div>
+            <div className="w-12 h-1 bg-linear-to-r from-transparent to-blue-600 rounded-full"></div>
             <div className="w-12 h-1 bg-blue-600 rounded-full"></div>
-            <div className="w-12 h-1 bg-gradient-to-r from-blue-600 to-transparent rounded-full"></div>
+            <div className="w-12 h-1 bg-linear-to-r from-blue-600 to-transparent rounded-full"></div>
           </div>
 
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -108,13 +108,13 @@ export default function Projects() {
               onClick={() => setActiveCategory(category)}
               className={`group relative px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
                 activeCategory === category
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30 scale-105"
+                  ? "bg-linear-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30 scale-105"
                   : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:shadow-md border border-gray-200 dark:border-gray-700"
               }`}
             >
               <span className="relative z-10">{category}</span>
               {activeCategory !== category && (
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-blue-600/10 to-purple-600/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               )}
             </button>
           ))}
@@ -140,7 +140,7 @@ export default function Projects() {
                 <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 dark:border-gray-700 h-full flex flex-col">
                   {/* Image Container */}
                   <div className="relative overflow-hidden h-56">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <Image
                       src={project.image}
                       alt={project.title}
@@ -156,7 +156,7 @@ export default function Projects() {
                           initial={{ scale: 0, rotate: -180 }}
                           animate={{ scale: 1, rotate: 0 }}
                           transition={{ delay: 0.2 + index * 0.1 }}
-                          className="flex items-center gap-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg"
+                          className="flex items-center gap-1 bg-linear-to-r from-yellow-400 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg"
                         >
                           <FaStar className="text-xs" />
                           Featured
@@ -191,12 +191,12 @@ export default function Projects() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 flex flex-col flex-grow">
+                  <div className="p-6 flex flex-col grow">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 line-clamp-1">
                       {project.title}
                     </h3>
 
-                    <p className="text-gray-600 dark:text-gray-400 mb-5 line-clamp-2 leading-relaxed flex-grow">
+                    <p className="text-gray-600 dark:text-gray-400 mb-5 line-clamp-2 leading-relaxed grow">
                       {project.description}
                     </p>
 
@@ -207,7 +207,7 @@ export default function Projects() {
                         .map((TechIcon, techIndex) => (
                           <div
                             key={techIndex}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-700 rounded-lg text-xs font-medium hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-600 dark:hover:to-gray-600 transition-all duration-200 border border-gray-200 dark:border-gray-600"
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-linear-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-700 rounded-lg text-xs font-medium hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-600 dark:hover:to-gray-600 transition-all duration-200 border border-gray-200 dark:border-gray-600"
                           >
                             <TechIcon className="text-blue-600 dark:text-blue-400 text-sm" />
                             <span className="text-gray-700 dark:text-gray-300">
@@ -240,7 +240,7 @@ export default function Projects() {
                     {/* CTA Button */}
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="group/btn relative inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 hover:scale-[1.02]"
+                      className="group/btn relative inline-flex items-center justify-center px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 hover:scale-[1.02]"
                     >
                       <span className="relative z-10 flex items-center gap-2">
                         View Details
@@ -258,12 +258,12 @@ export default function Projects() {
                           />
                         </svg>
                       </span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute inset-0 bg-linear-to-r from-purple-600 to-blue-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                     </Link>
                   </div>
 
                   {/* Hover Border Effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 -z-10 blur-xl transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 -z-10 blur-xl transition-opacity duration-500"></div>
                 </div>
               </motion.div>
             ))}
