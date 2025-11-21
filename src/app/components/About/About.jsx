@@ -9,6 +9,7 @@ import {
   FaGraduationCap,
   FaAward,
   FaCalendarAlt,
+  FaCheckCircle,
 } from "react-icons/fa";
 import { SiTensorflow, SiDjango, SiReact, SiNodedotjs } from "react-icons/si";
 
@@ -61,49 +62,108 @@ export default function About() {
     { number: "5", label: "Certifications" },
   ];
 
+  const highlights = [
+    "Building scalable full-stack applications",
+    "Machine Learning & AI integration",
+    "Clean code & best practices advocate",
+    "Continuous learner & tech enthusiast",
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
   };
 
   return (
-    <section id="about" ref={ref} className="py-24 bg-white dark:bg-slate-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="about"
+      ref={ref}
+      className="relative py-24 bg-linear-to-b from-white to-slate-50 dark:from-slate-950 dark:to-slate-900 overflow-hidden"
+    >
+      {/* Decorative Elements */}
+      <div className="absolute top-20 right-0 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={isInView ? { scale: 1 } : { scale: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-block mb-4 px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-full border border-emerald-200 dark:border-emerald-800"
+          >
+            <span className="text-emerald-600 dark:text-emerald-400 text-sm font-semibold tracking-wide uppercase">
+              Get to Know Me
+            </span>
+          </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
             About{" "}
             <span className="text-emerald-600 dark:text-emerald-400">Me</span>
           </h2>
-          <div className="w-20 h-1 bg-emerald-600 dark:bg-emerald-400 mx-auto mb-4"></div>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Passionate developer crafting digital experiences that make a
             difference
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left Column - Content */}
+        {/* Stats Cards - Top */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="relative group"
+            >
+              <div className="text-center p-6 bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-400 transition-all duration-300 shadow-sm hover:shadow-xl">
+                <div className="text-4xl font-bold bg-linear-to-r from-emerald-600 to-emerald-500 dark:from-emerald-400 dark:to-emerald-500 bg-clip-text text-transparent mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                  {stat.label}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
+          {/* Left Column - About & Education */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
+            className="space-y-8"
           >
-            {/* Introduction */}
-            <motion.div variants={itemVariants} className="mb-10">
-              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
-                Hello! I'm Shuvo 👋
-              </h3>
+            {/* Introduction Card */}
+            <motion.div
+              variants={itemVariants}
+              className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-linear-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center text-white text-2xl shadow-lg">
+                  👋
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                  Hello! I'm Shuvo
+                </h3>
+              </div>
               <p className="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
                 I'm a passionate{" "}
                 <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
@@ -112,7 +172,7 @@ export default function About() {
                 student at Green University of Bangladesh, specializing in
                 full-stack development and machine learning.
               </p>
-              <p className="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                 With over{" "}
                 <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
                   2 years
@@ -127,68 +187,59 @@ export default function About() {
               </p>
             </motion.div>
 
-            {/* Personal Journey */}
-            <motion.div variants={itemVariants} className="mb-10">
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">
-                My Journey
-              </h3>
-              <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
-                I started my programming journey in high school, experimenting
-                with Python and building small apps for fun. Over time, I
-                discovered a passion for full-stack development and machine
-                learning, which led me to work on projects like MCMS, ProFast,
-                and WhereIsIt.
-              </p>
-              <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
-                I enjoy creating intuitive web applications that solve real
-                problems and learning new technologies that push my limits.
-                Every project is a chance to grow and challenge myself.
-              </p>
-              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                Outside coding, I love reading tech blogs, exploring AI
-                innovations, playing badminton, and traveling to discover new
-                cultures.
-              </p>
-            </motion.div>
-
-            {/* Stats */}
+            {/* Highlights */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-2 gap-4 mb-10"
+              className="bg-linear-to-br from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 rounded-2xl p-8 border border-emerald-200 dark:border-emerald-800"
             >
-              {stats.map((stat, index) => (
-                <div
-                  key={index}
-                  className="text-center p-6 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500/30 dark:hover:border-emerald-400/30 transition-colors"
-                >
-                  <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-1">
-                    {stat.number}
-                  </div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <FaCheckCircle className="text-emerald-600 dark:text-emerald-400" />
+                What I Bring to the Table
+              </h4>
+              <div className="space-y-3">
+                {highlights.map((highlight, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={
+                      isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
+                    }
+                    transition={{ delay: 0.5 + index * 0.1 }}
+                    className="flex items-start gap-3"
+                  >
+                    <div className="w-2 h-2 bg-emerald-600 dark:bg-emerald-400 rounded-full mt-2 shrink-0"></div>
+                    <span className="text-slate-700 dark:text-slate-300">
+                      {highlight}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
 
-            {/* Education */}
+            {/* Education Card */}
             <motion.div variants={itemVariants}>
-              <h4 className="text-xl font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                <FaGraduationCap className="text-emerald-600 dark:text-emerald-400" />
-                Education
-              </h4>
               {education.map((edu, index) => (
                 <div
                   key={index}
-                  className="bg-slate-50 dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-800"
+                  className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-shadow"
                 >
-                  <h5 className="font-semibold text-slate-900 dark:text-white mb-1">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center">
+                      <FaGraduationCap className="text-emerald-600 dark:text-emerald-400 text-2xl" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-slate-900 dark:text-white">
+                        Education
+                      </h4>
+                    </div>
+                  </div>
+                  <h5 className="font-semibold text-slate-900 dark:text-white mb-2">
                     {edu.degree}
                   </h5>
-                  <p className="text-emerald-600 dark:text-emerald-400 mb-2 font-medium">
+                  <p className="text-emerald-600 dark:text-emerald-400 mb-3 font-medium">
                     {edu.institution}
                   </p>
-                  <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-2">
+                  <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-3">
                     <FaCalendarAlt />
                     <span>{edu.period}</span>
                   </div>
@@ -206,76 +257,79 @@ export default function About() {
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
-            <motion.div variants={itemVariants} className="mb-10">
-              <h4 className="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
+            <motion.div
+              variants={itemVariants}
+              className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
                 Technical Skills
               </h4>
 
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {skills.map((skill, index) => (
                   <motion.div
                     key={skill.name}
                     variants={itemVariants}
                     className="skill-item"
                   >
-                    <div className="flex justify-between items-center mb-3">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="relative">
+                        <div className="w-14 h-14 bg-linear-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/30 rounded-xl flex items-center justify-center border border-emerald-200 dark:border-emerald-700">
                           <skill.icon
-                            className="text-emerald-600 dark:text-emerald-400 text-xl"
+                            className="text-emerald-600 dark:text-emerald-400 text-2xl"
                             aria-label={skill.name}
                           />
                         </div>
-                        <div>
-                          <span className="font-medium text-slate-900 dark:text-white block">
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-semibold text-slate-900 dark:text-white">
                             {skill.name}
                           </span>
-                          <div className="text-xs text-slate-500 dark:text-slate-400">
-                            {skill.tech}
-                          </div>
+                          <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1 rounded-full">
+                            {skill.level}%
+                          </span>
+                        </div>
+                        <div className="text-xs text-slate-500 dark:text-slate-400 mb-3">
+                          {skill.tech}
+                        </div>
+                        <div
+                          className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden"
+                          role="progressbar"
+                          aria-valuenow={skill.level}
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        >
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={
+                              isInView
+                                ? { width: `${skill.level}%` }
+                                : { width: 0 }
+                            }
+                            transition={{
+                              duration: 1.2,
+                              delay: index * 0.15,
+                              ease: "easeOut",
+                            }}
+                            className="bg-linear-to-r from-emerald-500 to-emerald-600 dark:from-emerald-400 dark:to-emerald-500 h-2.5 rounded-full shadow-lg shadow-emerald-500/50"
+                          />
                         </div>
                       </div>
-                      <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
-                        {skill.level}%
-                      </span>
-                    </div>
-
-                    <div
-                      className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 overflow-hidden"
-                      role="progressbar"
-                      aria-valuenow={skill.level}
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    >
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={
-                          isInView ? { width: `${skill.level}%` } : { width: 0 }
-                        }
-                        transition={{
-                          duration: 1,
-                          delay: index * 0.1,
-                          ease: "easeOut",
-                        }}
-                        className="bg-linear-to-r from-emerald-500 to-emerald-600 dark:from-emerald-400 dark:to-emerald-500 h-2 rounded-full"
-                      />
                     </div>
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
 
-            <motion.div
-              variants={itemVariants}
-              className="text-center lg:text-left"
-            >
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 dark:bg-emerald-500 text-white font-medium rounded-lg hover:bg-emerald-700 dark:hover:bg-emerald-600 transition-colors duration-200 shadow-lg shadow-emerald-600/20"
-              >
-                <FaAward />
-                Let's Work Together
-              </a>
+              <motion.div variants={itemVariants} className="mt-10">
+                <a
+                  href="#contact"
+                  className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-linear-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/30 hover:shadow-xl hover:shadow-emerald-600/40 hover:scale-[1.02]"
+                >
+                  <FaAward className="text-xl" />
+                  Let's Work Together
+                </a>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
@@ -285,14 +339,14 @@ export default function About() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-20"
+          className="mt-8"
         >
           <div className="text-center mb-8">
             <h4 className="text-xl font-semibold text-slate-900 dark:text-white">
               Technologies I Work With
             </h4>
           </div>
-          <div className="overflow-hidden relative bg-slate-50 dark:bg-slate-900 rounded-xl py-6 border border-slate-200 dark:border-slate-800">
+          <div className="overflow-hidden relative bg-white dark:bg-slate-900 rounded-2xl py-8 border border-slate-200 dark:border-slate-800 shadow-sm">
             <motion.div
               className="flex space-x-12 px-6"
               animate={{ x: [0, -1000] }}
@@ -300,7 +354,7 @@ export default function About() {
                 x: {
                   repeat: Infinity,
                   repeatType: "loop",
-                  duration: 20,
+                  duration: 25,
                   ease: "linear",
                 },
               }}
@@ -316,10 +370,14 @@ export default function About() {
                 "TensorFlow",
                 "Git",
                 "Tailwind CSS",
+                "TypeScript",
+                "PostgreSQL",
+                "AWS",
+                "Docker",
               ].map((tech, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2 text-slate-600 dark:text-slate-400 font-medium whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap"
                 >
                   <FaCode className="text-emerald-600 dark:text-emerald-400" />
                   <span>{tech}</span>
