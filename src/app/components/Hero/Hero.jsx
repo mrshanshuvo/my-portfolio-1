@@ -1,10 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 import Image from "next/image";
-import src from "../../../../public/20240812_1611281.jpg";
 
 export default function Hero() {
   const scrollToProjects = () => {
@@ -40,74 +39,78 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen pt-30 flex items-center justify-center relative overflow-hidden bg-linear-to-br from-gray-900 via-blue-900 to-gray-900"
+      className="min-h-screen pt-20 flex items-center justify-center relative overflow-hidden bg-linear-to-br from-slate-950 via-slate-900 to-slate-950"
     >
-      {/* Animated Background Elements */}
+      {/* Subtle Grid Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
+
+      {/* Gradient Orbs */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-40 left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse"></div>
+        <div
+          className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-8"
+          transition={{ duration: 0.6 }}
         >
           {/* Profile Image */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="relative inline-block mb-8"
           >
-            {/* Gradient border */}
-            <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-linear-to-r from-blue-500 to-purple-600 p-1 shadow-lg">
-              {/* Profile image */}
-              <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden border-4 border-gray-900 relative">
+            <div className="relative w-40 h-40 md:w-48 md:h-48">
+              {/* Gradient ring */}
+              <div className="absolute inset-0 bg-linear-to-r from-emerald-500 to-blue-500 rounded-full animate-spin-slow"></div>
+              <div className="absolute inset-1 bg-slate-950 rounded-full"></div>
+
+              {/* Image container */}
+              <div className="absolute inset-2 rounded-full overflow-hidden border-2 border-emerald-500/20">
                 <Image
-                  src={src}
-                  alt={"Shuvo's Profile Picture"}
-                  fill
+                  src="/20240812_1611281.jpg"
+                  alt="Shahid Hasan Shuvo - Full Stack Developer"
+                  width={192}
+                  height={192}
                   className="object-cover"
-                  sizes="(max-width: 768px) 14rem, 16rem"
+                  sizes="(max-width: 768px) 10rem, 12rem"
+                  priority
                 />
               </div>
             </div>
-
-            {/* Animated pulsating ring */}
-            <motion.div
-              animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 rounded-full border-2 border-blue-400"
-            />
           </motion.div>
 
-          {/* Greeting Text */}
-          <motion.h1
+          {/* Name & Title */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4"
+            transition={{ delay: 0.3, duration: 0.6 }}
           >
-            Hi, I'm{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-500">
-              Shuvo
-            </span>
-          </motion.h1>
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-3 tracking-tight">
+              Shahid Hasan{" "}
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-blue-500">
+                Shuvo
+              </span>
+            </h1>
+          </motion.div>
 
-          {/* Typewriter Effect */}
+          {/* Typewriter */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-6 h-12"
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-xl md:text-2xl text-slate-400 mb-6 h-8 font-medium min-h-8"
           >
             <TypeAnimation
               sequence={[
-                "Full-Stack Developer",
+                "Full-Stack Web Developer",
                 2000,
                 "Computer Engineer",
                 2000,
@@ -118,8 +121,8 @@ export default function Hero() {
               ]}
               wrapper="span"
               speed={50}
+              deletionSpeed={65}
               repeat={Infinity}
-              className="font-semibold"
             />
           </motion.div>
 
@@ -127,45 +130,44 @@ export default function Hero() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed"
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            I build exceptional digital experiences that are fast, accessible,
-            visually appealing, and responsive. Let's bring your ideas to life!
+            Crafting exceptional digital experiences with clean code and modern
+            technologies. Specialized in building scalable web applications that
+            make an impact.
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
             <motion.button
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 10px 30px -10px rgba(59, 130, 246, 0.5)",
-              }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
               onClick={scrollToProjects}
-              className="px-8 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg transition-all duration-200 flex items-center gap-2"
+              className="group px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-all duration-200 flex items-center gap-2 shadow-lg shadow-emerald-600/20"
             >
               View My Work
               <motion.span
-                animate={{ x: [0, 5, 0] }}
+                animate={{ y: [0, 3, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
+                className="group-hover:translate-y-1 transition-transform"
               >
                 ↓
               </motion.span>
             </motion.button>
 
             <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
               href="/shovu_resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3 border-2 border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm"
+              className="px-8 py-3 border border-slate-700 text-slate-300 hover:text-white hover:border-slate-600 font-medium rounded-lg transition-all duration-200 hover:bg-slate-800/50"
             >
               Download Resume
             </motion.a>
@@ -175,8 +177,8 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
-            className="flex justify-center space-x-6"
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="flex justify-center gap-4"
           >
             {socialLinks.map((social, index) => (
               <motion.a
@@ -184,15 +186,12 @@ export default function Hero() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{
-                  scale: 1.2,
-                  y: -5,
-                }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={{ y: -3, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.3 + index * 0.1 }}
-                className="p-3 text-gray-400 hover:text-white transition-colors duration-200 rounded-full bg-white/5 backdrop-blur-sm hover:bg-white/10"
+                transition={{ delay: 0.8 + index * 0.1 }}
+                className="p-3 text-slate-400 hover:text-emerald-400 transition-colors duration-200 rounded-lg bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-emerald-500/30"
                 aria-label={social.label}
               >
                 <social.icon size={20} />
@@ -205,22 +204,32 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="w-6 h-10 border-2 border-slate-600 rounded-full flex justify-center p-2"
           >
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-3 bg-white/50 rounded-full mt-2"
-            />
+            <div className="w-1 h-2 bg-emerald-400 rounded-full"></div>
           </motion.div>
         </motion.div>
       </div>
+
+      <style jsx>{`
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 8s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }

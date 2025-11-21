@@ -63,29 +63,30 @@ export default function About() {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
-    <section id="about" ref={ref} className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="about" ref={ref} className="py-24 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            About <span className="text-blue-600">Me</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+            About{" "}
+            <span className="text-emerald-600 dark:text-emerald-400">Me</span>
           </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <div className="w-20 h-1 bg-emerald-600 dark:bg-emerald-400 mx-auto mb-4"></div>
+          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Passionate developer crafting digital experiences that make a
             difference
           </p>
@@ -99,23 +100,25 @@ export default function About() {
             animate={isInView ? "visible" : "hidden"}
           >
             {/* Introduction */}
-            <motion.div variants={itemVariants} className="mb-8">
-              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+            <motion.div variants={itemVariants} className="mb-10">
+              <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
                 Hello! I'm Shuvo 👋
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
                 I'm a passionate{" "}
-                <span className="text-blue-600 font-semibold">
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
                   Computer Science & Engineering
                 </span>{" "}
                 student at Green University of Bangladesh, specializing in
                 full-stack development and machine learning.
               </p>
-              <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
                 With over{" "}
-                <span className="text-blue-600 font-semibold">2 years</span> of
-                experience, I've mastered technologies like
-                <span className="text-blue-600 font-semibold">
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
+                  2 years
+                </span>{" "}
+                of experience, I've mastered technologies like
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
                   {" "}
                   React, Node.js, Django, TensorFlow
                 </span>
@@ -124,24 +127,24 @@ export default function About() {
               </p>
             </motion.div>
 
-            {/* Personal Journey + Hobbies */}
-            <motion.div variants={itemVariants} className="mb-8">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                A Bit About My Journey
+            {/* Personal Journey */}
+            <motion.div variants={itemVariants} className="mb-10">
+              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-3">
+                My Journey
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
                 I started my programming journey in high school, experimenting
                 with Python and building small apps for fun. Over time, I
                 discovered a passion for full-stack development and machine
                 learning, which led me to work on projects like MCMS, ProFast,
                 and WhereIsIt.
               </p>
-              <p className="text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 mb-3 leading-relaxed">
                 I enjoy creating intuitive web applications that solve real
                 problems and learning new technologies that push my limits.
                 Every project is a chance to grow and challenge myself.
               </p>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                 Outside coding, I love reading tech blogs, exploring AI
                 innovations, playing badminton, and traveling to discover new
                 cultures.
@@ -151,17 +154,17 @@ export default function About() {
             {/* Stats */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-2 gap-4 mb-8"
+              className="grid grid-cols-2 gap-4 mb-10"
             >
               {stats.map((stat, index) => (
                 <div
                   key={index}
-                  className="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm"
+                  className="text-center p-6 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500/30 dark:hover:border-emerald-400/30 transition-colors"
                 >
-                  <div className="text-2xl font-bold text-blue-600">
+                  <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-1">
                     {stat.number}
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-300">
+                  <div className="text-sm text-slate-600 dark:text-slate-400">
                     {stat.label}
                   </div>
                 </div>
@@ -170,24 +173,26 @@ export default function About() {
 
             {/* Education */}
             <motion.div variants={itemVariants}>
-              <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <FaGraduationCap className="text-blue-600" />
+              <h4 className="text-xl font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <FaGraduationCap className="text-emerald-600 dark:text-emerald-400" />
                 Education
               </h4>
               {education.map((edu, index) => (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm mb-4"
+                  className="bg-slate-50 dark:bg-slate-900 rounded-xl p-6 border border-slate-200 dark:border-slate-800"
                 >
-                  <h5 className="font-semibold text-gray-900 dark:text-white">
+                  <h5 className="font-semibold text-slate-900 dark:text-white mb-1">
                     {edu.degree}
                   </h5>
-                  <p className="text-blue-600 mb-2">{edu.institution}</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-emerald-600 dark:text-emerald-400 mb-2 font-medium">
+                    {edu.institution}
+                  </p>
+                  <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-2">
                     <FaCalendarAlt />
                     <span>{edu.period}</span>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm">
+                  <p className="text-slate-600 dark:text-slate-400 text-sm">
                     {edu.details}
                   </p>
                 </div>
@@ -201,8 +206,8 @@ export default function About() {
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
-            <motion.div variants={itemVariants} className="mb-8">
-              <h4 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 text-center lg:text-left">
+            <motion.div variants={itemVariants} className="mb-10">
+              <h4 className="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
                 Technical Skills
               </h4>
 
@@ -213,34 +218,46 @@ export default function About() {
                     variants={itemVariants}
                     className="skill-item"
                   >
-                    <div className="flex justify-between items-center mb-2">
+                    <div className="flex justify-between items-center mb-3">
                       <div className="flex items-center gap-3">
-                        <skill.icon
-                          className="text-blue-600 text-xl"
-                          aria-label={skill.name}
-                        />
+                        <div className="p-2 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+                          <skill.icon
+                            className="text-emerald-600 dark:text-emerald-400 text-xl"
+                            aria-label={skill.name}
+                          />
+                        </div>
                         <div>
-                          <span className="font-medium text-gray-900 dark:text-white">
+                          <span className="font-medium text-slate-900 dark:text-white block">
                             {skill.name}
                           </span>
-                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                          <div className="text-xs text-slate-500 dark:text-slate-400">
                             {skill.tech}
                           </div>
                         </div>
                       </div>
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
                         {skill.level}%
                       </span>
                     </div>
 
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div
+                      className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 overflow-hidden"
+                      role="progressbar"
+                      aria-valuenow={skill.level}
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    >
                       <motion.div
                         initial={{ width: 0 }}
                         animate={
                           isInView ? { width: `${skill.level}%` } : { width: 0 }
                         }
-                        transition={{ duration: 1, delay: index * 0.1 }}
-                        className="bg-linear-to-r from-blue-500 to-purple-600 h-2 rounded-full will-change-transform"
+                        transition={{
+                          duration: 1,
+                          delay: index * 0.1,
+                          ease: "easeOut",
+                        }}
+                        className="bg-linear-to-r from-emerald-500 to-emerald-600 dark:from-emerald-400 dark:to-emerald-500 h-2 rounded-full"
                       />
                     </div>
                   </motion.div>
@@ -254,7 +271,7 @@ export default function About() {
             >
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 dark:bg-emerald-500 text-white font-medium rounded-lg hover:bg-emerald-700 dark:hover:bg-emerald-600 transition-colors duration-200 shadow-lg shadow-emerald-600/20"
               >
                 <FaAward />
                 Let's Work Together
@@ -267,17 +284,17 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16"
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mt-20"
         >
           <div className="text-center mb-8">
-            <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <h4 className="text-xl font-semibold text-slate-900 dark:text-white">
               Technologies I Work With
             </h4>
           </div>
-          <div className="overflow-hidden relative group">
+          <div className="overflow-hidden relative bg-slate-50 dark:bg-slate-900 rounded-xl py-6 border border-slate-200 dark:border-slate-800">
             <motion.div
-              className="flex space-x-12 py-4"
+              className="flex space-x-12 px-6"
               animate={{ x: [0, -1000] }}
               transition={{
                 x: {
@@ -287,29 +304,24 @@ export default function About() {
                   ease: "linear",
                 },
               }}
-              whileHover={{ x: 0 }} // pause on hover
             >
               {[
                 "React",
                 "Next.js",
-                "TypeScript",
                 "Node.js",
                 "Express",
                 "MongoDB",
-                "PostgreSQL",
                 "Python",
                 "Django",
                 "TensorFlow",
-                "Docker",
-                "AWS",
                 "Git",
                 "Tailwind CSS",
               ].map((tech, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 text-gray-600 dark:text-gray-300 font-medium"
+                  className="flex items-center gap-2 text-slate-600 dark:text-slate-400 font-medium whitespace-nowrap"
                 >
-                  <FaCode className="text-blue-600" />
+                  <FaCode className="text-emerald-600 dark:text-emerald-400" />
                   <span>{tech}</span>
                 </div>
               ))}

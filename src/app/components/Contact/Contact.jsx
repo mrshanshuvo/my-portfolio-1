@@ -49,13 +49,13 @@ export default function Contact() {
       icon: FaLinkedin,
       label: "LinkedIn",
       url: "https://linkedin.com/in/shahidhasanshovu",
-      color: "hover:text-blue-600",
+      color: "hover:text-blue-600 dark:hover:text-blue-400",
     },
     {
       icon: FaGithub,
       label: "GitHub",
       url: "https://github.com/mrshanshuvo",
-      color: "hover:text-gray-900 dark:hover:text-white",
+      color: "hover:text-slate-900 dark:hover:text-white",
     },
     {
       icon: FaTwitter,
@@ -122,31 +122,34 @@ export default function Contact() {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
   };
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
     <section
       id="contact"
       ref={ref}
-      className="py-20 bg-gray-50 dark:bg-gray-900"
+      className="py-24 bg-slate-50 dark:bg-slate-900"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Get In <span className="text-blue-600">Touch</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+            Get In{" "}
+            <span className="text-emerald-600 dark:text-emerald-400">
+              Touch
+            </span>
           </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <div className="w-20 h-1 bg-emerald-600 dark:bg-emerald-400 mx-auto mb-4"></div>
+          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Have a project in mind or want to discuss opportunities? I'd love to
             hear from you.
           </p>
@@ -161,29 +164,29 @@ export default function Contact() {
           >
             <motion.h3
               variants={itemVariants}
-              className="text-2xl font-bold text-gray-900 dark:text-white mb-6"
+              className="text-2xl font-semibold text-slate-900 dark:text-white mb-6"
             >
               Let's talk!
             </motion.h3>
-            <motion.div variants={itemVariants} className="space-y-6 mb-8">
+            <motion.div variants={itemVariants} className="space-y-6 mb-10">
               {contactInfo.map((item, idx) => (
-                <div key={idx} className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                    <item.icon className="text-blue-600 text-xl" />
+                <div key={idx} className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center shrink-0">
+                    <item.icon className="text-emerald-600 dark:text-emerald-400 text-xl" />
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900 dark:text-white">
+                    <p className="font-medium text-slate-900 dark:text-white mb-1">
                       {item.label}
                     </p>
                     {item.link ? (
                       <a
                         href={item.link}
-                        className="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors"
+                        className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                       >
                         {item.value}
                       </a>
                     ) : (
-                      <p className="text-gray-600 dark:text-gray-300">
+                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                         {item.value}
                       </p>
                     )}
@@ -192,17 +195,17 @@ export default function Contact() {
               ))}
             </motion.div>
             <motion.div variants={itemVariants}>
-              <p className="font-medium text-gray-900 dark:text-white mb-4">
+              <p className="font-medium text-slate-900 dark:text-white mb-4">
                 Follow me on
               </p>
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 {socialLinks.map((social, idx) => (
                   <a
                     key={idx}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-10 h-10 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 transition-all duration-200 hover:border-blue-500 ${social.color} hover:scale-110`}
+                    className={`w-11 h-11 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-400 transition-all duration-200 hover:border-emerald-500 dark:hover:border-emerald-400 ${social.color} hover:scale-110 hover:shadow-lg`}
                     aria-label={social.label}
                   >
                     <social.icon className="text-lg" />
@@ -216,16 +219,16 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
             <form
               onSubmit={handleSubmit}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 space-y-6"
+              className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-8 space-y-6"
             >
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
                 >
                   Full Name *
                 </label>
@@ -235,13 +238,13 @@ export default function Contact() {
                   name="name"
                   required
                   placeholder="Shahid Hasan Shovu"
-                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all"
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 transition-all"
                 />
               </div>
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
                 >
                   Email Address *
                 </label>
@@ -251,13 +254,13 @@ export default function Contact() {
                   name="email"
                   required
                   placeholder="shahid@example.com"
-                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-all"
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 transition-all"
                 />
               </div>
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2"
                 >
                   Your Message *
                 </label>
@@ -266,8 +269,8 @@ export default function Contact() {
                   name="message"
                   required
                   rows="5"
-                  placeholder="Hello! I’d like to discuss a project collaboration or a web development task."
-                  className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none transition-all"
+                  placeholder="Hello! I'd like to discuss a project collaboration or a web development task."
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 resize-none transition-all"
                 ></textarea>
               </div>
 
@@ -283,10 +286,10 @@ export default function Contact() {
                 disabled={isSubmitting}
                 whileHover={!isSubmitting ? { scale: 1.02 } : {}}
                 whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-                className={`w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 text-white shadow-lg ${
+                className={`w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 text-white shadow-lg transition-all ${
                   isSubmitting
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                    ? "bg-slate-400 cursor-not-allowed"
+                    : "bg-emerald-600 dark:bg-emerald-500 hover:bg-emerald-700 dark:hover:bg-emerald-600 shadow-emerald-600/20"
                 }`}
               >
                 {isSubmitting ? (
@@ -304,7 +307,7 @@ export default function Contact() {
                   animate={{ opacity: 1, y: 0 }}
                   className={`p-4 rounded-lg ${
                     status.type === "success"
-                      ? "bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800"
+                      ? "bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800"
                       : status.type === "error"
                       ? "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
                       : "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800"
@@ -312,16 +315,16 @@ export default function Contact() {
                 >
                   <div className="flex items-center gap-3">
                     {status.type === "success" ? (
-                      <FaCheckCircle className="text-green-600 text-lg" />
+                      <FaCheckCircle className="text-emerald-600 dark:text-emerald-400 text-lg" />
                     ) : status.type === "error" ? (
-                      <FaExclamationTriangle className="text-red-600 text-lg" />
+                      <FaExclamationTriangle className="text-red-600 dark:text-red-400 text-lg" />
                     ) : (
                       <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
                     )}
                     <p
                       className={`text-sm font-medium ${
                         status.type === "success"
-                          ? "text-green-800 dark:text-green-300"
+                          ? "text-emerald-800 dark:text-emerald-300"
                           : status.type === "error"
                           ? "text-red-800 dark:text-red-300"
                           : "text-blue-800 dark:text-blue-300"

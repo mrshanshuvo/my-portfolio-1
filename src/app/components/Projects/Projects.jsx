@@ -49,47 +49,40 @@ export default function Projects() {
     <section
       id="projects"
       ref={ref}
-      className="relative py-24 bg-linear-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 overflow-hidden"
+      className="relative py-24 bg-white dark:bg-slate-950 overflow-hidden"
     >
-      {/* Background Decorations */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-3xl"></div>
-      </div>
+      {/* Subtle Background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : { scale: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-block mb-4 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full"
+            className="inline-block mb-4 px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-full border border-emerald-200 dark:border-emerald-800"
           >
-            <span className="text-blue-600 dark:text-blue-400 text-sm font-semibold tracking-wide uppercase">
+            <span className="text-emerald-600 dark:text-emerald-400 text-sm font-semibold tracking-wide uppercase">
               Portfolio
             </span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
             Featured{" "}
-            <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="text-emerald-600 dark:text-emerald-400">
               Projects
             </span>
           </h2>
 
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="w-12 h-1 bg-linear-to-r from-transparent to-blue-600 rounded-full"></div>
-            <div className="w-12 h-1 bg-blue-600 rounded-full"></div>
-            <div className="w-12 h-1 bg-linear-to-r from-blue-600 to-transparent rounded-full"></div>
-          </div>
+          <div className="w-20 h-1 bg-emerald-600 dark:bg-emerald-400 mx-auto mb-6"></div>
 
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Explore a curated selection of projects showcasing full-stack
             development, innovative solutions, and cutting-edge technologies
           </p>
@@ -99,23 +92,20 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-wrap justify-center gap-3 mb-16"
         >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`group relative px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
+              className={`px-6 py-2.5 rounded-lg font-medium transition-all duration-200 ${
                 activeCategory === category
-                  ? "bg-linear-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30 scale-105"
-                  : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:shadow-md border border-gray-200 dark:border-gray-700"
+                  ? "bg-emerald-600 dark:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
               }`}
             >
-              <span className="relative z-10">{category}</span>
-              {activeCategory !== category && (
-                <div className="absolute inset-0 bg-linear-to-r from-blue-600/10 to-purple-600/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              )}
+              {category}
             </button>
           ))}
         </motion.div>
@@ -128,7 +118,7 @@ export default function Projects() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {filteredProjects.map((project, index) => (
               <motion.div
@@ -137,14 +127,14 @@ export default function Projects() {
                 layout
                 className="group relative"
               >
-                <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 dark:border-gray-700 h-full flex flex-col">
+                <div className="relative bg-white dark:bg-slate-900 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-emerald-500/30 dark:hover:border-emerald-400/30 h-full flex flex-col">
                   {/* Image Container */}
                   <div className="relative overflow-hidden h-56">
-                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <Image
                       src={project.image}
                       alt={project.title}
-                      width={500} // adjust based on your design
+                      width={500}
                       height={300}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     />
@@ -156,13 +146,13 @@ export default function Projects() {
                           initial={{ scale: 0, rotate: -180 }}
                           animate={{ scale: 1, rotate: 0 }}
                           transition={{ delay: 0.2 + index * 0.1 }}
-                          className="flex items-center gap-1 bg-linear-to-r from-yellow-400 to-orange-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg"
+                          className="flex items-center gap-1 bg-amber-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg"
                         >
                           <FaStar className="text-xs" />
                           Featured
                         </motion.div>
                       )}
-                      <div className="bg-blue-600/90 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ml-auto">
+                      <div className="bg-emerald-600 dark:bg-emerald-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ml-auto">
                         {project.category}
                       </div>
                     </div>
@@ -173,16 +163,16 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 bg-white/95 dark:bg-gray-900/95 rounded-full hover:scale-110 transition-transform duration-200 shadow-xl"
+                        className="p-3 bg-white/95 dark:bg-slate-900/95 rounded-full hover:scale-110 transition-transform duration-200 shadow-xl"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <FaGithub className="text-gray-900 dark:text-white text-xl" />
+                        <FaGithub className="text-slate-900 dark:text-white text-xl" />
                       </a>
                       <a
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 bg-blue-600 rounded-full hover:scale-110 transition-transform duration-200 shadow-xl"
+                        className="p-3 bg-emerald-600 rounded-full hover:scale-110 transition-transform duration-200 shadow-xl"
                         onClick={(e) => e.stopPropagation()}
                       >
                         <FaExternalLinkAlt className="text-white text-lg" />
@@ -192,11 +182,11 @@ export default function Projects() {
 
                   {/* Content */}
                   <div className="p-6 flex flex-col grow">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 line-clamp-1">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300 line-clamp-1">
                       {project.title}
                     </h3>
 
-                    <p className="text-gray-600 dark:text-gray-400 mb-5 line-clamp-2 leading-relaxed grow">
+                    <p className="text-slate-600 dark:text-slate-400 mb-5 line-clamp-2 leading-relaxed grow">
                       {project.description}
                     </p>
 
@@ -207,17 +197,17 @@ export default function Projects() {
                         .map((TechIcon, techIndex) => (
                           <div
                             key={techIndex}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-linear-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-700 rounded-lg text-xs font-medium hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-600 dark:hover:to-gray-600 transition-all duration-200 border border-gray-200 dark:border-gray-600"
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 dark:bg-slate-800 rounded-lg text-xs font-medium hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-200 border border-slate-200 dark:border-slate-700"
                           >
-                            <TechIcon className="text-blue-600 dark:text-blue-400 text-sm" />
-                            <span className="text-gray-700 dark:text-gray-300">
+                            <TechIcon className="text-emerald-600 dark:text-emerald-400 text-sm" />
+                            <span className="text-slate-700 dark:text-slate-300">
                               {project.techNames[techIndex]}
                             </span>
                           </div>
                         ))}
                       {project.technologies.length > 4 && (
-                        <div className="flex items-center px-3 py-1.5 bg-gray-200 dark:bg-gray-700 rounded-lg text-xs font-medium">
-                          <span className="text-gray-600 dark:text-gray-400">
+                        <div className="flex items-center px-3 py-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg text-xs font-medium">
+                          <span className="text-slate-600 dark:text-slate-400">
                             +{project.technologies.length - 4}
                           </span>
                         </div>
@@ -227,10 +217,10 @@ export default function Projects() {
                     {/* Improvements / Lessons Preview */}
                     {project.improvements &&
                       project.improvements.length > 0 && (
-                        <div className="mb-3 text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+                        <div className="mb-3 text-sm text-slate-600 dark:text-slate-300 line-clamp-2">
                           <strong>Lessons:</strong> {project.improvements[0]}
                           {project.improvements.length > 1 && (
-                            <span className="ml-1 text-blue-600 dark:text-blue-400 font-semibold">
+                            <span className="ml-1 text-emerald-600 dark:text-emerald-400 font-semibold">
                               +{project.improvements.length - 1} more
                             </span>
                           )}
@@ -240,7 +230,7 @@ export default function Projects() {
                     {/* CTA Button */}
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="group/btn relative inline-flex items-center justify-center px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 hover:scale-[1.02]"
+                      className="group/btn relative inline-flex items-center justify-center px-6 py-3 bg-emerald-600 dark:bg-emerald-500 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:bg-emerald-700 dark:hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-500/30 hover:scale-[1.02]"
                     >
                       <span className="relative z-10 flex items-center gap-2">
                         View Details
@@ -258,12 +248,8 @@ export default function Projects() {
                           />
                         </svg>
                       </span>
-                      <div className="absolute inset-0 bg-linear-to-r from-purple-600 to-blue-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                     </Link>
                   </div>
-
-                  {/* Hover Border Effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 -z-10 blur-xl transition-opacity duration-500"></div>
                 </div>
               </motion.div>
             ))}
@@ -277,9 +263,9 @@ export default function Projects() {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-20"
           >
-            <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center">
+            <div className="w-24 h-24 mx-auto mb-6 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
               <svg
-                className="w-12 h-12 text-gray-400"
+                className="w-12 h-12 text-slate-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -292,10 +278,10 @@ export default function Projects() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <h3 className="text-xl font-semibold text-slate-700 dark:text-slate-300 mb-2">
               No projects found
             </h3>
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-slate-500 dark:text-slate-400">
               Try selecting a different category
             </p>
           </motion.div>
@@ -312,7 +298,7 @@ export default function Projects() {
             href="https://github.com/mrshanshuvo"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl hover:border-blue-600 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold rounded-xl hover:border-emerald-600 dark:hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 hover:scale-105"
           >
             <FaGithub className="text-2xl group-hover:rotate-12 transition-transform duration-300" />
             <span>View All Projects on GitHub</span>
