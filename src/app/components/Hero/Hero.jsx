@@ -75,7 +75,7 @@ export default function Hero() {
               {/* Image container */}
               <div className="absolute inset-2 rounded-full overflow-hidden border-2 border-emerald-500/20">
                 <Image
-                  src="/20240812_1611281.jpg"
+                  src="/PP1"
                   alt="Shahid Hasan Shuvo - Full Stack Developer"
                   width={192}
                   height={192}
