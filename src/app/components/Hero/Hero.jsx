@@ -75,7 +75,7 @@ export default function Hero() {
               {/* Image container */}
               <div className="absolute inset-2 rounded-full overflow-hidden border-2 border-emerald-500/20">
                 <Image
-                  src="/PP1"
+                  src="/PP1.jpeg"
                   alt="Shahid Hasan Shuvo - Full Stack Developer"
                   width={192}
                   height={192}
@@ -164,7 +164,7 @@ export default function Hero() {
             <motion.a
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
-              href="/shovu_resume.pdf"
+              href="/Resume_of_Shahid_Hasan_Shuvo.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 border border-slate-700 text-slate-300 hover:text-white hover:border-slate-600 font-medium rounded-lg transition-all duration-200 hover:bg-slate-800/50"

@@ -21,7 +21,7 @@ export default function About() {
     {
       icon: SiReact,
       name: "Frontend",
-      tech: "React, Next.js, TypeScript",
+      tech: "React, Next.js, JavaScript",
       level: 90,
     },
     {
@@ -33,10 +33,15 @@ export default function About() {
     {
       icon: FaDatabase,
       name: "Database",
-      tech: "MongoDB, PostgreSQL, Firebase",
+      tech: "MongoDB, MySQL, Firebase",
       level: 80,
     },
-    { icon: FaCloud, name: "DevOps", tech: "AWS, Docker, Vercel", level: 75 },
+    {
+      icon: FaCloud,
+      name: "DevOps",
+      tech: "Netlify, Docker, Vercel",
+      level: 75,
+    },
     {
       icon: SiTensorflow,
       name: "ML/AI",

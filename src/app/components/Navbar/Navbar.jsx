@@ -74,7 +74,7 @@ export default function Navbar() {
       <div
         className={`transition-all duration-300 ${scrolled ? "py-3" : "py-6"}`}
       >
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
+        <div className="max-w-350 mx-auto px-6 lg:px-8">
           <div
             className={`relative transition-all duration-300 ${
               scrolled
@@ -116,7 +116,7 @@ export default function Navbar() {
                       }
                     >
                       <span
-                        className={`relative z-10 text-sm font-medium transition-colors ${
+                        className={`relative z-10 text-sm font-medium transition-colors cursor-pointer ${
                           activeSection === item.id
                             ? scrolled
                               ? "text-emerald-600 dark:text-emerald-400"
@@ -149,7 +149,7 @@ export default function Navbar() {
 
                 {/* Resume Button */}
                 <motion.a
-                  href="/shovu_resume.pdf"
+                  href="/Resume_of_Shahid_Hasan_Shuvo.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ y: -1 }}
