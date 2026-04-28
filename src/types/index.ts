@@ -1,27 +1,91 @@
 import { IconType } from "react-icons";
 
+// ─── Portfolio types ────────────────────────────────────────────────
+
 export interface Project {
+  _id?: string;
   title: string;
   slug: string;
   description: string;
   image: string;
-  technologies: IconType[];
+  technologies?: IconType[]; // frontend-only, built from techNames
   techNames: string[];
   github: string;
   live: string;
   featured: boolean;
   category: string;
   improvements: string[];
+  order?: number;
 }
 
-export interface NavItem {
-  id: string;
+export interface Experience {
+  _id?: string;
+  title: string;
+  org: string;
+  duration: string;
+  details: string[];
+  color: "emerald" | "blue" | "amber";
+  type: "work" | "education" | "certification";
+  order?: number;
+}
+
+export interface Skill {
+  name: string;
+  tech: string;
+  level: number;
+  iconName: string;
+}
+
+export interface Stat {
+  number: string;
   label: string;
 }
 
+export interface Education {
+  degree: string;
+  institution: string;
+  period: string;
+  details: string;
+}
+
+export interface About {
+  _id?: string;
+  bio1: string;
+  bio2: string;
+  highlights: string[];
+  stats: Stat[];
+  skills: Skill[];
+  techList: string[];
+  education: Education[];
+}
+
 export interface SocialLink {
-  icon: IconType;
+  platform: string;
   href: string;
+  label: string;
+  icon?: IconType; // frontend-only
+}
+
+export interface TypeSequenceItem {
+  text: string;
+  delay: number;
+}
+
+export interface Hero {
+  _id?: string;
+  name: string;
+  lastName: string;
+  typeSequences: TypeSequenceItem[];
+  bio: string;
+  profileImage: string;
+  resumeUrl: string;
+  socialLinks: SocialLink[];
+}
+
+// ─── Legacy / util types ────────────────────────────────────────────
+
+export interface NavItem {
+  id: string;
   label: string;
 }
 

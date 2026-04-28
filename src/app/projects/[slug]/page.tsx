@@ -1,82 +1,49 @@
-"use client";
-
-import { projects } from "@/app/projects/projectsData";
+import { connectDB } from "@/lib/mongodb";
+import ProjectModel from "@/models/Project";
+import { notFound } from "next/navigation";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { getIcon } from "@/lib/techIconMap";
+import type { Project } from "@/types";
+import type { Metadata } from "next";
+import ProjectDetailClient from "./ProjectDetailClient";
 
-interface ProjectPageProps {
-  params: { slug: string };
+interface Props {
+  params: Promise<{ slug: string }>;
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = projects.find((p) => p.slug === params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  await connectDB();
+  const { slug } = await params;
+  const project = await ProjectModel.findOne({ slug }).lean();
+  if (!project) return { title: "Project Not Found" };
+  return {
+    title: `${project.title} · Portfolio`,
+    description: project.description,
+  };
+}
 
-  if (!project) return <p className="text-center mt-20">Project not found</p>;
+export default async function ProjectPage({ params }: Props) {
+  await connectDB();
+  const { slug } = await params;
+  const raw = await ProjectModel.findOne({ slug }).lean();
+  if (!raw) notFound();
 
-  return (
-    <section className="max-w-5xl mx-auto py-20 px-4">
-      <h1 className="text-4xl font-bold mb-6">{project.title}</h1>
+  const project: Project = {
+    _id: raw._id.toString(),
+    title: raw.title,
+    slug: raw.slug,
+    description: raw.description,
+    image: raw.image,
+    techNames: raw.techNames,
+    github: raw.github,
+    live: raw.live,
+    featured: raw.featured,
+    category: raw.category,
+    improvements: raw.improvements,
+    order: raw.order,
+  };
 
-      <img
-        src={project.image}
-        alt={project.title}
-        className="w-full h-auto object-contain rounded-lg mb-6"
-      />
-
-      <p className="text-gray-700 dark:text-gray-300 mb-4">
-        {project.description}
-      </p>
-
-      <div className="flex flex-wrap gap-2 mb-6">
-        {project.technologies.map((TechIcon, i) => (
-          <div
-            key={i}
-            className="flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded"
-          >
-            <TechIcon className="text-blue-600" />
-            <span className="text-gray-800 dark:text-gray-200">
-              {project.techNames[i]}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {project.improvements && project.improvements.length > 0 && (
-        <motion.div
-          className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6 shadow-inner"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
-            Challenges &amp; Lessons Learned
-          </h2>
-          <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
-            {project.improvements.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </motion.div>
-      )}
-
-      <div className="flex gap-4">
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
-        >
-          <FaGithub /> Code
-        </a>
-        <a
-          href={project.live}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          <FaExternalLinkAlt /> Live Demo
-        </a>
-      </div>
-    </section>
-  );
+  return <ProjectDetailClient project={project} />;
 }

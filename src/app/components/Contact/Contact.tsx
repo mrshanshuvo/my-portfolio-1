@@ -13,8 +13,16 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import type { ContactInfo, SocialLink, Status } from "@/types";
+import type { ContactInfo, Status } from "@/types";
+import type { IconType } from "react-icons";
 import type { FormEvent } from "react";
+
+interface ContactSocialLink {
+  icon: IconType;
+  label: string;
+  href: string;
+  color: string;
+}
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null);
@@ -45,7 +53,7 @@ export default function Contact() {
     },
   ];
 
-  const socialLinks: (SocialLink & { color: string })[] = [
+  const socialLinks: ContactSocialLink[] = [
     {
       icon: FaLinkedin,
       label: "LinkedIn",
@@ -213,7 +221,7 @@ export default function Contact() {
                     className={`w-11 h-11 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-400 transition-all duration-200 hover:border-emerald-500 dark:hover:border-emerald-400 ${social.color} hover:scale-110 hover:shadow-lg`}
                     aria-label={social.label}
                   >
-                    <social.icon className="text-lg" />
+                    {(() => { const Icon = social.icon; return <Icon className="text-lg" />; })()}
                   </a>
                 ))}
               </div>
