@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
+import User from "@/models/User";
+import { connectDB } from "./mongodb";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -16,16 +18,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           password: string;
         };
 
-        const adminEmail = process.env.ADMIN_EMAIL;
-        const adminHash = process.env.ADMIN_PASSWORD_HASH;
+        await connectDB();
+        const user = await User.findOne({ email }).lean();
 
-        if (!adminEmail || !adminHash) return null;
-        if (email !== adminEmail) return null;
+        if (!user || !user.passwordHash) return null;
 
-        const isValid = await bcrypt.compare(password, adminHash);
+        const isValid = await bcrypt.compare(password, user.passwordHash);
         if (!isValid) return null;
 
-        return { id: "admin", name: "Admin", email: adminEmail };
+        return { id: user._id.toString(), name: user.name, email: user.email };
       },
     }),
   ],
