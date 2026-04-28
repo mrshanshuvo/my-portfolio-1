@@ -10,6 +10,9 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
+import dns from "dns";
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 // --- Models (inline to avoid Next.js module issues) ---
 const ProjectSchema = new mongoose.Schema({

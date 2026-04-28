@@ -25,8 +25,9 @@ const DEFAULT_HERO: Hero = {
 
 async function getHero(): Promise<Hero> {
   await connectDB();
-  const raw = await HeroModel.findOne().lean();
-  if (!raw) return DEFAULT_HERO;
+  const rawDoc = await HeroModel.findOne().lean();
+  if (!rawDoc) return DEFAULT_HERO;
+  const raw = JSON.parse(JSON.stringify(rawDoc));
   return {
     _id: raw._id?.toString(),
     name: raw.name ?? DEFAULT_HERO.name,

@@ -42,8 +42,9 @@ const DEFAULT_ABOUT: About = {
 
 async function getAbout(): Promise<About> {
   await connectDB();
-  const raw = await AboutModel.findOne().lean();
-  if (!raw) return DEFAULT_ABOUT;
+  const rawDoc = await AboutModel.findOne().lean();
+  if (!rawDoc) return DEFAULT_ABOUT;
+  const raw = JSON.parse(JSON.stringify(rawDoc));
   return {
     _id: raw._id?.toString(),
     bio1: raw.bio1 ?? DEFAULT_ABOUT.bio1,
