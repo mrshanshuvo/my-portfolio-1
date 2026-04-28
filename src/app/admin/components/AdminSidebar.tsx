@@ -8,6 +8,7 @@ import {
   FaProjectDiagram,
   FaBriefcase,
   FaUser,
+  FaEnvelope,
   FaSignOutAlt,
   FaExternalLinkAlt,
   FaChevronRight,
@@ -22,6 +23,12 @@ const navItems = [
     label: "Dashboard",
     icon: MdDashboard,
     color: "text-blue-400",
+  },
+  {
+    href: "/admin/messages",
+    label: "Messages",
+    icon: FaEnvelope,
+    color: "text-blue-500",
   },
   {
     href: "/admin/hero",

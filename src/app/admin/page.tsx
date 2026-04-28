@@ -10,22 +10,34 @@ import {
   FaArrowRight,
   FaRocket,
   FaChartLine,
+  FaEnvelope,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Message from "@/models/Message";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 async function getStats() {
   await connectDB();
-  const [projectCount, expCount] = await Promise.all([
+  const [projectCount, expCount, msgCount] = await Promise.all([
     Project.countDocuments(),
     Experience.countDocuments(),
+    Message.countDocuments({ status: "unread" }),
   ]);
-  return { projectCount, expCount };
+  return { projectCount, expCount, msgCount };
 }
 
 const sections = [
+  {
+    href: "/admin/messages",
+    label: "Messages",
+    desc: "View and manage incoming contact form submissions",
+    icon: FaEnvelope,
+    color: "blue",
+    gradient: "from-blue-500/20 to-blue-600/5 border-blue-500/20",
+    iconColor: "text-blue-400",
+  },
   {
     href: "/admin/hero",
     label: "Hero Section",
@@ -65,9 +77,16 @@ const sections = [
 ];
 
 export default async function AdminDashboard() {
-  const { projectCount, expCount } = await getStats();
+  const { projectCount, expCount, msgCount } = await getStats();
 
   const stats = [
+    {
+      label: "New Messages",
+      value: msgCount,
+      icon: FaEnvelope,
+      color: "text-blue-400",
+      bg: "bg-blue-500/10",
+    },
     {
       label: "Total Projects",
       value: projectCount,
@@ -151,7 +170,7 @@ export default async function AdminDashboard() {
             Content Management
           </h2>
           <span className="text-xs font-bold text-slate-600 uppercase tracking-widest">
-            4 Sections Total
+            {sections.length} Sections Total
           </span>
         </div>
 
