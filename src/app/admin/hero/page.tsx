@@ -26,7 +26,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -205,6 +211,21 @@ export default function AdminHeroPage() {
         )}
       </AnimatePresence>
 
+      <Button
+        id="save-hero-btn"
+        onClick={handleSave}
+        disabled={saving}
+        className="bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold px-8 shadow-lg shadow-emerald-600/20 active:scale-95 transition-all group"
+      >
+        <FaSave
+          className={cn(
+            "mr-2 transition-transform duration-500",
+            saving ? "animate-spin" : "group-hover:rotate-12",
+          )}
+        />
+        {saving ? "Saving Changes..." : "Save Changes"}
+      </Button>
+
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Editor Column */}
@@ -217,8 +238,12 @@ export default function AdminHeroPage() {
                     <FaUser size={20} />
                   </div>
                   <div>
-                    <CardTitle className="text-xl font-bold text-white">Identity</CardTitle>
-                    <CardDescription className="text-slate-400">Your personal branding and display name.</CardDescription>
+                    <CardTitle className="text-xl font-bold text-white">
+                      Identity
+                    </CardTitle>
+                    <CardDescription className="text-slate-400">
+                      Your personal branding and display name.
+                    </CardDescription>
                   </div>
                 </div>
               </CardHeader>
@@ -238,7 +263,10 @@ export default function AdminHeroPage() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">
-                    Last Name <span className="text-blue-400 font-normal">(Highlighted)</span>
+                    Last Name{" "}
+                    <span className="text-blue-400 font-normal">
+                      (Highlighted)
+                    </span>
                   </label>
                   <Input
                     className="bg-slate-950/50 border-white/10 text-white rounded-xl focus-visible:ring-emerald-500/50"
@@ -261,8 +289,12 @@ export default function AdminHeroPage() {
                       <FaInfoCircle size={20} />
                     </div>
                     <div>
-                      <CardTitle className="text-xl font-bold text-white">Typing Sequences</CardTitle>
-                      <CardDescription className="text-slate-400">Animated roles that appear on your hero section.</CardDescription>
+                      <CardTitle className="text-xl font-bold text-white">
+                        Typing Sequences
+                      </CardTitle>
+                      <CardDescription className="text-slate-400">
+                        Animated roles that appear on your hero section.
+                      </CardDescription>
                     </div>
                   </div>
                   <Button
@@ -336,7 +368,9 @@ export default function AdminHeroPage() {
                 </AnimatePresence>
                 {data.typeSequences.length === 0 && (
                   <div className="text-center py-8 bg-slate-950/20 rounded-2xl border border-dashed border-white/5">
-                    <p className="text-slate-500 text-sm italic">No typing sequences added.</p>
+                    <p className="text-slate-500 text-sm italic">
+                      No typing sequences added.
+                    </p>
                   </div>
                 )}
               </CardContent>
@@ -350,8 +384,12 @@ export default function AdminHeroPage() {
                     <FaFileAlt size={20} />
                   </div>
                   <div>
-                    <CardTitle className="text-xl font-bold text-white">Biography</CardTitle>
-                    <CardDescription className="text-slate-400">Brief introduction for your hero section.</CardDescription>
+                    <CardTitle className="text-xl font-bold text-white">
+                      Biography
+                    </CardTitle>
+                    <CardDescription className="text-slate-400">
+                      Brief introduction for your hero section.
+                    </CardDescription>
                   </div>
                 </div>
               </CardHeader>
@@ -375,8 +413,12 @@ export default function AdminHeroPage() {
                     <FaImage size={20} />
                   </div>
                   <div>
-                    <CardTitle className="text-xl font-bold text-white">Assets</CardTitle>
-                    <CardDescription className="text-slate-400">Profile picture and resume document.</CardDescription>
+                    <CardTitle className="text-xl font-bold text-white">
+                      Assets
+                    </CardTitle>
+                    <CardDescription className="text-slate-400">
+                      Profile picture and resume document.
+                    </CardDescription>
                   </div>
                 </div>
               </CardHeader>
@@ -388,7 +430,10 @@ export default function AdminHeroPage() {
                       <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                         Profile Image
                       </label>
-                      <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/20 text-[10px]">
+                      <Badge
+                        variant="outline"
+                        className="bg-blue-500/10 text-blue-400 border-blue-500/20 text-[10px]"
+                      >
                         {data.profileImage ? "Uploaded" : "Missing"}
                       </Badge>
                     </div>
@@ -423,7 +468,9 @@ export default function AdminHeroPage() {
                           className="flex flex-col items-center gap-3 text-slate-500 hover:text-blue-400 transition-colors"
                         >
                           <FaImage size={32} />
-                          <span className="text-xs font-bold">Click to Upload</span>
+                          <span className="text-xs font-bold">
+                            Click to Upload
+                          </span>
                         </button>
                       )}
                       {uploading === "profileImage" && (
@@ -447,7 +494,10 @@ export default function AdminHeroPage() {
                       <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                         Resume PDF
                       </label>
-                      <Badge variant="outline" className="bg-amber-500/10 text-amber-400 border-amber-500/20 text-[10px]">
+                      <Badge
+                        variant="outline"
+                        className="bg-amber-500/10 text-amber-400 border-amber-500/20 text-[10px]"
+                      >
                         {data.resumeUrl ? "Uploaded" : "Missing"}
                       </Badge>
                     </div>
@@ -620,105 +670,6 @@ export default function AdminHeroPage() {
                 </div>
               </CardContent>
             </Card>
-          </div>
-
-          {/* Preview Column */}
-          <div className="lg:col-span-5">
-            <div className="sticky top-8">
-              <div className="flex items-center justify-between gap-3 mb-6 ml-1">
-                <div className="flex items-center gap-3">
-                  <div className="relative flex items-center justify-center">
-                    <div className="absolute w-3 h-3 bg-emerald-500/40 rounded-full animate-ping" />
-                    <div className="relative w-2 h-2 bg-emerald-500 rounded-full" />
-                  </div>
-                  <h2 className="text-xl font-bold text-white">Live Preview</h2>
-                </div>
-                <Button
-                  id="save-hero-btn"
-                  onClick={handleSave}
-                  disabled={saving}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold px-8 shadow-lg shadow-emerald-600/20 active:scale-95 transition-all group"
-                >
-                  <FaSave
-                    className={cn("mr-2 transition-transform duration-500", saving ? "animate-spin" : "group-hover:rotate-12")}
-                  />
-                  {saving ? "Saving Changes..." : "Save Changes"}
-                </Button>
-              </div>
-
-              <div className="preview-container rounded-[2.5rem] p-8 border border-white/10 bg-slate-900/60 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]" />
-
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  {/* Avatar Preview */}
-                  <div className="relative w-32 h-32 mb-8 group">
-                    <div className="absolute inset-0 bg-linear-to-r from-emerald-500 to-blue-500 rounded-full animate-spin-slow opacity-75 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute inset-1 bg-slate-900 rounded-full" />
-                    <div className="absolute inset-2 rounded-full overflow-hidden border border-white/10">
-                      <Image
-                        src={data.profileImage || "/PP1.jpeg"}
-                        alt="Profile"
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-                    </div>
-                  </div>
-
-                  {/* Name Preview */}
-                  <h3 className="text-3xl font-bold text-white mb-2 tracking-tight">
-                    {data.name || "First Name"}{" "}
-                    <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-blue-500">
-                      {data.lastName || "Last Name"}
-                    </span>
-                  </h3>
-
-                  {/* Type Seq Preview */}
-                  <div className="text-sm font-medium text-blue-400 mb-6 px-4 py-1.5 bg-blue-400/10 rounded-full border border-blue-400/20 min-h-[32px] flex items-center justify-center">
-                    {data.typeSequences.length > 0 ? (
-                      <TypeAnimation
-                        key={JSON.stringify(data.typeSequences)}
-                        sequence={data.typeSequences.flatMap((s) => [
-                          s.text,
-                          s.delay,
-                        ])}
-                        wrapper="span"
-                        speed={50}
-                        repeat={Infinity}
-                      />
-                    ) : (
-                      <span className="opacity-50 italic">
-                        Add a typing sequence...
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Bio Preview */}
-                  <p className="text-slate-400 text-sm leading-relaxed max-w-sm mb-8">
-                    {data.bio || "Crafting exceptional digital experiences..."}
-                  </p>
-
-                  {/* Links Preview */}
-                  <div className="flex gap-3 mb-8">
-                    {data.socialLinks.map((link, i) => {
-                      const Icon = platformIconMap[link.platform] || FaLink;
-                      return (
-                        <div
-                          key={i}
-                          className="p-2.5 bg-slate-800/80 text-slate-400 rounded-xl border border-white/5"
-                        >
-                          <Icon size={16} />
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Background Blobs */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl" />
-              </div>
-            </div>
           </div>
         </div>
       </div>
