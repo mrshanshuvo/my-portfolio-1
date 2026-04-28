@@ -1,9 +1,9 @@
 import nodemailer from "nodemailer";
 
 /**
- * Verify Google reCAPTCHA v2 token
+ * Verify Google reCAPTCHA v3 token
  * @param {string} token - reCAPTCHA token from client
- * @returns {Promise<boolean>} - true if human, false otherwise
+ * @returns {Promise<boolean>} - true if score >= 0.5 (human), false otherwise
  */
 async function verifyRecaptcha(token) {
   try {
@@ -15,14 +15,23 @@ async function verifyRecaptcha(token) {
 
     if (!data.success) {
       console.warn("reCAPTCHA verification failed:", data["error-codes"]);
+      return false;
     }
 
-    return data.success; // v2 only returns success/failure
+    // v3 returns a score: 1.0 = human, 0.0 = bot. Threshold: 0.5
+    const score = data.score ?? 0;
+    if (score < 0.5) {
+      console.warn("reCAPTCHA score too low:", score);
+      return false;
+    }
+
+    return true;
   } catch (err) {
     console.error("Error verifying reCAPTCHA:", err);
     return false;
   }
 }
+
 
 /**
  * Contact API POST handler

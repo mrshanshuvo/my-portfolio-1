@@ -12,16 +12,15 @@ import {
   FaCheckCircle,
   FaExclamationTriangle,
 } from "react-icons/fa";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const recaptchaRef = useRef(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const [status, setStatus] = useState({ message: "", type: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [recaptchaToken, setRecaptchaToken] = useState("");
 
   const contactInfo = [
     {
@@ -82,11 +81,13 @@ export default function Contact() {
       return;
     }
 
-    if (!recaptchaToken) {
-      setStatus({ message: "Please verify the reCAPTCHA.", type: "error" });
+    if (!executeRecaptcha) {
+      setStatus({ message: "reCAPTCHA not ready. Please try again.", type: "error" });
       setIsSubmitting(false);
       return;
     }
+
+    const recaptchaToken = await executeRecaptcha("contact_form");
 
     try {
       const res = await fetch("/api/contact", {
@@ -103,8 +104,6 @@ export default function Contact() {
           type: "success",
         });
         e.target.reset();
-        recaptchaRef.current.reset();
-        setRecaptchaToken("");
 
         setTimeout(() => setStatus({ message: "", type: "" }), 5000);
       } else {
@@ -274,12 +273,7 @@ export default function Contact() {
                 ></textarea>
               </div>
 
-              {/* reCAPTCHA */}
-              <ReCAPTCHA
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                onChange={(token) => setRecaptchaToken(token)}
-                ref={recaptchaRef}
-              />
+              {/* reCAPTCHA v3 – invisible, no widget needed */}
 
               <motion.button
                 type="submit"
