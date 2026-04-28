@@ -2,11 +2,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import type { NavItem } from "@/types";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
+  const [activeSection, setActiveSection] = useState<string>("home");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +29,7 @@ export default function Navbar() {
           }
         });
       },
-      { threshold: 0.3, rootMargin: "-50px 0px -50px 0px" }
+      { threshold: 0.3, rootMargin: "-50px 0px -50px 0px" },
     );
 
     sections.forEach((section) => {
@@ -39,7 +40,7 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  const smoothScroll = (sectionId) => {
+  const smoothScroll = (sectionId: string): void => {
     setIsOpen(false);
     const element = document.getElementById(sectionId);
     if (element) {
@@ -49,14 +50,13 @@ export default function Navbar() {
         inline: "nearest",
       });
 
-      // Update URL without page reload
       if (window.history.pushState) {
         window.history.pushState(null, "", `#${sectionId}`);
       }
     }
   };
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { id: "home", label: "Home" },
     { id: "about", label: "About" },
     { id: "experience", label: "Experience" },
@@ -122,8 +122,8 @@ export default function Navbar() {
                               ? "text-emerald-600 dark:text-emerald-400"
                               : "text-white"
                             : scrolled
-                            ? "text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                            : "text-white/70 group-hover:text-white"
+                              ? "text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200"
+                              : "text-white/70 group-hover:text-white"
                         }`}
                       >
                         {item.label}
@@ -216,7 +216,7 @@ export default function Navbar() {
                 }`}
               >
                 <div className="p-3">
-                  {navItems.map((item, i) => (
+                  {navItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => smoothScroll(item.id)}
@@ -226,8 +226,8 @@ export default function Navbar() {
                             ? "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400"
                             : "bg-white/10 text-white"
                           : scrolled
-                          ? "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50"
-                          : "text-white/80 hover:bg-white/5"
+                            ? "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/50"
+                            : "text-white/80 hover:bg-white/5"
                       }`}
                       aria-current={
                         activeSection === item.id ? "page" : undefined

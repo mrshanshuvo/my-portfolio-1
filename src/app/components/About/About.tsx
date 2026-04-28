@@ -12,12 +12,32 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import { SiTensorflow, SiDjango, SiReact, SiNodedotjs } from "react-icons/si";
+import type { IconType } from "react-icons";
+
+interface Skill {
+  icon: IconType;
+  name: string;
+  tech: string;
+  level: number;
+}
+
+interface Education {
+  degree: string;
+  institution: string;
+  period: string;
+  details: string;
+}
+
+interface Stat {
+  number: string;
+  label: string;
+}
 
 export default function About() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const skills = [
+  const skills: Skill[] = [
     {
       icon: SiReact,
       name: "Frontend",
@@ -51,7 +71,7 @@ export default function About() {
     { icon: FaRobot, name: "Other", tech: "Python, Java, C++", level: 85 },
   ];
 
-  const education = [
+  const education: Education[] = [
     {
       degree: "BSc in Computer Science & Engineering",
       institution: "Green University of Bangladesh",
@@ -60,14 +80,14 @@ export default function About() {
     },
   ];
 
-  const stats = [
+  const stats: Stat[] = [
     { number: "20+", label: "Projects Completed" },
     { number: "2+", label: "Years Experience" },
     { number: "10+", label: "Technologies" },
     { number: "5", label: "Certifications" },
   ];
 
-  const highlights = [
+  const highlights: string[] = [
     "Building scalable full-stack applications",
     "Machine Learning & AI integration",
     "Clean code & best practices advocate",
@@ -84,18 +104,33 @@ export default function About() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
   };
 
+  const techList: string[] = [
+    "React",
+    "Next.js",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Python",
+    "Django",
+    "TensorFlow",
+    "Git",
+    "Tailwind CSS",
+    "TypeScript",
+    "PostgreSQL",
+    "AWS",
+    "Docker",
+  ];
+
   return (
     <section
       id="about"
       ref={ref}
       className="relative py-24 bg-linear-to-b from-white to-slate-50 dark:from-slate-950 dark:to-slate-900 overflow-hidden"
     >
-      {/* Decorative Elements */}
       <div className="absolute top-20 right-0 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -122,7 +157,6 @@ export default function About() {
           </p>
         </motion.div>
 
-        {/* Stats Cards - Top */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -149,14 +183,12 @@ export default function About() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
-          {/* Left Column - About & Education */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
             className="space-y-8"
           >
-            {/* Introduction Card */}
             <motion.div
               variants={itemVariants}
               className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-shadow"
@@ -166,11 +198,11 @@ export default function About() {
                   👋
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-                  Hello! I'm Shuvo
+                  Hello! I&apos;m Shuvo
                 </h3>
               </div>
               <p className="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
-                I'm a passionate{" "}
+                I&apos;m a passionate{" "}
                 <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
                   Computer Science & Engineering
                 </span>{" "}
@@ -182,23 +214,20 @@ export default function About() {
                 <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
                   2 years
                 </span>{" "}
-                of experience, I've mastered technologies like
+                of experience, I&apos;ve mastered technologies like{" "}
                 <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
-                  {" "}
                   React, Node.js, Django, TensorFlow
                 </span>
-                , and more. I love transforming complex problems into simple,
-                beautiful, and intuitive solutions.
+                , and more.
               </p>
             </motion.div>
 
-            {/* Highlights */}
             <motion.div
               variants={itemVariants}
               className="bg-linear-to-br from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 rounded-2xl p-8 border border-emerald-200 dark:border-emerald-800"
             >
               <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                <FaCheckCircle className="text-emerald-600 dark:text-emerald-400" />
+                <FaCheckCircle className="text-emerald-600 dark:text-emerald-400" />{" "}
                 What I Bring to the Table
               </h4>
               <div className="space-y-3">
@@ -221,7 +250,6 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* Education Card */}
             <motion.div variants={itemVariants}>
               {education.map((edu, index) => (
                 <div
@@ -256,7 +284,6 @@ export default function About() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Skills */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -269,7 +296,6 @@ export default function About() {
               <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
                 Technical Skills
               </h4>
-
               <div className="space-y-8">
                 {skills.map((skill, index) => (
                   <motion.div
@@ -278,13 +304,11 @@ export default function About() {
                     className="skill-item"
                   >
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="relative">
-                        <div className="w-14 h-14 bg-linear-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/30 rounded-xl flex items-center justify-center border border-emerald-200 dark:border-emerald-700">
-                          <skill.icon
-                            className="text-emerald-600 dark:text-emerald-400 text-2xl"
-                            aria-label={skill.name}
-                          />
-                        </div>
+                      <div className="w-14 h-14 bg-linear-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/30 rounded-xl flex items-center justify-center border border-emerald-200 dark:border-emerald-700">
+                        <skill.icon
+                          className="text-emerald-600 dark:text-emerald-400 text-2xl"
+                          aria-label={skill.name}
+                        />
                       </div>
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
@@ -302,8 +326,8 @@ export default function About() {
                           className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden"
                           role="progressbar"
                           aria-valuenow={skill.level}
-                          aria-valuemin="0"
-                          aria-valuemax="100"
+                          aria-valuemin={0}
+                          aria-valuemax={100}
                         >
                           <motion.div
                             initial={{ width: 0 }}
@@ -325,21 +349,18 @@ export default function About() {
                   </motion.div>
                 ))}
               </div>
-
               <motion.div variants={itemVariants} className="mt-10">
                 <a
                   href="#contact"
                   className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-linear-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/30 hover:shadow-xl hover:shadow-emerald-600/40 hover:scale-[1.02]"
                 >
-                  <FaAward className="text-xl" />
-                  Let's Work Together
+                  <FaAward className="text-xl" /> Let&apos;s Work Together
                 </a>
               </motion.div>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Technologies Marquee */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -364,22 +385,7 @@ export default function About() {
                 },
               }}
             >
-              {[
-                "React",
-                "Next.js",
-                "Node.js",
-                "Express",
-                "MongoDB",
-                "Python",
-                "Django",
-                "TensorFlow",
-                "Git",
-                "Tailwind CSS",
-                "TypeScript",
-                "PostgreSQL",
-                "AWS",
-                "Docker",
-              ].map((tech, index) => (
+              {techList.map((tech, index) => (
                 <div
                   key={index}
                   className="flex items-center gap-2 px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap"

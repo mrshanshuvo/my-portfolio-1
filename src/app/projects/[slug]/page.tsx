@@ -4,7 +4,11 @@ import { projects } from "@/app/projects/projectsData";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-export default function ProjectPage({ params }) {
+interface ProjectPageProps {
+  params: { slug: string };
+}
+
+export default function ProjectPage({ params }: ProjectPageProps) {
   const project = projects.find((p) => p.slug === params.slug);
 
   if (!project) return <p className="text-center mt-20">Project not found</p>;
@@ -13,19 +17,16 @@ export default function ProjectPage({ params }) {
     <section className="max-w-5xl mx-auto py-20 px-4">
       <h1 className="text-4xl font-bold mb-6">{project.title}</h1>
 
-      {/* Project Image */}
       <img
         src={project.image}
         alt={project.title}
         className="w-full h-auto object-contain rounded-lg mb-6"
       />
 
-      {/* Description */}
       <p className="text-gray-700 dark:text-gray-300 mb-4">
         {project.description}
       </p>
 
-      {/* Technologies */}
       <div className="flex flex-wrap gap-2 mb-6">
         {project.technologies.map((TechIcon, i) => (
           <div
@@ -40,7 +41,6 @@ export default function ProjectPage({ params }) {
         ))}
       </div>
 
-      {/* Challenges / Improvements */}
       {project.improvements && project.improvements.length > 0 && (
         <motion.div
           className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6 shadow-inner"
@@ -49,7 +49,7 @@ export default function ProjectPage({ params }) {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
-            Challenges & Lessons Learned
+            Challenges &amp; Lessons Learned
           </h2>
           <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
             {project.improvements.map((item, index) => (
@@ -59,7 +59,6 @@ export default function ProjectPage({ params }) {
         </motion.div>
       )}
 
-      {/* Links */}
       <div className="flex gap-4">
         <a
           href={project.github}

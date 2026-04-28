@@ -15,8 +15,9 @@ import {
   SiDocker,
   SiLeaflet,
 } from "react-icons/si";
+import type { Project } from "@/types";
 
-export const projects = [
+export const projects: Project[] = [
   {
     title: "Medical Camp Management System (MCMS)",
     slug: "mcms",

@@ -13,16 +13,18 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import type { ContactInfo, SocialLink, Status } from "@/types";
+import type { FormEvent } from "react";
 
 export default function Contact() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const [status, setStatus] = useState({ message: "", type: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<Status>({ message: "", type: "" });
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const contactInfo = [
+  const contactInfo: ContactInfo[] = [
     {
       icon: FaEnvelope,
       label: "Email",
@@ -43,34 +45,37 @@ export default function Contact() {
     },
   ];
 
-  const socialLinks = [
+  const socialLinks: (SocialLink & { color: string })[] = [
     {
       icon: FaLinkedin,
       label: "LinkedIn",
-      url: "https://linkedin.com/in/shahidhasanshovu",
+      href: "https://linkedin.com/in/shahidhasanshovu",
       color: "hover:text-blue-600 dark:hover:text-blue-400",
     },
     {
       icon: FaGithub,
       label: "GitHub",
-      url: "https://github.com/mrshanshuvo",
+      href: "https://github.com/mrshanshuvo",
       color: "hover:text-slate-900 dark:hover:text-white",
     },
     {
       icon: FaTwitter,
       label: "Twitter",
-      url: "https://twitter.com/mrshanshuvo",
+      href: "https://twitter.com/mrshanshuvo",
       color: "hover:text-blue-400",
     },
   ];
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus({ message: "Sending your message...", type: "loading" });
 
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries()) as Record<
+      string,
+      string
+    >;
 
     if (!data.name || !data.email || !data.message) {
       setStatus({
@@ -82,7 +87,10 @@ export default function Contact() {
     }
 
     if (!executeRecaptcha) {
-      setStatus({ message: "reCAPTCHA not ready. Please try again.", type: "error" });
+      setStatus({
+        message: "reCAPTCHA not ready. Please try again.",
+        type: "error",
+      });
       setIsSubmitting(false);
       return;
     }
@@ -96,18 +104,17 @@ export default function Contact() {
         body: JSON.stringify({ ...data, recaptchaToken }),
       });
 
-      const result = await res.json();
+      const result = (await res.json()) as { success: boolean; error?: string };
 
       if (result.success) {
         setStatus({
           message: "Message sent successfully! ✅",
           type: "success",
         });
-        e.target.reset();
-
+        (e.target as HTMLFormElement).reset();
         setTimeout(() => setStatus({ message: "", type: "" }), 5000);
       } else {
-        throw new Error(result.error || "Failed to send message");
+        throw new Error(result.error ?? "Failed to send message");
       }
     } catch (err) {
       setStatus({
@@ -149,13 +156,12 @@ export default function Contact() {
           </h2>
           <div className="w-20 h-1 bg-emerald-600 dark:bg-emerald-400 mx-auto mb-4"></div>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Have a project in mind or want to discuss opportunities? I'd love to
-            hear from you.
+            Have a project in mind or want to discuss opportunities? I&apos;d
+            love to hear from you.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info + Socials */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -165,7 +171,7 @@ export default function Contact() {
               variants={itemVariants}
               className="text-2xl font-semibold text-slate-900 dark:text-white mb-6"
             >
-              Let's talk!
+              Let&apos;s talk!
             </motion.h3>
             <motion.div variants={itemVariants} className="space-y-6 mb-10">
               {contactInfo.map((item, idx) => (
@@ -201,7 +207,7 @@ export default function Contact() {
                 {socialLinks.map((social, idx) => (
                   <a
                     key={idx}
-                    href={social.url}
+                    href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`w-11 h-11 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-400 transition-all duration-200 hover:border-emerald-500 dark:hover:border-emerald-400 ${social.color} hover:scale-110 hover:shadow-lg`}
@@ -214,7 +220,6 @@ export default function Contact() {
             </motion.div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
@@ -267,7 +272,7 @@ export default function Contact() {
                   id="message"
                   name="message"
                   required
-                  rows="5"
+                  rows={5}
                   placeholder="Hello! I'd like to discuss a project collaboration or a web development task."
                   className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 resize-none transition-all"
                 ></textarea>
@@ -280,11 +285,7 @@ export default function Contact() {
                 disabled={isSubmitting}
                 whileHover={!isSubmitting ? { scale: 1.02 } : {}}
                 whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-                className={`w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 text-white shadow-lg transition-all ${
-                  isSubmitting
-                    ? "bg-slate-400 cursor-not-allowed"
-                    : "bg-emerald-600 dark:bg-emerald-500 hover:bg-emerald-700 dark:hover:bg-emerald-600 shadow-emerald-600/20"
-                }`}
+                className={`w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 text-white shadow-lg transition-all ${isSubmitting ? "bg-slate-400 cursor-not-allowed" : "bg-emerald-600 dark:bg-emerald-500 hover:bg-emerald-700 dark:hover:bg-emerald-600 shadow-emerald-600/20"}`}
               >
                 {isSubmitting ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -299,13 +300,7 @@ export default function Contact() {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={`p-4 rounded-lg ${
-                    status.type === "success"
-                      ? "bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800"
-                      : status.type === "error"
-                      ? "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
-                      : "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800"
-                  }`}
+                  className={`p-4 rounded-lg ${status.type === "success" ? "bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800" : status.type === "error" ? "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800" : "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800"}`}
                 >
                   <div className="flex items-center gap-3">
                     {status.type === "success" ? (
@@ -316,13 +311,7 @@ export default function Contact() {
                       <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" />
                     )}
                     <p
-                      className={`text-sm font-medium ${
-                        status.type === "success"
-                          ? "text-emerald-800 dark:text-emerald-300"
-                          : status.type === "error"
-                          ? "text-red-800 dark:text-red-300"
-                          : "text-blue-800 dark:text-blue-300"
-                      }`}
+                      className={`text-sm font-medium ${status.type === "success" ? "text-emerald-800 dark:text-emerald-300" : status.type === "error" ? "text-red-800 dark:text-red-300" : "text-blue-800 dark:text-blue-300"}`}
                     >
                       {status.message}
                     </p>

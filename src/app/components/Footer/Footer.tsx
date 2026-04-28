@@ -8,24 +8,29 @@ import {
   FaArrowUp,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import type { IconType } from "react-icons";
+
+interface FooterSocialLink {
+  icon: IconType;
+  href: string;
+  label: string;
+  color: string;
+}
 
 export default function Footer() {
-  const [showTopButton, setShowTopButton] = useState(false);
+  const [showTopButton, setShowTopButton] = useState<boolean>(false);
 
-  const scrollToTop = () => {
+  const scrollToTop = (): void => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Show button after scrolling 300px
   useEffect(() => {
-    const handleScroll = () => {
-      setShowTopButton(window.scrollY > 300);
-    };
+    const handleScroll = () => setShowTopButton(window.scrollY > 300);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const socialLinks = [
+  const socialLinks: FooterSocialLink[] = [
     {
       icon: FaGithub,
       href: "https://github.com/mrshanshuvo",
@@ -54,7 +59,6 @@ export default function Footer() {
 
   return (
     <>
-      {/* Animated Back to Top Button */}
       <AnimatePresence>
         {showTopButton && (
           <motion.button
@@ -76,7 +80,6 @@ export default function Footer() {
       <footer className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 py-12 mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            {/* Heading */}
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -88,7 +91,6 @@ export default function Footer() {
               <span className="text-emerald-600 dark:text-emerald-400">Me</span>
             </motion.h2>
 
-            {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -120,10 +122,8 @@ export default function Footer() {
               ))}
             </motion.div>
 
-            {/* Divider */}
             <div className="w-20 h-0.5 bg-emerald-600 dark:bg-emerald-400 mx-auto mb-6"></div>
 
-            {/* Copyright */}
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -134,8 +134,6 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} Shahid Hasan Shuvo. All rights
               reserved.
             </motion.p>
-
-            {/* Optional: Built with love message */}
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -145,7 +143,7 @@ export default function Footer() {
             >
               Built with{" "}
               <span className="text-emerald-600 dark:text-emerald-400">❤</span>{" "}
-              using Next.js & Tailwind CSS
+              using Next.js &amp; Tailwind CSS
             </motion.p>
           </div>
         </div>

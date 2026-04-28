@@ -4,21 +4,16 @@ import { TypeAnimation } from "react-type-animation";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 import Image from "next/image";
+import type { SocialLink } from "@/types";
 
 export default function Hero() {
-  const scrollToProjects = () => {
+  const scrollToProjects = (): void => {
     const element = document.getElementById("projects");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    if (element) element.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const socialLinks = [
-    {
-      icon: FaGithub,
-      href: "https://github.com/mrshanshuvo",
-      label: "GitHub",
-    },
+  const socialLinks: SocialLink[] = [
+    { icon: FaGithub, href: "https://github.com/mrshanshuvo", label: "GitHub" },
     {
       icon: FaLinkedin,
       href: "https://linkedin.com/in/shahidhasanshovu",
@@ -29,11 +24,7 @@ export default function Hero() {
       href: "https://leetcode.com/yourusername",
       label: "LeetCode",
     },
-    {
-      icon: FaEnvelope,
-      href: "mailto:mrshanshuvo@gmail.com",
-      label: "Email",
-    },
+    { icon: FaEnvelope, href: "mailto:mrshanshuvo@gmail.com", label: "Email" },
   ];
 
   return (
@@ -41,10 +32,7 @@ export default function Hero() {
       id="home"
       className="min-h-screen pt-20 flex items-center justify-center relative overflow-hidden bg-linear-to-br from-slate-950 via-slate-900 to-slate-950"
     >
-      {/* Subtle Grid Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
-
-      {/* Gradient Orbs */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse"></div>
         <div
@@ -53,14 +41,12 @@ export default function Hero() {
         ></div>
       </div>
 
-      {/* Main Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Profile Image */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -68,11 +54,8 @@ export default function Hero() {
             className="relative inline-block mb-8"
           >
             <div className="relative w-40 h-40 md:w-48 md:h-48">
-              {/* Gradient ring */}
               <div className="absolute inset-0 bg-linear-to-r from-emerald-500 to-blue-500 rounded-full animate-spin-slow"></div>
               <div className="absolute inset-1 bg-slate-950 rounded-full"></div>
-
-              {/* Image container */}
               <div className="absolute inset-2 rounded-full overflow-hidden border-2 border-emerald-500/20">
                 <Image
                   src="/PP1.jpeg"
@@ -87,7 +70,6 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Name & Title */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -101,7 +83,6 @@ export default function Hero() {
             </h1>
           </motion.div>
 
-          {/* Typewriter */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -126,7 +107,6 @@ export default function Hero() {
             />
           </motion.div>
 
-          {/* Description */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -138,7 +118,6 @@ export default function Hero() {
             make an impact.
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -160,7 +139,6 @@ export default function Hero() {
                 ↓
               </motion.span>
             </motion.button>
-
             <motion.a
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
@@ -173,7 +151,6 @@ export default function Hero() {
             </motion.a>
           </motion.div>
 
-          {/* Social Links */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -200,7 +177,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -217,18 +193,9 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <style jsx>{`
-        @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
-        }
+      <style>{`
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 8s linear infinite; }
       `}</style>
     </section>
   );

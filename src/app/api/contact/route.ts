@@ -1,24 +1,38 @@
 import nodemailer from "nodemailer";
+import type { NextRequest } from "next/server";
+
+interface RecaptchaResponse {
+  success: boolean;
+  score?: number;
+  "error-codes"?: string[];
+}
+
+interface ContactBody {
+  name: string;
+  email: string;
+  message: string;
+  honeypot?: string;
+  recaptchaToken: string;
+}
 
 /**
  * Verify Google reCAPTCHA v3 token
- * @param {string} token - reCAPTCHA token from client
- * @returns {Promise<boolean>} - true if score >= 0.5 (human), false otherwise
+ * @param token - reCAPTCHA token from client
+ * @returns true if score >= 0.5 (human), false otherwise
  */
-async function verifyRecaptcha(token) {
+async function verifyRecaptcha(token: string): Promise<boolean> {
   try {
     const res = await fetch(
       `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
-      { method: "POST" }
+      { method: "POST" },
     );
-    const data = await res.json();
+    const data = (await res.json()) as RecaptchaResponse;
 
     if (!data.success) {
       console.warn("reCAPTCHA verification failed:", data["error-codes"]);
       return false;
     }
 
-    // v3 returns a score: 1.0 = human, 0.0 = bot. Threshold: 0.5
     const score = data.score ?? 0;
     if (score < 0.5) {
       console.warn("reCAPTCHA score too low:", score);
@@ -32,18 +46,17 @@ async function verifyRecaptcha(token) {
   }
 }
 
-
 /**
  * Contact API POST handler
  * Expects JSON: { name, email, message, honeypot, recaptchaToken }
  */
-export async function POST(req) {
+export async function POST(req: NextRequest): Promise<Response> {
   try {
-    const { name, email, message, honeypot, recaptchaToken } = await req.json();
+    const { name, email, message, honeypot, recaptchaToken } =
+      (await req.json()) as ContactBody;
 
-    // ----------------- Spam protection -----------------
+    // Spam protection
     if (honeypot) {
-      // Bot detected via hidden field – silently accept
       return new Response(JSON.stringify({ success: true }), { status: 200 });
     }
 
@@ -53,7 +66,7 @@ export async function POST(req) {
           success: false,
           error: "reCAPTCHA token is missing.",
         }),
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -64,15 +77,15 @@ export async function POST(req) {
           success: false,
           error: "reCAPTCHA verification failed.",
         }),
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    // ----------------- Input validation -----------------
+    // Input validation
     if (!name || !email || !message) {
       return new Response(
         JSON.stringify({ success: false, error: "All fields are required." }),
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -80,14 +93,14 @@ export async function POST(req) {
     if (!emailPattern.test(email)) {
       return new Response(
         JSON.stringify({ success: false, error: "Invalid email address." }),
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    // ----------------- Sanitize message -----------------
+    // Sanitize message
     const sanitizedMessage = message.replace(/<\/?[^>]+(>|$)/g, "");
 
-    // ----------------- Nodemailer setup -----------------
+    // Nodemailer setup
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -96,7 +109,6 @@ export async function POST(req) {
       },
     });
 
-    // ----------------- Send email -----------------
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       replyTo: email,
@@ -114,7 +126,7 @@ export async function POST(req) {
     console.error("Contact API Error:", error);
     return new Response(
       JSON.stringify({ success: false, error: "Internal server error." }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

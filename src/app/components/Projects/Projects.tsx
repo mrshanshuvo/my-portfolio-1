@@ -4,15 +4,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { FaGithub, FaExternalLinkAlt, FaStar } from "react-icons/fa";
+import type { MouseEvent } from "react";
 
 export default function Projects() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
-  const categories = ["All", "Full Stack", "Backend", "ML/AI", "Mobile"];
-  const [activeCategory, setActiveCategory] = useState("All");
+  const categories: string[] = [
+    "All",
+    "Full Stack",
+    "Backend",
+    "ML/AI",
+    "Mobile",
+  ];
+  const [activeCategory, setActiveCategory] = useState<string>("All");
 
   const filteredProjects =
     activeCategory === "All"
@@ -23,10 +30,7 @@ export default function Projects() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
     },
   };
 
@@ -36,13 +40,9 @@ export default function Projects() {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const },
     },
-    exit: {
-      opacity: 0,
-      scale: 0.95,
-      transition: { duration: 0.3 },
-    },
+    exit: { opacity: 0, scale: 0.95, transition: { duration: 0.3 } },
   };
 
   return (
@@ -51,11 +51,9 @@ export default function Projects() {
       ref={ref}
       className="relative py-24 bg-white dark:bg-slate-950 overflow-hidden"
     >
-      {/* Subtle Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -72,23 +70,19 @@ export default function Projects() {
               Portfolio
             </span>
           </motion.div>
-
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4 tracking-tight">
             Featured{" "}
             <span className="text-emerald-600 dark:text-emerald-400">
               Projects
             </span>
           </h2>
-
           <div className="w-20 h-1 bg-emerald-600 dark:bg-emerald-400 mx-auto mb-6"></div>
-
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Explore a curated selection of projects showcasing full-stack
             development, innovative solutions, and cutting-edge technologies
           </p>
         </motion.div>
 
-        {/* Category Filter */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -99,18 +93,13 @@ export default function Projects() {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2.5 rounded-lg font-medium transition-all duration-200 ${
-                activeCategory === category
-                  ? "bg-emerald-600 dark:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20"
-                  : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
-              }`}
+              className={`px-6 py-2.5 rounded-lg font-medium transition-all duration-200 ${activeCategory === category ? "bg-emerald-600 dark:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20" : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"}`}
             >
               {category}
             </button>
           ))}
         </motion.div>
 
-        {/* Projects Grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeCategory}
@@ -128,7 +117,6 @@ export default function Projects() {
                 className="group relative"
               >
                 <div className="relative bg-white dark:bg-slate-900 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-emerald-500/30 dark:hover:border-emerald-400/30 h-full flex flex-col">
-                  {/* Image Container */}
                   <div className="relative overflow-hidden h-56">
                     <div className="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <Image
@@ -138,8 +126,6 @@ export default function Projects() {
                       height={300}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                     />
-
-                    {/* Badges */}
                     <div className="absolute top-4 left-4 right-4 flex justify-between items-start z-20">
                       {project.featured && (
                         <motion.div
@@ -148,23 +134,20 @@ export default function Projects() {
                           transition={{ delay: 0.2 + index * 0.1 }}
                           className="flex items-center gap-1 bg-amber-500 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg"
                         >
-                          <FaStar className="text-xs" />
-                          Featured
+                          <FaStar className="text-xs" /> Featured
                         </motion.div>
                       )}
                       <div className="bg-emerald-600 dark:bg-emerald-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ml-auto">
                         {project.category}
                       </div>
                     </div>
-
-                    {/* Quick Links Overlay */}
                     <div className="absolute inset-0 z-20 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-3 bg-white/95 dark:bg-slate-900/95 rounded-full hover:scale-110 transition-transform duration-200 shadow-xl"
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e: MouseEvent) => e.stopPropagation()}
                       >
                         <FaGithub className="text-slate-900 dark:text-white text-xl" />
                       </a>
@@ -173,24 +156,20 @@ export default function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-3 bg-emerald-600 rounded-full hover:scale-110 transition-transform duration-200 shadow-xl"
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e: MouseEvent) => e.stopPropagation()}
                       >
                         <FaExternalLinkAlt className="text-white text-lg" />
                       </a>
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className="p-6 flex flex-col grow">
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300 line-clamp-1">
                       {project.title}
                     </h3>
-
                     <p className="text-slate-600 dark:text-slate-400 mb-5 line-clamp-2 leading-relaxed grow">
                       {project.description}
                     </p>
-
-                    {/* Tech Stack */}
                     <div className="flex flex-wrap gap-2 mb-5">
                       {project.technologies
                         .slice(0, 4)
@@ -213,8 +192,6 @@ export default function Projects() {
                         </div>
                       )}
                     </div>
-
-                    {/* Improvements / Lessons Preview */}
                     {project.improvements &&
                       project.improvements.length > 0 && (
                         <div className="mb-3 text-sm text-slate-600 dark:text-slate-300 line-clamp-2">
@@ -226,8 +203,6 @@ export default function Projects() {
                           )}
                         </div>
                       )}
-
-                    {/* CTA Button */}
                     <Link
                       href={`/projects/${project.slug}`}
                       className="group/btn relative inline-flex items-center justify-center px-6 py-3 bg-emerald-600 dark:bg-emerald-500 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:bg-emerald-700 dark:hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-500/30 hover:scale-[1.02]"
@@ -256,7 +231,6 @@ export default function Projects() {
           </motion.div>
         </AnimatePresence>
 
-        {/* No Results State */}
         {filteredProjects.length === 0 && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -287,7 +261,6 @@ export default function Projects() {
           </motion.div>
         )}
 
-        {/* View All Projects CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
