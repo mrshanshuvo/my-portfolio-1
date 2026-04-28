@@ -211,25 +211,33 @@ export default function AdminHeroPage() {
         )}
       </AnimatePresence>
 
-      <Button
-        id="save-hero-btn"
-        onClick={handleSave}
-        disabled={saving}
-        className="bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold px-8 shadow-lg shadow-emerald-600/20 active:scale-95 transition-all group"
-      >
-        <FaSave
-          className={cn(
-            "mr-2 transition-transform duration-500",
-            saving ? "animate-spin" : "group-hover:rotate-12",
-          )}
-        />
-        {saving ? "Saving Changes..." : "Save Changes"}
-      </Button>
+      <div className="max-w-5xl mx-auto">
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+          <div>
+            <h1 className="text-4xl font-bold text-white tracking-tight mb-2">
+              Hero Section
+            </h1>
+            <p className="text-slate-400">
+              Update your name, bio, typing sequences & social links.
+            </p>
+          </div>
+          <Button
+            id="save-hero-btn"
+            onClick={handleSave}
+            disabled={saving}
+            className="bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold px-8 shadow-lg shadow-emerald-600/20 active:scale-95 transition-all group"
+          >
+            <FaSave
+              className={cn(
+                "mr-2 transition-transform duration-500",
+                saving ? "animate-spin" : "group-hover:rotate-12",
+              )}
+            />
+            {saving ? "Saving Changes..." : "Save Changes"}
+          </Button>
+        </header>
 
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Editor Column */}
-          <div className="lg:col-span-7 space-y-8">
+        <div className="space-y-8">
             {/* Identity Card */}
             <Card className="rounded-3xl border border-white/10 bg-slate-900/40 backdrop-blur-xl overflow-hidden">
               <CardHeader className="pb-2">
@@ -670,7 +678,6 @@ export default function AdminHeroPage() {
                 </div>
               </CardContent>
             </Card>
-          </div>
         </div>
       </div>
 

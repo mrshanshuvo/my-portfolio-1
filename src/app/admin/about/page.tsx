@@ -204,7 +204,7 @@ export default function AdminAboutPage() {
         )}
       </AnimatePresence>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <div>
             <h1 className="text-4xl font-bold text-white tracking-tight mb-2">
@@ -230,10 +230,8 @@ export default function AdminAboutPage() {
           </Button>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Editor Column */}
-          <div className="lg:col-span-8">
-            <Tabs defaultValue="bio" className="space-y-8">
+        <div className="w-full">
+          <Tabs defaultValue="bio" className="space-y-8">
               <TabsList className="bg-slate-900/60 border border-white/10 p-1 rounded-2xl w-full md:w-auto h-auto flex flex-wrap gap-1">
                 <TabsTrigger
                   value="bio"
@@ -764,7 +762,6 @@ export default function AdminAboutPage() {
               </TabsContent>
             </Tabs>
           </div>
-        </div>
       </div>
     </div>
   );
