@@ -5,14 +5,15 @@ import { auth } from "@/lib/auth";
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {
+    const { id } = await params;
     await connectDB();
-    const deleted = await Message.findByIdAndDelete(params.id);
+    const deleted = await Message.findByIdAndDelete(id);
     if (!deleted) return NextResponse.json({ error: "Message not found" }, { status: 404 });
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -22,15 +23,16 @@ export async function DELETE(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {
+    const { id } = await params;
     const { status } = await req.json();
     await connectDB();
-    const updated = await Message.findByIdAndUpdate(params.id, { status }, { new: true });
+    const updated = await Message.findByIdAndUpdate(id, { status }, { new: true });
     if (!updated) return NextResponse.json({ error: "Message not found" }, { status: 404 });
     return NextResponse.json(updated);
   } catch (error) {
