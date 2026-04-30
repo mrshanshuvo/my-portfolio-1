@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { FaGlobe, FaEnvelope, FaPalette, FaShieldAlt } from "react-icons/fa";
+import ImageUpload from "../components/ImageUpload";
 
 export default function SettingsForm({
   initialSettings,
@@ -79,16 +80,10 @@ export default function SettingsForm({
               />
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-widest text-slate-500">
-                OG Image URL (Social Share)
-              </label>
-              <Input
+              <ImageUpload
+                label="OG Image (Social Share)"
                 value={settings.ogImage}
-                onChange={(e) =>
-                  setSettings({ ...settings, ogImage: e.target.value })
-                }
-                className="bg-slate-950 border-white/10 rounded-xl"
-                placeholder="https://..."
+                onChange={(url) => setSettings({ ...settings, ogImage: url })}
               />
             </div>
           </div>

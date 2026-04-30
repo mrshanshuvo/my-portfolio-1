@@ -16,11 +16,13 @@ import {
   FaInfoCircle,
   FaImage,
   FaFileAlt,
+  FaCog,
 } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 import { motion, AnimatePresence } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import Image from "next/image";
+import ImageUpload from "../components/ImageUpload";
 
 // Shadcn UI Imports
 import { Button } from "@/components/ui/button";
@@ -405,66 +407,11 @@ export default function AdminHeroPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Profile Image UI */}
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between px-1">
-                      <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                        Profile Image
-                      </label>
-                      <Badge
-                        variant="outline"
-                        className="bg-blue-500/10 text-blue-400 border-blue-500/20 text-[10px]"
-                      >
-                        {data.profileImage ? "Uploaded" : "Missing"}
-                      </Badge>
-                    </div>
-                    <div className="relative group overflow-hidden rounded-2xl border border-white/10 bg-slate-950/50 aspect-square max-w-[200px] mx-auto flex items-center justify-center">
-                      {data.profileImage ? (
-                        <>
-                          <Image
-                            src={data.profileImage}
-                            alt="Profile Preview"
-                            fill
-                            className="object-cover transition-transform group-hover:scale-110"
-                            unoptimized
-                          />
-                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3">
-                            <Button
-                              size="sm"
-                              onClick={() => imageInputRef.current?.click()}
-                              className="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white border border-white/20"
-                            >
-                              {uploading === "profileImage"
-                                ? "Uploading..."
-                                : "Change Image"}
-                            </Button>
-                            <span className="text-[10px] text-slate-300 px-2 text-center break-all max-w-[150px]">
-                              {data.profileImage.split("/").pop()}
-                            </span>
-                          </div>
-                        </>
-                      ) : (
-                        <button
-                          onClick={() => imageInputRef.current?.click()}
-                          className="flex flex-col items-center gap-3 text-slate-500 hover:text-blue-400 transition-colors"
-                        >
-                          <FaImage size={32} />
-                          <span className="text-xs font-bold">
-                            Click to Upload
-                          </span>
-                        </button>
-                      )}
-                      {uploading === "profileImage" && (
-                        <div className="absolute inset-0 bg-slate-950/80 flex items-center justify-center">
-                          <div className="w-8 h-8 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin" />
-                        </div>
-                      )}
-                      <input
-                        type="file"
-                        ref={imageInputRef}
-                        className="hidden"
-                        accept="image/*"
-                        onChange={(e) => handleUpload(e, "profileImage")}
-                      />
-                    </div>
+                    <ImageUpload
+                      label="Profile Image"
+                      value={data.profileImage}
+                      onChange={(url) => setData((prev) => ({ ...prev, profileImage: url }))}
+                    />
                   </div>
 
                   {/* Resume PDF UI */}
