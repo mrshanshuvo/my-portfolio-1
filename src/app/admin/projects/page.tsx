@@ -21,6 +21,7 @@ import {
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import ImageUpload from "../components/ImageUpload";
 
 // Shadcn UI Imports
 import { Button } from "@/components/ui/button";
@@ -571,57 +572,10 @@ export default function AdminProjectsPage() {
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                       <div className="space-y-4">
-                        <div className="relative group rounded-2xl border border-white/10 bg-slate-950/50 aspect-video overflow-hidden flex items-center justify-center">
-                          {form.image ? (
-                            <>
-                              <Image
-                                src={form.image}
-                                alt="Project"
-                                fill
-                                className="object-cover"
-                                unoptimized
-                              />
-                              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <Button
-                                  size="sm"
-                                  onClick={() => imageInputRef.current?.click()}
-                                  className="bg-white/20 hover:bg-white/30 text-white"
-                                >
-                                  Change Image
-                                </Button>
-                              </div>
-                            </>
-                          ) : (
-                            <button
-                              onClick={() => imageInputRef.current?.click()}
-                              className="flex flex-col items-center gap-3 text-slate-500 hover:text-emerald-400 transition-colors"
-                            >
-                              <FaImage size={32} />
-                              <span className="text-xs font-bold uppercase tracking-wider">
-                                Click to Upload
-                              </span>
-                            </button>
-                          )}
-                          {uploading && (
-                            <div className="absolute inset-0 bg-slate-950/80 flex items-center justify-center">
-                              <div className="w-8 h-8 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin" />
-                            </div>
-                          )}
-                        </div>
-                        <Input
-                          className="bg-slate-950/50 border-white/10 text-white rounded-xl text-xs h-8"
+                        <ImageUpload
+                          label="Project Image"
                           value={form.image}
-                          onChange={(e) =>
-                            setForm((f) => ({ ...f, image: e.target.value }))
-                          }
-                          placeholder="Or enter image URL manually..."
-                        />
-                        <input
-                          type="file"
-                          ref={imageInputRef}
-                          className="hidden"
-                          accept="image/*"
-                          onChange={handleUpload}
+                          onChange={(url) => setForm((f) => ({ ...f, image: url }))}
                         />
                       </div>
                       <div className="space-y-4">

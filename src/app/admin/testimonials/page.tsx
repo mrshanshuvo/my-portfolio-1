@@ -9,6 +9,7 @@ import {
   FaUserCircle,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import ImageUpload from "../components/ImageUpload";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -163,6 +164,11 @@ export default function AdminTestimonialsPage() {
                   </Button>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-4">
+                      <ImageUpload
+                        label="Client Avatar"
+                        value={item.avatar || ""}
+                        onChange={(url) => updateTestimonial(i, "avatar", url)}
+                      />
                       <div className="space-y-2">
                         <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">
                           Client Name

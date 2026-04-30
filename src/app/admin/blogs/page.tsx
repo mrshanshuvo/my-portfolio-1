@@ -11,6 +11,7 @@ import {
   FaTags,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import ImageUpload from "../components/ImageUpload";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -30,6 +31,7 @@ interface Blog {
   link: string;
   date: string;
   tags: string[];
+  image?: string;
 }
 
 export default function AdminBlogsPage() {
@@ -181,20 +183,27 @@ export default function AdminBlogsPage() {
                     <FaTimes size={14} />
                   </Button>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">
-                        Article Title
-                      </label>
-                      <div className="relative">
-                        <FaPenNib className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
-                        <Input
-                          className="bg-slate-900/50 border-white/10 text-white rounded-xl pl-10"
-                          value={item.title}
-                          onChange={(e) =>
-                            updateBlog(i, "title", e.target.value)
-                          }
-                        />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <ImageUpload
+                        label="Article Cover Image"
+                        value={item.image || ""}
+                        onChange={(url) => updateBlog(i, "image", url)}
+                      />
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">
+                          Article Title
+                        </label>
+                        <div className="relative">
+                          <FaPenNib className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
+                          <Input
+                            className="bg-slate-900/50 border-white/10 text-white rounded-xl pl-10"
+                            value={item.title}
+                            onChange={(e) =>
+                              updateBlog(i, "title", e.target.value)
+                            }
+                          />
+                        </div>
                       </div>
                     </div>
                     <div className="space-y-2">

@@ -6,6 +6,7 @@ export interface IBlog extends Document {
   link: string;
   date: string;
   tags: string[];
+  image?: string;
   order: number;
   createdAt: Date;
   updatedAt: Date;
@@ -18,6 +19,7 @@ const BlogSchema = new Schema<IBlog>(
     link: { type: String, required: true },
     date: { type: String, required: true },
     tags: [{ type: String }],
+    image: { type: String },
     order: { type: Number, default: 0 },
   },
   { timestamps: true },
