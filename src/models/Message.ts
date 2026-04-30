@@ -1,6 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
-const MessageSchema = new mongoose.Schema(
+export interface IMessage extends Document {
+  name: string;
+  email: string;
+  message: string;
+  status: "unread" | "read";
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const MessageSchema = new Schema<IMessage>(
   {
     name: {
       type: String,
@@ -20,7 +29,10 @@ const MessageSchema = new mongoose.Schema(
       default: "unread",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export default mongoose.models.Message || mongoose.model("Message", MessageSchema);
+const Message: Model<IMessage> =
+  mongoose.models.Message || mongoose.model<IMessage>("Message", MessageSchema);
+
+export default Message;

@@ -1,11 +1,5 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
-interface SocialLink {
-  platform: string;
-  href: string;
-  label: string;
-}
-
 interface TypeSequenceItem {
   text: string;
   delay: number;
@@ -14,36 +8,27 @@ interface TypeSequenceItem {
 export interface IHero extends Document {
   name: string;
   lastName: string;
-  typeSequences: TypeSequenceItem[];
-  bio: string;
   profileImage: string;
   resumeUrl: string;
-  socialLinks: SocialLink[];
+  typeSequences: TypeSequenceItem[];
+  createdAt: Date;
   updatedAt: Date;
 }
 
 const HeroSchema = new Schema<IHero>(
   {
-    name: { type: String, default: "Shahid Hasan" },
-    lastName: { type: String, default: "Shuvo" },
+    name: { type: String, required: true },
+    lastName: { type: String, required: true },
+    profileImage: { type: String },
+    resumeUrl: { type: String },
     typeSequences: [
       {
         text: { type: String },
         delay: { type: Number, default: 2000 },
       },
     ],
-    bio: { type: String, default: "" },
-    profileImage: { type: String, default: "/PP1.jpeg" },
-    resumeUrl: { type: String, default: "/Resume_of_Shahid_Hasan_Shuvo.pdf" },
-    socialLinks: [
-      {
-        platform: { type: String },
-        href: { type: String },
-        label: { type: String },
-      },
-    ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Hero: Model<IHero> =

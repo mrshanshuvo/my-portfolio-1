@@ -1,5 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
 import HeroModel from "@/models/Hero";
+import SocialLinkModel from "@/models/SocialLink";
 import type { Hero } from "@/types";
 import HeroClient from "./HeroClient";
 
@@ -25,18 +26,25 @@ const DEFAULT_HERO: Hero = {
 
 async function getHero(): Promise<Hero> {
   await connectDB();
-  const rawDoc = await HeroModel.findOne().lean();
-  if (!rawDoc) return DEFAULT_HERO;
-  const raw = JSON.parse(JSON.stringify(rawDoc));
+  const [heroDoc, socialDocs] = await Promise.all([
+    HeroModel.findOne().lean(),
+    SocialLinkModel.find().sort({ order: 1 }).lean(),
+  ]);
+
+  if (!heroDoc) return DEFAULT_HERO;
+  
+  const raw = JSON.parse(JSON.stringify(heroDoc));
+  const socials = JSON.parse(JSON.stringify(socialDocs));
+
   return {
     _id: raw._id?.toString(),
     name: raw.name ?? DEFAULT_HERO.name,
     lastName: raw.lastName ?? DEFAULT_HERO.lastName,
     typeSequences: raw.typeSequences?.length ? raw.typeSequences : DEFAULT_HERO.typeSequences,
-    bio: raw.bio ?? DEFAULT_HERO.bio,
+    bio: raw.heroBio ?? raw.bio ?? DEFAULT_HERO.bio, // support both just in case
     profileImage: raw.profileImage ?? DEFAULT_HERO.profileImage,
     resumeUrl: raw.resumeUrl ?? DEFAULT_HERO.resumeUrl,
-    socialLinks: raw.socialLinks?.length ? raw.socialLinks : DEFAULT_HERO.socialLinks,
+    socialLinks: socials.length ? socials : DEFAULT_HERO.socialLinks,
   };
 }
 

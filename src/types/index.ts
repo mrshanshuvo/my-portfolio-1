@@ -41,6 +41,34 @@ export interface Stat {
   label: string;
 }
 
+export interface SocialLink {
+  platform: string;
+  href: string;
+  label: string;
+  icon?: IconType; // frontend-only
+}
+
+export interface TypeSequenceItem {
+  text: string;
+  delay: number;
+}
+
+export interface Profile {
+  _id?: string;
+  name: string;
+  lastName: string;
+  profileImage: string;
+  resumeUrl: string;
+  typeSequences: TypeSequenceItem[];
+  heroBio: string;
+  socialLinks: SocialLink[];
+  aboutBio: string;
+  highlights: string[];
+  stats: Stat[];
+  skills: Skill[];
+  techList: string[];
+}
+
 export interface Education {
   degree: string;
   institution: string;
@@ -57,18 +85,6 @@ export interface About {
   skills: Skill[];
   techList: string[];
   education: Education[];
-}
-
-export interface SocialLink {
-  platform: string;
-  href: string;
-  label: string;
-  icon?: IconType; // frontend-only
-}
-
-export interface TypeSequenceItem {
-  text: string;
-  delay: number;
 }
 
 export interface Hero {

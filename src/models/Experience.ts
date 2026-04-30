@@ -18,11 +18,19 @@ const ExperienceSchema = new Schema<IExperience>(
     org: { type: String, required: true },
     duration: { type: String, required: true },
     details: [{ type: String }],
-    color: { type: String, enum: ["emerald", "blue", "amber"], default: "emerald" },
-    type: { type: String, enum: ["work", "education", "certification"], default: "work" },
+    color: {
+      type: String,
+      enum: ["emerald", "blue", "amber"],
+      default: "emerald",
+    },
+    type: {
+      type: String,
+      enum: ["work", "education", "certification"],
+      default: "work",
+    },
     order: { type: Number, default: 0 },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Experience: Model<IExperience> =

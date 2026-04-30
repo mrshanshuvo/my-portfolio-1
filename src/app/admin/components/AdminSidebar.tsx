@@ -12,6 +12,10 @@ import {
   FaSignOutAlt,
   FaExternalLinkAlt,
   FaChevronRight,
+  FaRocket,
+  FaChartLine,
+  FaGraduationCap,
+  FaLink,
 } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -31,16 +35,38 @@ const navItems = [
     color: "text-blue-500",
   },
   {
+    type: "label",
+    label: "Content",
+  },
+  {
     href: "/admin/hero",
-    label: "Hero",
+    label: "Identity",
     icon: FaHome,
     color: "text-purple-400",
   },
   {
+    href: "/admin/socials",
+    label: "Social Links",
+    icon: FaLink,
+    color: "text-blue-400",
+  },
+  {
     href: "/admin/about",
-    label: "About",
+    label: "Biography",
     icon: FaUser,
     color: "text-pink-400",
+  },
+  {
+    href: "/admin/skills",
+    label: "Skills & Tech",
+    icon: FaRocket,
+    color: "text-purple-500",
+  },
+  {
+    href: "/admin/stats",
+    label: "Stats",
+    icon: FaChartLine,
+    color: "text-amber-400",
   },
   {
     href: "/admin/projects",
@@ -49,10 +75,20 @@ const navItems = [
     color: "text-emerald-400",
   },
   {
+    type: "label",
+    label: "Timeline",
+  },
+  {
     href: "/admin/experience",
     label: "Experience",
     icon: FaBriefcase,
-    color: "text-amber-400",
+    color: "text-amber-500",
+  },
+  {
+    href: "/admin/education",
+    label: "Education",
+    icon: FaGraduationCap,
+    color: "text-emerald-500",
   },
 ];
 
@@ -90,12 +126,24 @@ export default function AdminSidebar() {
             Management
           </p>
         </div>
-        {navItems.map((item) => {
+        {navItems.map((item, idx) => {
+          if (item.type === "label") {
+            return (
+              <div key={`label-${idx}`} className="px-4 pt-6 pb-2">
+                <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-800" />
+                  {item.label}
+                </p>
+              </div>
+            );
+          }
+
           const isActive = pathname === item.href;
+          const Icon = item.icon!;
           return (
             <Link
               key={item.href}
-              href={item.href}
+              href={item.href!}
               className={cn(
                 "group relative flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-300",
                 isActive
@@ -109,7 +157,7 @@ export default function AdminSidebar() {
                   className="absolute left-0 w-1 h-5 bg-emerald-500 rounded-r-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"
                 />
               )}
-              <item.icon
+              <Icon
                 className={cn(
                   "text-lg transition-colors",
                   isActive ? item.color : "group-hover:text-slate-300",

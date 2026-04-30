@@ -30,11 +30,10 @@ const ProjectSchema = new Schema<IProject>(
     improvements: [{ type: String }],
     order: { type: Number, default: 0 },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Project: Model<IProject> =
-  mongoose.models.Project ||
-  mongoose.model<IProject>("Project", ProjectSchema);
+  mongoose.models.Project || mongoose.model<IProject>("Project", ProjectSchema);
 
 export default Project;

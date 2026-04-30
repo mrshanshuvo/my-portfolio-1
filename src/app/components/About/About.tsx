@@ -1,6 +1,9 @@
 import { connectDB } from "@/lib/mongodb";
 import AboutModel from "@/models/About";
-import type { About } from "@/types";
+import SkillModel from "@/models/Skill";
+import StatModel from "@/models/Stat";
+import ExperienceModel from "@/models/Experience";
+import type { About, Education } from "@/types";
 import AboutClient from "./AboutClient";
 
 const DEFAULT_ABOUT: About = {
@@ -42,18 +45,38 @@ const DEFAULT_ABOUT: About = {
 
 async function getAbout(): Promise<About> {
   await connectDB();
-  const rawDoc = await AboutModel.findOne().lean();
-  if (!rawDoc) return DEFAULT_ABOUT;
-  const raw = JSON.parse(JSON.stringify(rawDoc));
+  
+  const [aboutDoc, skillDocs, statDocs, educationDocs] = await Promise.all([
+    AboutModel.findOne().lean(),
+    SkillModel.find().sort({ order: 1 }).lean(),
+    StatModel.find().sort({ order: 1 }).lean(),
+    ExperienceModel.find({ type: "education" }).sort({ order: 1 }).lean(),
+  ]);
+
+  if (!aboutDoc) return DEFAULT_ABOUT;
+
+  const about = JSON.parse(JSON.stringify(aboutDoc));
+  const skills = JSON.parse(JSON.stringify(skillDocs));
+  const stats = JSON.parse(JSON.stringify(statDocs));
+  const education: Education[] = educationDocs.map((edu: any) => ({
+    degree: edu.title,
+    institution: edu.org,
+    period: edu.duration,
+    details: Array.isArray(edu.details) ? edu.details[0] : edu.details,
+  }));
+
+  // Split aboutBio into bio1 and bio2 by double newline
+  const bios = (about.aboutBio || "").split("\n\n");
+
   return {
-    _id: raw._id?.toString(),
-    bio1: raw.bio1 ?? DEFAULT_ABOUT.bio1,
-    bio2: raw.bio2 ?? DEFAULT_ABOUT.bio2,
-    highlights: raw.highlights?.length ? raw.highlights : DEFAULT_ABOUT.highlights,
-    stats: raw.stats?.length ? raw.stats : DEFAULT_ABOUT.stats,
-    skills: raw.skills?.length ? raw.skills : DEFAULT_ABOUT.skills,
-    techList: raw.techList?.length ? raw.techList : DEFAULT_ABOUT.techList,
-    education: raw.education?.length ? raw.education : DEFAULT_ABOUT.education,
+    _id: about._id?.toString(),
+    bio1: bios[0] || DEFAULT_ABOUT.bio1,
+    bio2: bios.slice(1).join("\n\n") || DEFAULT_ABOUT.bio2,
+    highlights: about.highlights?.length ? about.highlights : DEFAULT_ABOUT.highlights,
+    stats: stats.length ? stats : DEFAULT_ABOUT.stats,
+    skills: skills.length ? skills : DEFAULT_ABOUT.skills,
+    techList: about.techList?.length ? about.techList : DEFAULT_ABOUT.techList,
+    education: education.length ? education : DEFAULT_ABOUT.education,
   };
 }
 
