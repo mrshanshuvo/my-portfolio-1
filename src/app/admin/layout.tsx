@@ -14,7 +14,7 @@ export default function AdminLayout({
 }) {
   return (
     <SessionProvider>
-      <div className="flex min-h-screen bg-slate-950 text-white selection:bg-emerald-500/30 selection:text-emerald-200">
+      <div className="dark flex min-h-screen bg-slate-950 text-white selection:bg-emerald-500/30 selection:text-emerald-200">
         {/* Ambient Background */}
         <div className="fixed inset-0 z-0 pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.05),transparent_50%)]" />

@@ -140,7 +140,7 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-72 shrink-0 bg-slate-950/50 backdrop-blur-2xl border-r border-white/5 flex flex-col h-screen sticky top-0 z-50">
+    <aside className="w-72 shrink-0 bg-slate-950 border-r border-white/5 flex flex-col h-screen sticky top-0 z-50">
       {/* Brand */}
       <div className="p-8">
         <div className="flex items-center gap-4">
@@ -164,7 +164,7 @@ export default function AdminSidebar() {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-4 py-2 space-y-1.5">
+      <nav className="flex-1 px-4 py-2 space-y-1.5 overflow-y-auto custom-scrollbar">
         <div className="px-4 mb-4">
           <p className="text-[10px] font-bold text-slate-600 uppercase tracking-[0.2em]">
             Management

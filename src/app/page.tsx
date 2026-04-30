@@ -11,10 +11,12 @@ import Playground from "./components/Playground/Playground";
 import Blog from "./components/Writing/Blog";
 import Certifications from "./components/Education/Certifications";
 import Testimonials from "./components/Testimonials/Testimonials";
+import VisitorTracker from "./components/Analytics/VisitorTracker";
 
 export default function Home() {
   return (
     <>
+      <VisitorTracker />
       <Navbar />
       <Hero />
       <About />
