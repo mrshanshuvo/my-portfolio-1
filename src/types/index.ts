@@ -116,3 +116,59 @@ export interface Status {
   message: string;
   type: "success" | "error" | "loading" | "";
 }
+
+export interface Testimonial {
+  _id?: string;
+  name: string;
+  role: string;
+  content: string;
+  avatar?: string;
+  company?: string;
+  order: number;
+}
+
+export interface Certification {
+  _id?: string;
+  title: string;
+  issuer: string;
+  date: string;
+  link?: string;
+  image?: string;
+  order: number;
+}
+
+export interface Blog {
+  _id?: string;
+  title: string;
+  description: string;
+  link: string;
+  date: string;
+  tags: string[];
+  order: number;
+}
+
+export interface Service {
+  _id?: string;
+  title: string;
+  description: string;
+  icon: string;
+  features: string[];
+  order: number;
+}
+
+export interface WorkflowStep {
+  _id?: string;
+  title: string;
+  description: string;
+  icon: string;
+  order: number;
+}
+
+export interface Demo {
+  _id?: string;
+  title: string;
+  description: string;
+  url: string;
+  tech: string[];
+  order: number;
+}

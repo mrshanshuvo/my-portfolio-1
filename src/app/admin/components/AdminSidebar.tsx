@@ -16,6 +16,12 @@ import {
   FaChartLine,
   FaGraduationCap,
   FaLink,
+  FaQuoteLeft,
+  FaAward,
+  FaPenNib,
+  FaServicestack,
+  FaFlask,
+  FaProjectDiagram as FaWorkflow,
 } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -36,7 +42,7 @@ const navItems = [
   },
   {
     type: "label",
-    label: "Content",
+    label: "Identity & Social",
   },
   {
     href: "/admin/hero",
@@ -57,22 +63,54 @@ const navItems = [
     color: "text-pink-400",
   },
   {
+    type: "label",
+    label: "Professional",
+  },
+  {
     href: "/admin/skills",
     label: "Skills & Tech",
     icon: FaRocket,
     color: "text-purple-500",
   },
   {
-    href: "/admin/stats",
-    label: "Stats",
-    icon: FaChartLine,
+    href: "/admin/services",
+    label: "Services",
+    icon: FaServicestack,
+    color: "text-emerald-400",
+  },
+  {
+    href: "/admin/workflow",
+    label: "Methodology",
+    icon: FaWorkflow,
     color: "text-amber-400",
+  },
+  {
+    type: "label",
+    label: "Portfolio",
   },
   {
     href: "/admin/projects",
     label: "Projects",
     icon: FaProjectDiagram,
     color: "text-emerald-400",
+  },
+  {
+    href: "/admin/demos",
+    label: "Playground",
+    icon: FaFlask,
+    color: "text-purple-400",
+  },
+  {
+    href: "/admin/blogs",
+    label: "Blog & Writing",
+    icon: FaPenNib,
+    color: "text-blue-400",
+  },
+  {
+    href: "/admin/testimonials",
+    label: "Testimonials",
+    icon: FaQuoteLeft,
+    color: "text-blue-500",
   },
   {
     type: "label",
@@ -89,6 +127,12 @@ const navItems = [
     label: "Education",
     icon: FaGraduationCap,
     color: "text-emerald-500",
+  },
+  {
+    href: "/admin/certifications",
+    label: "Certifications",
+    icon: FaAward,
+    color: "text-amber-400",
   },
 ];
 

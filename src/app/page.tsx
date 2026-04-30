@@ -5,6 +5,12 @@ import Contact from "./components/Contact/Contact";
 import Projects from "./components/Projects/Projects";
 import Experience from "./components/Experience/Experience";
 import Footer from "./components/Footer/Footer";
+import Services from "./components/Services/Services";
+import Workflow from "./components/Workflow/Workflow";
+import Playground from "./components/Playground/Playground";
+import Blog from "./components/Writing/Blog";
+import Certifications from "./components/Education/Certifications";
+import Testimonials from "./components/Testimonials/Testimonials";
 
 export default function Home() {
   return (
@@ -12,8 +18,14 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
+      <Services />
+      <Workflow />
       <Experience />
       <Projects />
+      <Playground />
+      <Blog />
+      <Certifications />
+      <Testimonials />
       <Contact />
       <Footer />
     </>

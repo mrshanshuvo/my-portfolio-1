@@ -19,7 +19,17 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const sections = ["home", "about", "experience", "projects", "contact"];
+    const sections = [
+      "home",
+      "about",
+      "services",
+      "workflow",
+      "experience",
+      "projects",
+      "playground",
+      "blog",
+      "contact",
+    ];
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -59,8 +69,12 @@ export default function Navbar() {
   const navItems: NavItem[] = [
     { id: "home", label: "Home" },
     { id: "about", label: "About" },
+    { id: "services", label: "Services" },
+    { id: "workflow", label: "Methodology" },
     { id: "experience", label: "Experience" },
     { id: "projects", label: "Projects" },
+    { id: "playground", label: "Playground" },
+    { id: "blog", label: "Blog" },
     { id: "contact", label: "Contact" },
   ];
 
