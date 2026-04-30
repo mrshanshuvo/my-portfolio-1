@@ -22,6 +22,7 @@ import {
   FaServicestack,
   FaFlask,
   FaProjectDiagram as FaWorkflow,
+  FaCog,
 } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -133,6 +134,16 @@ const navItems = [
     label: "Certifications",
     icon: FaAward,
     color: "text-amber-400",
+  },
+  {
+    type: "label",
+    label: "Management",
+  },
+  {
+    href: "/admin/settings",
+    label: "Settings",
+    icon: FaCog,
+    color: "text-slate-400",
   },
 ];
 

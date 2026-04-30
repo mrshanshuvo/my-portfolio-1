@@ -7,10 +7,24 @@ import type { ReactNode } from "react";
 const geistSans = Geist({ subsets: ["latin"] });
 const geistMono = Geist_Mono({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Shahid Hasan Shuvo – Portfolio",
-  description: "Portfolio of Shuvo, Full-Stack Developer & ML Enthusiast",
-};
+import { connectDB } from "@/lib/mongodb";
+import Setting from "@/models/Setting";
+
+export async function generateMetadata(): Promise<Metadata> {
+  await connectDB();
+  const settings = await Setting.findOne().lean();
+
+  return {
+    title: settings?.siteName || "Shahid Hasan Shuvo – Portfolio",
+    description:
+      settings?.siteDescription || "Full-Stack Developer & ML Enthusiast",
+    openGraph: {
+      title: settings?.siteName,
+      description: settings?.siteDescription,
+      images: settings?.ogImage ? [settings.ogImage] : [],
+    },
+  };
+}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

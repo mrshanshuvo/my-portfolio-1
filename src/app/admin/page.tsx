@@ -17,6 +17,7 @@ import {
   FaFlask,
   FaPenNib,
   FaChevronRight,
+  FaCog,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Message from "@/models/Message";
@@ -68,14 +69,14 @@ async function getStats() {
 
 async function getRecentActivity() {
   await connectDB();
-  
+
   const [
     recentProjects,
     recentMsgs,
     recentBlogs,
     recentExp,
     recentCerts,
-    recentTestimonials
+    recentTestimonials,
   ] = await Promise.all([
     Project.find().sort({ updatedAt: -1 }).limit(3).lean(),
     Message.find().sort({ createdAt: -1 }).limit(3).lean(),
@@ -122,8 +123,9 @@ async function getRecentActivity() {
       time: t.updatedAt,
       action: "Updated",
     })),
-  ].sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
-   .slice(0, 6);
+  ]
+    .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
+    .slice(0, 6);
 
   return JSON.parse(JSON.stringify(activities));
 }
@@ -255,6 +257,15 @@ const sections = [
     gradient: "from-blue-500/20 to-blue-600/5 border-blue-500/20",
     iconColor: "text-blue-400",
   },
+  {
+    href: "/admin/settings",
+    label: "Settings",
+    desc: "Manage global SEO, communication, and visual DNA",
+    icon: FaCog,
+    color: "slate",
+    gradient: "from-slate-500/20 to-slate-600/5 border-slate-500/20",
+    iconColor: "text-slate-400",
+  },
 ];
 
 export default async function AdminDashboard() {
@@ -322,6 +333,10 @@ export default async function AdminDashboard() {
       items: sections.filter((s) =>
         ["Experience", "Education", "Certifications"].includes(s.label),
       ),
+    },
+    {
+      label: "System Management",
+      items: sections.filter((s) => ["Settings"].includes(s.label)),
     },
   ];
 
