@@ -65,6 +65,16 @@ export default function BlogClient({ blogs }: BlogClientProps) {
                 </div>
               </div>
 
+              {blog.image && (
+                <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-white/5">
+                  <img
+                    src={blog.image}
+                    alt={blog.title}
+                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                  />
+                </div>
+              )}
+
               <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors line-clamp-2">
                 {blog.title}
               </h3>

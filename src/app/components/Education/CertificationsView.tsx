@@ -47,8 +47,12 @@ export default function CertificationsView({
               transition={{ delay: idx * 0.1 }}
               className="flex items-center gap-6 p-6 rounded-3xl bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-amber-500/30 transition-all duration-300 group"
             >
-              <div className="w-16 h-16 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
-                <FaAward size={32} />
+              <div className="w-16 h-16 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform overflow-hidden shrink-0">
+                {cert.image ? (
+                  <img src={cert.image} alt={cert.title} className="w-full h-full object-cover" />
+                ) : (
+                  <FaAward size={32} />
+                )}
               </div>
               <div className="flex-1">
                 <h3 className="text-white font-bold mb-1 group-hover:text-amber-400 transition-colors">

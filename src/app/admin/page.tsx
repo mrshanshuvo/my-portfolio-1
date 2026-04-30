@@ -1,4 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
+import VisitorChart from "./components/VisitorChart";
+
 import Project from "@/models/Project";
 import Experience from "@/models/Experience";
 import Link from "next/link";
@@ -45,6 +47,7 @@ async function getStats() {
     testimonialCount,
     certCount,
     visitorStats,
+    visitorTrend,
   ] = await Promise.all([
     Project.countDocuments(),
     Experience.countDocuments(),
@@ -54,7 +57,9 @@ async function getStats() {
     Testimonial.countDocuments(),
     Certification.countDocuments(),
     Visitor.aggregate([{ $group: { _id: null, total: { $sum: "$count" } } }]),
+    Visitor.find().sort({ date: -1 }).limit(7).lean(),
   ]);
+
   return {
     projectCount,
     expCount,
@@ -64,6 +69,10 @@ async function getStats() {
     testimonialCount,
     certCount,
     visitorCount: visitorStats[0]?.total || 0,
+    visitorTrend: visitorTrend.reverse().map((v: any) => ({
+      date: v.date,
+      count: v.count,
+    })),
   };
 }
 
@@ -385,6 +394,9 @@ export default async function AdminDashboard() {
                   {s.label}
                 </p>
               </div>
+              {s.label === "Portfolio Visits" && (
+                <VisitorChart data={statsData.visitorTrend} />
+              )}
             </CardContent>
           </Card>
         ))}

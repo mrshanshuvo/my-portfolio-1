@@ -144,6 +144,7 @@ export interface Blog {
   link: string;
   date: string;
   tags: string[];
+  image?: string;
   order: number;
 }
 
