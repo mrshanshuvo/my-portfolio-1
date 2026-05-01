@@ -6,6 +6,8 @@ import { SmoothScroll } from "./components/SmoothScroll";
 import CustomCursor from "./components/CustomCursor";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import ScrollProgress from "./components/UI/ScrollProgress";
+import PageTransition from "./components/UI/PageTransition";
 
 const geistSans = Geist({ subsets: ["latin"], variable: "--font-sans" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -47,9 +49,12 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <ThemeProvider>
+          <ScrollProgress />
           <CustomCursor />
           <SmoothScroll>
-            <RecaptchaProvider>{children}</RecaptchaProvider>
+            <RecaptchaProvider>
+              <PageTransition>{children}</PageTransition>
+            </RecaptchaProvider>
           </SmoothScroll>
         </ThemeProvider>
       </body>

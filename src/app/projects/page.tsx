@@ -6,6 +6,12 @@ import Navbar from "@/app/components/Navbar/Navbar";
 import Footer from "@/app/components/Footer/Footer";
 import HeroModel from "@/models/Hero";
 import SocialLinkModel from "@/models/SocialLink";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects Archive | Shahid Hasan Shuvo",
+  description: "A comprehensive showcase of my technical projects across various domains.",
+};
 
 async function getProjects(): Promise<Project[]> {
   await connectDB();

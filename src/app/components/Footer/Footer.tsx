@@ -111,16 +111,21 @@ export default function Footer({ socialLinks: rawSocialLinks }: Props) {
                       ? "noopener noreferrer"
                       : undefined
                   }
-                  whileHover={{ y: -3, scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ y: -5, scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
-                  className={`w-12 h-12 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-400 transition-all duration-200 hover:border-emerald-500 dark:hover:border-emerald-400 hover:shadow-lg ${social.color}`}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 17,
+                    delay: 0.2 + index * 0.1 
+                  }}
+                  className={`w-14 h-14 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-2xl flex items-center justify-center text-slate-600 dark:text-slate-400 transition-colors duration-300 hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-500/10 ${social.color} group`}
                   aria-label={social.label}
                 >
-                  <social.icon className="text-xl" />
+                  <social.icon className="text-2xl group-hover:scale-110 transition-transform" />
                 </motion.a>
               ))}
             </motion.div>

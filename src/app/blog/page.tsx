@@ -6,6 +6,12 @@ import Navbar from "@/app/components/Navbar/Navbar";
 import Footer from "@/app/components/Footer/Footer";
 import HeroModel from "@/models/Hero";
 import SocialLinkModel from "@/models/SocialLink";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog & Technical Writing | Shahid Hasan Shuvo",
+  description: "Explore my latest thoughts on software engineering, machine learning, and web development.",
+};
 
 async function getBlogs(): Promise<Blog[]> {
   await connectDB();

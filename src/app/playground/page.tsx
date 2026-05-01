@@ -6,6 +6,12 @@ import Navbar from "@/app/components/Navbar/Navbar";
 import Footer from "@/app/components/Footer/Footer";
 import HeroModel from "@/models/Hero";
 import SocialLinkModel from "@/models/SocialLink";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Technical Playground | Shahid Hasan Shuvo",
+  description: "A lab for experimental code, prototypes, and technical explorations.",
+};
 
 async function getDemos(): Promise<Demo[]> {
   await connectDB();

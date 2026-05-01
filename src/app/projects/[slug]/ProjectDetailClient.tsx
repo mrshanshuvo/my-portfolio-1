@@ -12,93 +12,129 @@ interface Props {
 
 export default function ProjectDetailClient({ project }: Props) {
   return (
-    <section className="max-w-5xl mx-auto py-20 px-4">
-      <Link
-        href="/#projects"
-        className="inline-flex items-center gap-2 text-slate-400 hover:text-emerald-400 text-sm mb-8 transition-colors"
-      >
-        <FaArrowLeft className="text-xs" /> Back to Projects
-      </Link>
-
-      <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-2">{project.title}</h1>
-      <p className="text-emerald-600 dark:text-emerald-400 font-medium mb-6">{project.category}</p>
-
-      <div className="relative w-full h-64 md:h-96 rounded-xl overflow-hidden mb-8 bg-slate-100 dark:bg-slate-800">
-        <Image
-          src={project.image || "/images/placeholder.png"}
-          alt={project.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 80vw"
-          priority
-        />
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
+      {/* Cinematic Background Orbs */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 rounded-full blur-[120px] dark:opacity-50" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[120px] dark:opacity-50" />
       </div>
 
-      <p className="text-slate-700 dark:text-gray-300 mb-6 text-lg leading-relaxed">
-        {project.description}
-      </p>
+      <section className="max-w-5xl mx-auto py-32 px-6 relative z-10">
+        <Link
+          href="/projects"
+          className="group inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 text-sm mb-12 transition-all font-bold uppercase tracking-widest"
+        >
+          <FaArrowLeft className="text-xs group-hover:-translate-x-1 transition-transform" /> Back to Project Archive
+        </Link>
 
-      <div className="flex flex-wrap gap-2 mb-8">
-        {project.techNames.map((name) => {
-          const Icon = getIcon(name);
-          return (
-            <div
-              key={name}
-              className="flex items-center gap-2 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm text-slate-700 dark:text-slate-300"
-            >
-              <Icon className="text-emerald-600 dark:text-emerald-400" />
-              <span>{name}</span>
-            </div>
-          );
-        })}
-      </div>
-
-      {project.improvements && project.improvements.length > 0 && (
         <motion.div
-          className="bg-slate-50 dark:bg-slate-800 p-6 rounded-xl mb-8 border border-slate-200 dark:border-slate-700"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2 className="text-2xl font-semibold mb-4 text-slate-900 dark:text-white">
-            Challenges &amp; Lessons Learned
-          </h2>
-          <ul className="space-y-2">
-            {project.improvements.map((item, index) => (
-              <li
-                key={index}
-                className="flex items-start gap-2 text-slate-700 dark:text-slate-300"
-              >
-                <span className="text-emerald-500 mt-1">•</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      )}
+          <div className="mb-12">
+            <h1 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
+              {project.title}
+            </h1>
+            <div className="flex items-center gap-4">
+               <span className="px-4 py-1.5 bg-emerald-500 text-white font-black text-xs rounded-full uppercase tracking-[0.2em]">
+                {project.category}
+              </span>
+              <div className="h-px flex-1 bg-slate-200 dark:bg-white/10" />
+            </div>
+          </div>
 
-      <div className="flex gap-4">
-        {project.github && (
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-sm font-medium transition-colors"
-          >
-            <FaGithub /> View Code
-          </a>
-        )}
-        {project.live && (
-          <a
-            href={project.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium transition-colors"
-          >
-            <FaExternalLinkAlt /> Live Demo
-          </a>
-        )}
-      </div>
-    </section>
+          <div className="relative w-full aspect-video rounded-[2.5rem] overflow-hidden mb-16 bg-slate-100 dark:bg-slate-900 shadow-2xl border border-white/10 group">
+            <Image
+              src={project.image || "/images/placeholder.png"}
+              alt={project.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              sizes="(max-width: 768px) 100vw, 80vw"
+              priority
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 to-transparent" />
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-16">
+            <div className="lg:col-span-2 space-y-12">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-wider">The Story</h2>
+                <p className="text-slate-600 dark:text-slate-300 text-xl leading-relaxed font-medium">
+                  {project.description}
+                </p>
+              </div>
+
+              {project.improvements && project.improvements.length > 0 && (
+                <div className="p-10 rounded-[2.5rem] bg-white/50 dark:bg-white/5 backdrop-blur-xl border border-slate-200 dark:border-white/10 shadow-xl">
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8 uppercase tracking-wider">
+                    Execution & Outcomes
+                  </h2>
+                  <ul className="grid sm:grid-cols-2 gap-6">
+                    {project.improvements.map((item, index) => (
+                      <li
+                        key={index}
+                        className="flex items-start gap-4 text-slate-600 dark:text-slate-400 font-medium"
+                      >
+                        <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-500 shrink-0 mt-1">
+                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                        </div>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            <div className="space-y-10">
+              <div>
+                <h3 className="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.3em] mb-6">Tech Stack</h3>
+                <div className="flex flex-wrap gap-3">
+                  {project.techNames.map((name) => {
+                    const Icon = getIcon(name);
+                    return (
+                      <div
+                        key={name}
+                        className="flex items-center gap-3 px-5 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-2xl text-sm text-slate-700 dark:text-slate-300 font-bold shadow-sm hover:border-emerald-500/50 transition-colors"
+                      >
+                        <Icon className="text-emerald-500" />
+                        <span>{name}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="pt-10 border-t border-slate-200 dark:border-white/10 space-y-4">
+                 <h3 className="text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.3em] mb-6">Links</h3>
+                <div className="flex flex-col gap-4">
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-950 rounded-2xl font-black transition-all hover:scale-105 shadow-xl"
+                    >
+                      <FaGithub size={20} /> View Source Code
+                    </a>
+                  )}
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-3 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-black transition-all hover:scale-105 shadow-xl shadow-emerald-500/20"
+                    >
+                      <FaExternalLinkAlt size={18} /> Visit Live Project
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+    </div>
   );
 }
