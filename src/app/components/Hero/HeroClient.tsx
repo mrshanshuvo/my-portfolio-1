@@ -13,6 +13,7 @@ import Image from "next/image";
 import type { Hero } from "@/types";
 import type { IconType } from "react-icons";
 import MagneticButton from "../MagneticButton";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   hero: Hero;
@@ -130,9 +131,9 @@ export default function HeroClient({ hero }: Props) {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
           >
             <MagneticButton strength={40}>
-              <button
+              <Button
                 onClick={scrollToProjects}
-                className="group relative px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-full overflow-hidden transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
+                className="group relative px-8 py-7 h-auto bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-full overflow-hidden transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
               >
                 <div className="absolute inset-0 bg-linear-to-r from-emerald-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center gap-2 group-hover:text-white transition-colors duration-300">
@@ -141,18 +142,23 @@ export default function HeroClient({ hero }: Props) {
                     ↓
                   </span>
                 </span>
-              </button>
+              </Button>
             </MagneticButton>
 
             <MagneticButton strength={20}>
-              <a
-                href={hero.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-full transition-all duration-300 hover:border-slate-900 dark:hover:border-white hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5"
+              <Button
+                variant="outline"
+                render={
+                  <a
+                    href={hero.resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                }
+                className="px-8 py-7 h-auto border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-full transition-all duration-300 hover:border-slate-900 dark:hover:border-white hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5"
               >
                 Download Resume
-              </a>
+              </Button>
             </MagneticButton>
           </motion.div>
 

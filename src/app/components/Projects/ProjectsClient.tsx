@@ -5,6 +5,8 @@ import Image from "next/image";
 import { FaGithub, FaExternalLinkAlt, FaStar } from "react-icons/fa";
 import type { Project } from "@/types";
 import { getIcon } from "@/lib/techIconMap";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
   projects: Project[];
@@ -168,14 +170,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {project.techNames.slice(0, 5).map((name) => {
               const Icon = getIcon(name);
               return (
-                <span
+                <Badge
                   key={name}
+                  variant="outline"
                   className="flex items-center gap-1.5 px-2.5 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-bold shadow-sm"
                   title={name}
                 >
                   <Icon className="text-emerald-500" />
                   {name}
-                </span>
+                </Badge>
               );
             })}
           </div>
@@ -185,33 +188,45 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             className="flex items-center gap-3 mt-auto"
             style={{ transform: "translateZ(50px)" }}
           >
-            <Link
-              href={`/projects/${project.slug}`}
-              className="flex-1 text-center px-4 py-3 bg-slate-900 dark:bg-white hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white dark:text-slate-900 dark:hover:text-white text-sm font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1"
+            <Button
+              render={<Link href={`/projects/${project.slug}`} />}
+              className="flex-1 text-center px-4 py-6 bg-slate-900 dark:bg-white hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white dark:text-slate-900 dark:hover:text-white text-sm font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1"
             >
               Explore Project
-            </Link>
+            </Button>
             {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 text-slate-600 dark:text-slate-400 hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-900 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md"
+              <Button
+                variant="outline"
+                size="icon"
+                render={
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                }
+                className="size-12 text-slate-600 dark:text-slate-400 hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-900 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-xl transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md"
                 title="GitHub"
               >
                 <FaGithub size={18} />
-              </a>
+              </Button>
             )}
             {project.live && (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 text-emerald-600 dark:text-emerald-400 hover:text-white bg-emerald-50 dark:bg-emerald-900/20 hover:bg-emerald-600 border border-emerald-200 dark:border-emerald-800/50 rounded-xl transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md"
+              <Button
+                variant="outline"
+                size="icon"
+                render={
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                }
+                className="size-12 text-emerald-600 dark:text-emerald-400 hover:text-white bg-emerald-50 dark:bg-emerald-900/20 hover:bg-emerald-600 border border-emerald-200 dark:border-emerald-800/50 rounded-xl transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md"
                 title="Live Demo"
               >
                 <FaExternalLinkAlt size={16} />
-              </a>
+              </Button>
             )}
           </div>
         </div>

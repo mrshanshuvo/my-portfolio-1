@@ -16,6 +16,9 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import type { ContactInfo, Status } from "@/types";
 import type { IconType } from "react-icons";
 import type { FormEvent } from "react";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface ContactSocialLink {
   icon: IconType;
@@ -37,7 +40,10 @@ interface Props {
   contactEmail: string;
 }
 
-export default function Contact({ socialLinks: rawSocialLinks, contactEmail }: Props) {
+export default function Contact({
+  socialLinks: rawSocialLinks,
+  contactEmail,
+}: Props) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -74,8 +80,8 @@ export default function Contact({ socialLinks: rawSocialLinks, contactEmail }: P
       s.platform === "GitHub"
         ? "hover:text-slate-900 dark:hover:text-white"
         : s.platform === "LinkedIn"
-        ? "hover:text-blue-600 dark:hover:text-blue-400"
-        : "hover:text-emerald-500",
+          ? "hover:text-blue-600 dark:hover:text-blue-400"
+          : "hover:text-emerald-500",
   }));
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -225,7 +231,10 @@ export default function Contact({ socialLinks: rawSocialLinks, contactEmail }: P
                     className={`w-11 h-11 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg flex items-center justify-center text-slate-600 dark:text-slate-400 transition-all duration-200 hover:border-emerald-500 dark:hover:border-emerald-400 ${social.color} hover:scale-110 hover:shadow-lg`}
                     aria-label={social.label}
                   >
-                    {(() => { const Icon = social.icon; return <Icon className="text-lg" />; })()}
+                    {(() => {
+                      const Icon = social.icon;
+                      return <Icon className="text-lg" />;
+                    })()}
                   </a>
                 ))}
               </div>
@@ -248,13 +257,13 @@ export default function Contact({ socialLinks: rawSocialLinks, contactEmail }: P
                 >
                   Full Name *
                 </label>
-                <input
+                <Input
                   type="text"
                   id="name"
                   name="name"
                   required
                   placeholder="Shahid Hasan Shovu"
-                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 transition-all"
+                  className="w-full px-4 py-6 border border-slate-300 dark:border-slate-700 rounded-lg focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:border-transparent bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 transition-all"
                 />
               </div>
               <div>
@@ -264,13 +273,13 @@ export default function Contact({ socialLinks: rawSocialLinks, contactEmail }: P
                 >
                   Email Address *
                 </label>
-                <input
+                <Input
                   type="email"
                   id="email"
                   name="email"
                   required
                   placeholder="shahid@example.com"
-                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 transition-all"
+                  className="w-full px-4 py-6 border border-slate-300 dark:border-slate-700 rounded-lg focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:border-transparent bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 transition-all"
                 />
               </div>
               <div>
@@ -280,24 +289,22 @@ export default function Contact({ socialLinks: rawSocialLinks, contactEmail }: P
                 >
                   Your Message *
                 </label>
-                <textarea
+                <Textarea
                   id="message"
                   name="message"
                   required
                   rows={5}
                   placeholder="Hello! I'd like to discuss a project collaboration or a web development task."
-                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 resize-none transition-all"
-                ></textarea>
+                  className="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 rounded-lg focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:border-transparent bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 resize-none transition-all"
+                />
               </div>
 
               {/* reCAPTCHA v3 – invisible, no widget needed */}
 
-              <motion.button
+              <Button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={!isSubmitting ? { scale: 1.02 } : {}}
-                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-                className={`w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 text-white shadow-lg transition-all ${isSubmitting ? "bg-slate-400 cursor-not-allowed" : "bg-emerald-600 dark:bg-emerald-500 hover:bg-emerald-700 dark:hover:bg-emerald-600 shadow-emerald-600/20"}`}
+                className={`w-full py-6 rounded-lg font-medium flex items-center justify-center gap-2 text-white shadow-lg transition-all hover:scale-[1.02] active:scale-95 ${isSubmitting ? "bg-slate-400 cursor-not-allowed" : "bg-emerald-600 dark:bg-emerald-500 hover:bg-emerald-700 dark:hover:bg-emerald-600 shadow-emerald-600/20"}`}
               >
                 {isSubmitting ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -306,7 +313,7 @@ export default function Contact({ socialLinks: rawSocialLinks, contactEmail }: P
                     <FaPaperPlane /> Send Message
                   </>
                 )}
-              </motion.button>
+              </Button>
 
               {status.message && (
                 <motion.div

@@ -3,6 +3,12 @@ import { FaBriefcase, FaGraduationCap, FaAward } from "react-icons/fa";
 import { motion } from "framer-motion";
 import type { IconType } from "react-icons";
 import type { Experience } from "@/types";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card";
 
 interface Props {
   experiences: Experience[];
@@ -65,31 +71,35 @@ export default function ExperienceClient({ experiences }: Props) {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   whileHover={{ y: -4 }}
-                  className="group bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500/30 dark:hover:border-emerald-400/30 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/5"
+                  className="h-full"
                 >
-                  <div className={`inline-flex p-3 rounded-lg mb-4 ${colors.bg}`}>
-                    <Icon className={`text-2xl ${colors.text}`} />
-                  </div>
-                  <div className="mb-4">
-                    <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
-                      {exp.title}
-                    </h3>
-                    <p className="text-emerald-600 dark:text-emerald-400 font-medium text-sm mb-1">
-                      {exp.org}
-                    </p>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm">{exp.duration}</p>
-                  </div>
-                  <ul className="space-y-2">
-                    {exp.details.map((item, idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-start gap-2 text-slate-600 dark:text-slate-400 text-sm"
-                      >
-                        <span className="text-emerald-600 dark:text-emerald-400 mt-1">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <Card className="h-full group bg-white dark:bg-slate-950 p-6 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500/30 dark:hover:border-emerald-400/30 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/5 overflow-hidden">
+                    <CardHeader className="p-0 mb-4">
+                      <div className={`inline-flex p-3 rounded-lg mb-4 ${colors.bg}`}>
+                        <Icon className={`text-2xl ${colors.text}`} />
+                      </div>
+                      <CardTitle className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                        {exp.title}
+                      </CardTitle>
+                      <p className="text-emerald-600 dark:text-emerald-400 font-medium text-sm mb-1">
+                        {exp.org}
+                      </p>
+                      <p className="text-slate-500 dark:text-slate-400 text-sm">{exp.duration}</p>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                      <ul className="space-y-2">
+                        {exp.details.map((item, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-2 text-slate-600 dark:text-slate-400 text-sm"
+                          >
+                            <span className="text-emerald-600 dark:text-emerald-400 mt-1">•</span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
                 </motion.div>
               );
             })}

@@ -5,6 +5,8 @@ import Image from "next/image";
 import type { NavItem } from "@/types";
 import ThemeToggle from "../ThemeToggle";
 
+import { Button } from "@/components/ui/button";
+
 interface Props {
   resumeUrl: string;
 }
@@ -169,20 +171,22 @@ export default function Navbar({ resumeUrl }: Props) {
                 <div className="flex items-center gap-4">
                   <ThemeToggle />
                   {/* Resume Button */}
-                  <motion.a
-                    href={resumeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ y: -1 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md ${
+                  <Button
+                    render={
+                      <a
+                        href={resumeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      />
+                    }
+                    className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md hover:-translate-y-px ${
                       scrolled
                         ? "bg-emerald-600 dark:bg-emerald-500 text-white hover:bg-emerald-700 dark:hover:bg-emerald-600 hover:shadow-lg"
                         : "bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 hover:shadow-lg border border-slate-700 dark:border-white/20"
                     }`}
                   >
                     Resume
-                  </motion.a>
+                  </Button>
                 </div>
               </div>
 

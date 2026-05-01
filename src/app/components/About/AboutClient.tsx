@@ -7,13 +7,18 @@ import {
   FaCloud,
   FaRobot,
   FaGraduationCap,
-  FaAward,
-  FaCalendarAlt,
   FaCheckCircle,
 } from "react-icons/fa";
 import { SiTensorflow, SiReact, SiNodedotjs } from "react-icons/si";
 import type { IconType } from "react-icons";
 import type { About } from "@/types";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card";
 
 interface Props {
   about: About;
@@ -74,10 +79,14 @@ export default function AboutClient({ about }: Props) {
             </span>
           </motion.div>
           <h2 className="font-display text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
-            About <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-500">Me</span>
+            About{" "}
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-500">
+              Me
+            </span>
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-            Passionate developer crafting digital experiences that make a difference
+            Passionate developer crafting digital experiences that make a
+            difference
           </p>
         </motion.div>
 
@@ -93,16 +102,16 @@ export default function AboutClient({ about }: Props) {
               key={index}
               variants={itemVariants}
               whileHover={{ y: -5, scale: 1.02 }}
-              className="relative group"
+              className="relative group h-full"
             >
-              <div className="text-center p-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] border border-slate-200/50 dark:border-white/10 hover:border-emerald-500/50 transition-all duration-300 shadow-xl">
+              <Card className="h-full text-center p-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] border border-slate-200/50 dark:border-white/10 hover:border-emerald-500/50 transition-all duration-300 shadow-xl overflow-hidden">
                 <div className="font-display text-5xl font-black bg-linear-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-500 bg-clip-text text-transparent mb-2">
                   {stat.number}
                 </div>
                 <div className="text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">
                   {stat.label}
                 </div>
-              </div>
+              </Card>
             </motion.div>
           ))}
         </motion.div>
@@ -114,22 +123,30 @@ export default function AboutClient({ about }: Props) {
             variants={itemVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="md:col-span-2 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] p-10 border border-slate-200/50 dark:border-white/10 shadow-xl hover:shadow-2xl transition-shadow h-full"
+            className="md:col-span-2 h-full"
           >
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-16 h-16 bg-linear-to-br from-emerald-500 to-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-lg shadow-emerald-500/20">
-                👋
+            <Card className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] p-10 border border-slate-200/50 dark:border-white/10 shadow-xl hover:shadow-2xl transition-shadow h-full overflow-hidden">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-16 h-16 bg-linear-to-br from-emerald-500 to-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-lg shadow-emerald-500/20">
+                  👋
+                </div>
+                <CardTitle className="font-display text-3xl font-bold text-slate-900 dark:text-white">
+                  Hello! I&apos;m Shuvo
+                </CardTitle>
               </div>
-              <h3 className="font-display text-3xl font-bold text-slate-900 dark:text-white">
-                Hello! I&apos;m Shuvo
-              </h3>
-            </div>
-            {about.bio1 && (
-              <p className="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed font-medium">{about.bio1}</p>
-            )}
-            {about.bio2 && (
-              <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-medium">{about.bio2}</p>
-            )}
+              <CardContent className="p-0">
+                {about.bio1 && (
+                  <p className="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed font-medium">
+                    {about.bio1}
+                  </p>
+                )}
+                {about.bio2 && (
+                  <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+                    {about.bio2}
+                  </p>
+                )}
+              </CardContent>
+            </Card>
           </motion.div>
 
           <div className="flex flex-col gap-6 md:col-span-1 h-full">
@@ -138,47 +155,78 @@ export default function AboutClient({ about }: Props) {
               variants={itemVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
-              className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 backdrop-blur-xl rounded-[2rem] p-8 border border-emerald-500/20 shadow-xl flex-1"
+              className="flex-1"
             >
-              <h4 className="font-display text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-                <FaCheckCircle className="text-emerald-500" /> What I Bring
-              </h4>
-              <div className="space-y-4">
-                {about.highlights.map((highlight, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.5 + index * 0.1 }}
-                    className="flex items-start gap-3"
-                  >
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
-                    <span className="text-slate-700 dark:text-slate-300 font-medium">{highlight}</span>
-                  </motion.div>
-                ))}
-              </div>
+              <Card className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 backdrop-blur-xl rounded-[2rem] p-8 border border-emerald-500/20 shadow-xl h-full overflow-hidden">
+                <CardHeader className="p-0 mb-6">
+                  <CardTitle className="font-display text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <FaCheckCircle className="text-emerald-500" /> What I Bring
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-0 space-y-4">
+                  {about.highlights.map((highlight, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={
+                        isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
+                      }
+                      transition={{ delay: 0.5 + index * 0.1 }}
+                      className="flex items-start gap-3"
+                    >
+                      <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
+                      <span className="text-slate-700 dark:text-slate-300 font-medium text-sm lg:text-base">
+                        {highlight}
+                      </span>
+                    </motion.div>
+                  ))}
+                </CardContent>
+              </Card>
             </motion.div>
 
             {/* Education */}
             {about.education.map((edu, index) => (
-              <motion.div key={index} variants={itemVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-                <div className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] p-8 border border-slate-200/50 dark:border-white/10 shadow-xl flex-1">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center">
-                      <FaGraduationCap className="text-blue-500 text-2xl" />
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                className="flex-1"
+              >
+                <Card className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] p-8 border border-slate-200/50 dark:border-white/10 shadow-xl h-full overflow-hidden">
+                  <CardHeader className="p-0 mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center">
+                        <FaGraduationCap className="text-blue-500 text-2xl" />
+                      </div>
+                      <CardTitle className="font-display text-xl font-bold text-slate-900 dark:text-white">
+                        Education
+                      </CardTitle>
                     </div>
-                    <h4 className="font-display text-xl font-bold text-slate-900 dark:text-white">Education</h4>
-                  </div>
-                  <h5 className="font-bold text-slate-900 dark:text-white mb-1 leading-snug">{edu.degree}</h5>
-                  <p className="text-blue-600 dark:text-blue-400 mb-4 font-semibold text-sm">{edu.institution}</p>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{edu.details}</p>
-                </div>
+                  </CardHeader>
+                  <CardContent className="p-0">
+                    <h5 className="font-bold text-slate-900 dark:text-white mb-1 leading-snug">
+                      {edu.degree}
+                    </h5>
+                    <p className="text-blue-600 dark:text-blue-400 mb-4 font-semibold text-sm">
+                      {edu.institution}
+                    </p>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                      {edu.details}
+                    </p>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
 
           {/* Skills - Spans full width below the bento row */}
-          <motion.div variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"} className="md:col-span-3">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="md:col-span-3"
+          >
             <motion.div
               variants={itemVariants}
               className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] p-10 border border-slate-200/50 dark:border-white/10 shadow-xl"
@@ -193,24 +241,39 @@ export default function AboutClient({ about }: Props) {
                     <motion.div key={skill.name} variants={itemVariants}>
                       <div className="flex items-start gap-5">
                         <div className="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center border border-slate-200 dark:border-slate-700 shadow-md group-hover:scale-110 transition-transform">
-                          <Icon className="text-emerald-500 text-3xl" aria-label={skill.name} />
+                          <Icon
+                            className="text-emerald-500 text-3xl"
+                            aria-label={skill.name}
+                          />
                         </div>
                         <div className="flex-1">
                           <div className="flex justify-between items-center mb-2">
-                            <span className="font-bold text-lg text-slate-900 dark:text-white">{skill.name}</span>
+                            <span className="font-bold text-lg text-slate-900 dark:text-white">
+                              {skill.name}
+                            </span>
                             <span className="font-mono text-sm font-bold text-emerald-500">
                               {skill.level}%
                             </span>
                           </div>
-                          <div className="text-sm text-slate-500 dark:text-slate-400 mb-3 font-medium">{skill.tech}</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400 mb-3 font-medium">
+                            {skill.tech}
+                          </div>
                           <div
                             className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 overflow-hidden"
                             role="progressbar"
                           >
                             <motion.div
                               initial={{ width: 0 }}
-                              animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                              transition={{ duration: 1.5, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                              animate={
+                                isInView
+                                  ? { width: `${skill.level}%` }
+                                  : { width: 0 }
+                              }
+                              transition={{
+                                duration: 1.5,
+                                delay: index * 0.15,
+                                ease: [0.16, 1, 0.3, 1],
+                              }}
                               className="bg-emerald-500 h-full rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]"
                             />
                           </div>
@@ -240,16 +303,24 @@ export default function AboutClient({ about }: Props) {
             <motion.div
               className="flex space-x-12 px-6"
               animate={{ x: [0, -1000] }}
-              transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 25, ease: "linear" } }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 25,
+                  ease: "linear",
+                },
+              }}
             >
               {about.techList.map((tech, index) => (
-                <div
+                <Badge
                   key={index}
+                  variant="outline"
                   className="flex items-center gap-2 px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap"
                 >
                   <FaCode className="text-emerald-600 dark:text-emerald-400" />
                   <span>{tech}</span>
-                </div>
+                </Badge>
               ))}
             </motion.div>
           </div>
