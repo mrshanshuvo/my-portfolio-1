@@ -13,7 +13,21 @@ import Certifications from "./components/Education/Certifications";
 import Testimonials from "./components/Testimonials/Testimonials";
 import VisitorTracker from "./components/Analytics/VisitorTracker";
 
-export default function Home() {
+import { connectDB } from "@/lib/mongodb";
+import SocialLinkModel from "@/models/SocialLink";
+import SettingModel from "@/models/Setting";
+import type { SocialLink } from "@/types";
+
+export default async function Home() {
+  await connectDB();
+  const [socialDocs, settingDoc] = await Promise.all([
+    SocialLinkModel.find().sort({ order: 1 }).lean(),
+    SettingModel.findOne().lean(),
+  ]);
+
+  const socialLinks = JSON.parse(JSON.stringify(socialDocs)) as SocialLink[];
+  const contactEmail = settingDoc?.contactEmail || "mrshanshuvo@gmail.com";
+
   return (
     <>
       <VisitorTracker />
@@ -28,8 +42,8 @@ export default function Home() {
       <Blog />
       <Certifications />
       <Testimonials />
-      <Contact />
-      <Footer />
+      <Contact socialLinks={socialLinks} contactEmail={contactEmail} />
+      <Footer socialLinks={socialLinks} />
     </>
   );
 }

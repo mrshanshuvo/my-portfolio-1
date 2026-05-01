@@ -5,6 +5,7 @@ import {
   FaLinkedin,
   FaEnvelope,
   FaWhatsapp,
+  FaTwitter,
   FaArrowUp,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,7 +18,20 @@ interface FooterSocialLink {
   color: string;
 }
 
-export default function Footer() {
+const platformIconMap: Record<string, IconType> = {
+  GitHub: FaGithub,
+  LinkedIn: FaLinkedin,
+  LeetCode: FaGithub, // Fallback
+  Email: FaEnvelope,
+  Twitter: FaTwitter,
+  WhatsApp: FaWhatsapp,
+};
+
+interface Props {
+  socialLinks: import("@/types").SocialLink[];
+}
+
+export default function Footer({ socialLinks: rawSocialLinks }: Props) {
   const [showTopButton, setShowTopButton] = useState<boolean>(false);
 
   const scrollToTop = (): void => {
@@ -30,32 +44,21 @@ export default function Footer() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const socialLinks: FooterSocialLink[] = [
-    {
-      icon: FaGithub,
-      href: "https://github.com/mrshanshuvo",
-      label: "GitHub",
-      color: "hover:text-slate-900 dark:hover:text-white",
-    },
-    {
-      icon: FaLinkedin,
-      href: "https://linkedin.com/in/mrshanshuvo",
-      label: "LinkedIn",
-      color: "hover:text-blue-600 dark:hover:text-blue-400",
-    },
-    {
-      icon: FaEnvelope,
-      href: "mailto:mrshanshuvo@gmail.com",
-      label: "Email",
-      color: "hover:text-red-500 dark:hover:text-red-400",
-    },
-    {
-      icon: FaWhatsapp,
-      href: "https://wa.me/8801929346733",
-      label: "WhatsApp",
-      color: "hover:text-green-500 dark:hover:text-green-400",
-    },
-  ];
+  const socialLinks: FooterSocialLink[] = rawSocialLinks.map((s) => ({
+    icon: platformIconMap[s.platform] || FaEnvelope,
+    label: s.platform,
+    href: s.href,
+    color:
+      s.platform === "GitHub"
+        ? "hover:text-slate-900 dark:hover:text-white"
+        : s.platform === "LinkedIn"
+        ? "hover:text-blue-600 dark:hover:text-blue-400"
+        : s.platform === "WhatsApp"
+        ? "hover:text-green-500 dark:hover:text-green-400"
+        : s.platform === "Email"
+        ? "hover:text-red-500 dark:hover:text-red-400"
+        : "hover:text-emerald-500",
+  }));
 
   return (
     <>

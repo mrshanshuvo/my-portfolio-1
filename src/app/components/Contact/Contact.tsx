@@ -24,7 +24,20 @@ interface ContactSocialLink {
   color: string;
 }
 
-export default function Contact() {
+const platformIconMap: Record<string, IconType> = {
+  GitHub: FaGithub,
+  LinkedIn: FaLinkedin,
+  LeetCode: FaGithub, // Fallback or add SiLeetcode if needed
+  Email: FaEnvelope,
+  Twitter: FaTwitter,
+};
+
+interface Props {
+  socialLinks: import("@/types").SocialLink[];
+  contactEmail: string;
+}
+
+export default function Contact({ socialLinks: rawSocialLinks, contactEmail }: Props) {
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -36,8 +49,8 @@ export default function Contact() {
     {
       icon: FaEnvelope,
       label: "Email",
-      value: "mrshanshuvo@gmail.com",
-      link: "mailto:mrshanshuvo@gmail.com",
+      value: contactEmail,
+      link: `mailto:${contactEmail}`,
     },
     {
       icon: FaPhone,
@@ -53,26 +66,17 @@ export default function Contact() {
     },
   ];
 
-  const socialLinks: ContactSocialLink[] = [
-    {
-      icon: FaLinkedin,
-      label: "LinkedIn",
-      href: "https://linkedin.com/in/shahidhasanshovu",
-      color: "hover:text-blue-600 dark:hover:text-blue-400",
-    },
-    {
-      icon: FaGithub,
-      label: "GitHub",
-      href: "https://github.com/mrshanshuvo",
-      color: "hover:text-slate-900 dark:hover:text-white",
-    },
-    {
-      icon: FaTwitter,
-      label: "Twitter",
-      href: "https://twitter.com/mrshanshuvo",
-      color: "hover:text-blue-400",
-    },
-  ];
+  const socialLinks: ContactSocialLink[] = rawSocialLinks.map((s) => ({
+    icon: platformIconMap[s.platform] || FaEnvelope,
+    label: s.platform,
+    href: s.href,
+    color:
+      s.platform === "GitHub"
+        ? "hover:text-slate-900 dark:hover:text-white"
+        : s.platform === "LinkedIn"
+        ? "hover:text-blue-600 dark:hover:text-blue-400"
+        : "hover:text-emerald-500",
+  }));
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
