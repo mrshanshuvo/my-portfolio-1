@@ -20,7 +20,7 @@ export default function PlaygroundArchiveClient({ demos }: Props) {
     : demos.filter((demo) => demo.tech.includes(activeTech));
 
   return (
-    <div className="min-h-screen bg-slate-950 pt-32 pb-24 relative overflow-hidden">
+    <div className="min-h-screen bg-white dark:bg-slate-950 pt-32 pb-24 relative overflow-hidden">
       {/* Cinematic Background */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-[120px]" />
@@ -40,7 +40,7 @@ export default function PlaygroundArchiveClient({ demos }: Props) {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight"
+            className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white mb-6 tracking-tight"
           >
             Interactive <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-pink-500">Playground</span>
           </motion.h1>
@@ -48,7 +48,7 @@ export default function PlaygroundArchiveClient({ demos }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-slate-400 max-w-2xl mx-auto"
+            className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium"
           >
             Where ideas take shape. A collection of experiments, prototypes, and technical explorations.
           </motion.p>
@@ -66,10 +66,10 @@ export default function PlaygroundArchiveClient({ demos }: Props) {
               key={tech}
               onClick={() => setActiveTech(tech)}
               variant={activeTech === tech ? "default" : "outline"}
-              className={`rounded-full px-5 py-2 text-xs font-bold transition-all ${
+              className={`rounded-full px-5 py-2 text-xs font-black transition-all ${
                 activeTech === tech
                   ? "bg-purple-600 text-white shadow-lg shadow-purple-500/20"
-                  : "text-slate-400 hover:border-purple-500 border-white/10 bg-white/5"
+                  : "text-slate-600 dark:text-slate-400 hover:border-purple-500 border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5"
               }`}
             >
               {tech}
