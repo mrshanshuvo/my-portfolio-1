@@ -17,26 +17,33 @@ export default function CertificationsView({
       className="py-24 relative overflow-hidden bg-slate-900/10"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight"
-          >
-            Academic &{" "}
-            <span className="text-amber-500">Professional Credentials</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20"
+        >
+          <div className="text-left">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3 text-amber-500 font-black uppercase tracking-[0.3em] text-sm mb-4"
+            >
+              <FaAward /> The Validation
+            </motion.div>
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight whitespace-nowrap">
+              Academic &{" "}
+              <span className="text-amber-500">
+                Credentials
+              </span>
+            </h2>
+          </div>
+          <p className="text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
             A validation of my continuous commitment to learning and staying at
             the forefront of technology.
-          </motion.p>
-        </div>
+          </p>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {certifications.map((cert, idx) => (
