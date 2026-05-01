@@ -24,17 +24,26 @@ export default function ProjectsClient({ projects }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16"
         >
-          <h2 className="font-display text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
-            Featured{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-500">
-              Projects
-            </span>
-          </h2>
-          <div className="w-20 h-1 bg-emerald-600 dark:bg-emerald-400 mx-auto mb-4" />
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
-            A curated selection of my most impactful work, demonstrating technical depth and user-centric design.
+          <div className="text-left">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3 text-emerald-500 font-black uppercase tracking-[0.3em] text-sm mb-6"
+            >
+              <FaStar /> The Showcase
+            </motion.div>
+            <h2 className="font-display text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+              Featured{" "}
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-500">
+                Projects
+              </span>
+            </h2>
+          </div>
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl md:text-right font-medium leading-relaxed line-clamp-2">
+            A curated selection of my most impactful work, demonstrating technical depth and user-centric engineering solutions.
           </p>
         </motion.div>
 

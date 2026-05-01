@@ -17,33 +17,29 @@ export default function BlogClient({ blogs }: BlogClientProps) {
   return (
     <section id="blog" className="py-24 bg-slate-950 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="w-16 h-16 rounded-3xl bg-blue-500/10 flex items-center justify-center text-blue-400 mx-auto mb-6"
-          >
-            <FaPenNib size={24} />
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight"
-          >
-            Latest <span className="text-blue-500">Writing</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed"
-          >
-            Sharing my thoughts on software engineering, machine learning, and
-            the future of technology.
-          </motion.p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20"
+        >
+          <div className="text-left">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3 text-blue-500 font-black uppercase tracking-[0.3em] text-sm mb-6"
+            >
+              <FaPenNib /> The Journal
+            </motion.div>
+            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight whitespace-nowrap">
+              Latest <span className="text-blue-500">Writing</span>
+            </h2>
+          </div>
+          <p className="text-slate-400 max-w-xl md:text-right text-lg md:text-xl font-medium leading-relaxed line-clamp-2">
+            Sharing my technical insights on software engineering, machine intelligence, and the architectural future of modern technology.
+          </p>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {blogs.map((blog, idx) => (

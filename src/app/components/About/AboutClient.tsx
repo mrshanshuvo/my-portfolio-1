@@ -66,27 +66,26 @@ export default function AboutClient({ about }: Props) {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-20"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : { scale: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-block mb-4 px-6 py-2 bg-emerald-500/10 dark:bg-emerald-500/20 backdrop-blur-md rounded-full border border-emerald-500/20"
-          >
-            <span className="text-emerald-600 dark:text-emerald-400 text-xs font-black tracking-widest uppercase">
-              Get to Know Me
-            </span>
-          </motion.div>
-          <h2 className="font-display text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
-            About{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-500">
-              Me
-            </span>
-          </h2>
-          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-            Passionate developer crafting digital experiences that make a
-            difference
+          <div className="text-left">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={isInView ? { scale: 1 } : { scale: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex items-center gap-3 text-emerald-500 font-black uppercase tracking-[0.3em] text-sm mb-6"
+            >
+              <FaRobot /> The Identity
+            </motion.div>
+            <h2 className="font-display text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+              Cinematic{" "}
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-cyan-500">
+                Profile
+              </span>
+            </h2>
+          </div>
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl md:text-right font-medium leading-relaxed line-clamp-2">
+            Architecting high-performance digital experiences through the lens of modern software engineering and machine intelligence.
           </p>
         </motion.div>
 

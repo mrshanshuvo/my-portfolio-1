@@ -44,15 +44,23 @@ export default function ExperienceClient({ experiences }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-            Experience &{" "}
-            <span className="text-emerald-600 dark:text-emerald-400">Education</span>
-          </h2>
-          <div className="w-20 h-1 bg-emerald-600 dark:bg-emerald-400 mx-auto mb-4" />
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            My professional, academic, and training journey
+          <div className="text-left">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3 text-emerald-500 font-black uppercase tracking-[0.3em] text-sm mb-6"
+            >
+              <FaBriefcase /> The Journey
+            </motion.div>
+            <h2 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+              Professional <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-500">History</span>
+            </h2>
+          </div>
+          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl md:text-right font-medium leading-relaxed line-clamp-2">
+            A chronicle of my academic foundation, professional engineering roles, and continuous technical certification path.
           </p>
         </motion.div>
 

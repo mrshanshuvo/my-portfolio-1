@@ -16,30 +16,29 @@ export default function ServicesClient({ services }: ServicesClientProps) {
       <div className="absolute bottom-1/4 -left-24 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] -z-10" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight"
-          >
-            Professional <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-blue-500">Services</span>
-          </motion.h2>
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            className="w-24 h-1.5 bg-emerald-500 mx-auto rounded-full mb-8"
-          />
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed"
-          >
-            Leveraging cutting-edge technologies to deliver high-performance solutions tailored to your specific needs.
-          </motion.p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20"
+        >
+          <div className="text-left">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3 text-blue-500 font-black uppercase tracking-[0.3em] text-sm mb-6"
+            >
+              <Icons.FaShieldAlt /> The Solutions
+            </motion.div>
+            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight whitespace-nowrap">
+              Technical <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-indigo-500">Expertise</span>
+            </h2>
+          </div>
+          <p className="text-slate-400 max-w-xl md:text-right text-lg md:text-xl font-medium leading-relaxed line-clamp-2">
+            Leveraging cutting-edge technologies to deliver high-performance solutions tailored to your specific engineering requirements.
+          </p>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, idx) => {
