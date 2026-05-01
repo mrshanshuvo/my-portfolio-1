@@ -67,16 +67,16 @@ export default function AboutClient({ about }: Props) {
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : { scale: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-block mb-4 px-4 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-full border border-emerald-200 dark:border-emerald-800"
+            className="inline-block mb-4 px-6 py-2 bg-emerald-500/10 dark:bg-emerald-500/20 backdrop-blur-md rounded-full border border-emerald-500/20"
           >
-            <span className="text-emerald-600 dark:text-emerald-400 text-sm font-semibold tracking-wide uppercase">
+            <span className="text-emerald-600 dark:text-emerald-400 text-xs font-black tracking-widest uppercase">
               Get to Know Me
             </span>
           </motion.div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-            About <span className="text-emerald-600 dark:text-emerald-400">Me</span>
+          <h2 className="font-display text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
+            About <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-500">Me</span>
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium">
             Passionate developer crafting digital experiences that make a difference
           </p>
         </motion.div>
@@ -86,7 +86,7 @@ export default function AboutClient({ about }: Props) {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8"
         >
           {about.stats.map((stat, index) => (
             <motion.div
@@ -95,11 +95,11 @@ export default function AboutClient({ about }: Props) {
               whileHover={{ y: -5, scale: 1.02 }}
               className="relative group"
             >
-              <div className="text-center p-6 bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-400 transition-all duration-300 shadow-sm hover:shadow-xl">
-                <div className="text-4xl font-bold bg-linear-to-r from-emerald-600 to-emerald-500 dark:from-emerald-400 dark:to-emerald-500 bg-clip-text text-transparent mb-2">
+              <div className="text-center p-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] border border-slate-200/50 dark:border-white/10 hover:border-emerald-500/50 transition-all duration-300 shadow-xl">
+                <div className="font-display text-5xl font-black bg-linear-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-500 bg-clip-text text-transparent mb-2">
                   {stat.number}
                 </div>
-                <div className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                <div className="text-sm font-bold tracking-widest uppercase text-slate-500 dark:text-slate-400">
                   {stat.label}
                 </div>
               </div>
@@ -107,45 +107,43 @@ export default function AboutClient({ about }: Props) {
           ))}
         </motion.div>
 
-        {/* Grid: bio + skills */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start mb-16">
+          {/* Bio - Spans 2 columns */}
           <motion.div
-            variants={containerVariants}
+            variants={itemVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="space-y-8"
+            className="md:col-span-2 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] p-10 border border-slate-200/50 dark:border-white/10 shadow-xl hover:shadow-2xl transition-shadow h-full"
           >
-            {/* Bio */}
-            <motion.div
-              variants={itemVariants}
-              className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-shadow"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-linear-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center text-white text-2xl shadow-lg">
-                  👋
-                </div>
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-                  Hello! I&apos;m Shuvo
-                </h3>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-16 h-16 bg-linear-to-br from-emerald-500 to-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-lg shadow-emerald-500/20">
+                👋
               </div>
-              {about.bio1 && (
-                <p className="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">{about.bio1}</p>
-              )}
-              {about.bio2 && (
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{about.bio2}</p>
-              )}
-            </motion.div>
+              <h3 className="font-display text-3xl font-bold text-slate-900 dark:text-white">
+                Hello! I&apos;m Shuvo
+              </h3>
+            </div>
+            {about.bio1 && (
+              <p className="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed font-medium">{about.bio1}</p>
+            )}
+            {about.bio2 && (
+              <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-medium">{about.bio2}</p>
+            )}
+          </motion.div>
 
+          <div className="flex flex-col gap-6 md:col-span-1 h-full">
             {/* Highlights */}
             <motion.div
               variants={itemVariants}
-              className="bg-linear-to-br from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 rounded-2xl p-8 border border-emerald-200 dark:border-emerald-800"
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              className="bg-linear-to-br from-emerald-500/10 to-blue-500/10 backdrop-blur-xl rounded-[2rem] p-8 border border-emerald-500/20 shadow-xl flex-1"
             >
-              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                <FaCheckCircle className="text-emerald-600 dark:text-emerald-400" /> What I Bring
-                to the Table
+              <h4 className="font-display text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                <FaCheckCircle className="text-emerald-500" /> What I Bring
               </h4>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {about.highlights.map((highlight, index) => (
                   <motion.div
                     key={index}
@@ -154,8 +152,8 @@ export default function AboutClient({ about }: Props) {
                     transition={{ delay: 0.5 + index * 0.1 }}
                     className="flex items-start gap-3"
                   >
-                    <div className="w-2 h-2 bg-emerald-600 dark:bg-emerald-400 rounded-full mt-2 shrink-0" />
-                    <span className="text-slate-700 dark:text-slate-300">{highlight}</span>
+                    <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
+                    <span className="text-slate-700 dark:text-slate-300 font-medium">{highlight}</span>
                   </motion.div>
                 ))}
               </div>
@@ -163,64 +161,57 @@ export default function AboutClient({ about }: Props) {
 
             {/* Education */}
             {about.education.map((edu, index) => (
-              <motion.div key={index} variants={itemVariants}>
-                <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-shadow">
+              <motion.div key={index} variants={itemVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
+                <div className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] p-8 border border-slate-200/50 dark:border-white/10 shadow-xl flex-1">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center">
-                      <FaGraduationCap className="text-emerald-600 dark:text-emerald-400 text-2xl" />
+                    <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center">
+                      <FaGraduationCap className="text-blue-500 text-2xl" />
                     </div>
-                    <h4 className="text-lg font-bold text-slate-900 dark:text-white">Education</h4>
+                    <h4 className="font-display text-xl font-bold text-slate-900 dark:text-white">Education</h4>
                   </div>
-                  <h5 className="font-semibold text-slate-900 dark:text-white mb-2">{edu.degree}</h5>
-                  <p className="text-emerald-600 dark:text-emerald-400 mb-3 font-medium">{edu.institution}</p>
-                  <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-3">
-                    <FaCalendarAlt />
-                    <span>{edu.period}</span>
-                  </div>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm">{edu.details}</p>
+                  <h5 className="font-bold text-slate-900 dark:text-white mb-1 leading-snug">{edu.degree}</h5>
+                  <p className="text-blue-600 dark:text-blue-400 mb-4 font-semibold text-sm">{edu.institution}</p>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{edu.details}</p>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
 
-          {/* Skills */}
-          <motion.div variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
+          {/* Skills - Spans full width below the bento row */}
+          <motion.div variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"} className="md:col-span-3">
             <motion.div
               variants={itemVariants}
-              className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-shadow"
+              className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] p-10 border border-slate-200/50 dark:border-white/10 shadow-xl"
             >
-              <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
-                Technical Skills
+              <h4 className="font-display text-3xl font-bold text-slate-900 dark:text-white mb-10">
+                Technical Mastery
               </h4>
-              <div className="space-y-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
                 {about.skills.map((skill, index) => {
                   const Icon = getSkillIcon(skill.iconName);
                   return (
                     <motion.div key={skill.name} variants={itemVariants}>
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="w-14 h-14 bg-linear-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/30 rounded-xl flex items-center justify-center border border-emerald-200 dark:border-emerald-700">
-                          <Icon className="text-emerald-600 dark:text-emerald-400 text-2xl" aria-label={skill.name} />
+                      <div className="flex items-start gap-5">
+                        <div className="w-16 h-16 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center border border-slate-200 dark:border-slate-700 shadow-md group-hover:scale-110 transition-transform">
+                          <Icon className="text-emerald-500 text-3xl" aria-label={skill.name} />
                         </div>
                         <div className="flex-1">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="font-semibold text-slate-900 dark:text-white">{skill.name}</span>
-                            <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1 rounded-full">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="font-bold text-lg text-slate-900 dark:text-white">{skill.name}</span>
+                            <span className="font-mono text-sm font-bold text-emerald-500">
                               {skill.level}%
                             </span>
                           </div>
-                          <div className="text-xs text-slate-500 dark:text-slate-400 mb-3">{skill.tech}</div>
+                          <div className="text-sm text-slate-500 dark:text-slate-400 mb-3 font-medium">{skill.tech}</div>
                           <div
-                            className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden"
+                            className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 overflow-hidden"
                             role="progressbar"
-                            aria-valuenow={skill.level}
-                            aria-valuemin={0}
-                            aria-valuemax={100}
                           >
                             <motion.div
                               initial={{ width: 0 }}
                               animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                              transition={{ duration: 1.2, delay: index * 0.15, ease: "easeOut" }}
-                              className="bg-linear-to-r from-emerald-500 to-emerald-600 dark:from-emerald-400 dark:to-emerald-500 h-2.5 rounded-full shadow-lg shadow-emerald-500/50"
+                              transition={{ duration: 1.5, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                              className="bg-emerald-500 h-full rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]"
                             />
                           </div>
                         </div>
@@ -229,14 +220,6 @@ export default function AboutClient({ about }: Props) {
                   );
                 })}
               </div>
-              <motion.div variants={itemVariants} className="mt-10">
-                <a
-                  href="#contact"
-                  className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-linear-to-r from-emerald-600 to-emerald-500 hover:from-emerald-700 hover:to-emerald-600 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/30 hover:shadow-xl hover:shadow-emerald-600/40 hover:scale-[1.02]"
-                >
-                  <FaAward className="text-xl" /> Let&apos;s Work Together
-                </a>
-              </motion.div>
             </motion.div>
           </motion.div>
         </div>
@@ -249,11 +232,11 @@ export default function AboutClient({ about }: Props) {
           className="mt-8"
         >
           <div className="text-center mb-8">
-            <h4 className="text-xl font-semibold text-slate-900 dark:text-white">
+            <h4 className="font-display text-2xl font-bold text-slate-900 dark:text-white">
               Technologies I Work With
             </h4>
           </div>
-          <div className="overflow-hidden relative bg-white dark:bg-slate-900 rounded-2xl py-8 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div className="overflow-hidden relative bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] py-8 border border-slate-200/50 dark:border-white/10 shadow-xl">
             <motion.div
               className="flex space-x-12 px-6"
               animate={{ x: [0, -1000] }}

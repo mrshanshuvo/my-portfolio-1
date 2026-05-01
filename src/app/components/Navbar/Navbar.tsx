@@ -3,8 +3,13 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import type { NavItem } from "@/types";
+import ThemeToggle from "../ThemeToggle";
 
-export default function Navbar() {
+interface Props {
+  resumeUrl: string;
+}
+
+export default function Navbar({ resumeUrl }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -118,26 +123,26 @@ export default function Navbar() {
               </motion.button>
 
               {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center gap-8">
-                <div className="flex items-center gap-1">
+              <div className="hidden md:flex items-center gap-6">
+                <div className="flex items-center gap-1 mr-2">
                   {navItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => smoothScroll(item.id)}
-                      className="relative px-4 py-2 group"
+                      className="relative px-3 lg:px-4 py-2 group"
                       aria-current={
                         activeSection === item.id ? "page" : undefined
                       }
                     >
                       <span
-                        className={`relative z-10 text-sm font-medium transition-colors cursor-pointer ${
+                        className={`relative z-10 text-sm font-bold transition-colors cursor-pointer ${
                           activeSection === item.id
                             ? scrolled
                               ? "text-emerald-600 dark:text-emerald-400"
-                              : "text-white"
+                              : "text-slate-900 dark:text-white"
                             : scrolled
                               ? "text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200"
-                              : "text-white/70 group-hover:text-white"
+                              : "text-slate-700/70 dark:text-white/70 group-hover:text-slate-900 dark:group-hover:text-white"
                         }`}
                       >
                         {item.label}
@@ -148,7 +153,7 @@ export default function Navbar() {
                           className={`absolute bottom-0 left-0 right-0 h-0.5 ${
                             scrolled
                               ? "bg-emerald-600 dark:bg-emerald-400"
-                              : "bg-white"
+                              : "bg-slate-900 dark:bg-white"
                           }`}
                           transition={{
                             type: "spring",
@@ -161,21 +166,24 @@ export default function Navbar() {
                   ))}
                 </div>
 
-                {/* Resume Button */}
-                <motion.a
-                  href="/Resume_of_Shahid_Hasan_Shuvo.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${
-                    scrolled
-                      ? "bg-emerald-600 dark:bg-emerald-500 text-white hover:bg-emerald-700 dark:hover:bg-emerald-600"
-                      : "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"
-                  }`}
-                >
-                  Resume
-                </motion.a>
+                <div className="flex items-center gap-4">
+                  <ThemeToggle />
+                  {/* Resume Button */}
+                  <motion.a
+                    href={resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ y: -1 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md ${
+                      scrolled
+                        ? "bg-emerald-600 dark:bg-emerald-500 text-white hover:bg-emerald-700 dark:hover:bg-emerald-600 hover:shadow-lg"
+                        : "bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 hover:shadow-lg border border-slate-700 dark:border-white/20"
+                    }`}
+                  >
+                    Resume
+                  </motion.a>
+                </div>
               </div>
 
               {/* Mobile Menu Button */}
@@ -251,7 +259,7 @@ export default function Navbar() {
                     </button>
                   ))}
                   <a
-                    href="/shovu_resume.pdf"
+                    href={resumeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`block mt-3 px-4 py-3 rounded-lg text-base font-medium text-center transition-colors ${

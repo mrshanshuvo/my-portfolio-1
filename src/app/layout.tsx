@@ -1,11 +1,15 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import RecaptchaProvider from "./components/RecaptchaProvider";
+import { ThemeProvider } from "./components/ThemeProvider";
+import { SmoothScroll } from "./components/SmoothScroll";
+import CustomCursor from "./components/CustomCursor";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-const geistSans = Geist({ subsets: ["latin"] });
-const geistMono = Geist_Mono({ subsets: ["latin"] });
+const geistSans = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-display" });
 
 import { connectDB } from "@/lib/mongodb";
 import Setting from "@/models/Setting";
@@ -32,13 +36,18 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const accentColor = settings?.accentColor || "#10b981";
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.className} ${geistMono.className} antialiased bg-white text-gray-900`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-300 font-sans`}
         style={{ "--dynamic-accent": accentColor } as any}
         suppressHydrationWarning
       >
-        <RecaptchaProvider>{children}</RecaptchaProvider>
+        <ThemeProvider>
+          <CustomCursor />
+          <SmoothScroll>
+            <RecaptchaProvider>{children}</RecaptchaProvider>
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

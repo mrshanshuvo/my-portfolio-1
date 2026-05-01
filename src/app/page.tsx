@@ -16,22 +16,25 @@ import VisitorTracker from "./components/Analytics/VisitorTracker";
 import { connectDB } from "@/lib/mongodb";
 import SocialLinkModel from "@/models/SocialLink";
 import SettingModel from "@/models/Setting";
+import HeroModel from "@/models/Hero";
 import type { SocialLink } from "@/types";
 
 export default async function Home() {
   await connectDB();
-  const [socialDocs, settingDoc] = await Promise.all([
+  const [socialDocs, settingDoc, heroDoc] = await Promise.all([
     SocialLinkModel.find().sort({ order: 1 }).lean(),
     SettingModel.findOne().lean(),
+    HeroModel.findOne().lean(),
   ]);
 
   const socialLinks = JSON.parse(JSON.stringify(socialDocs)) as SocialLink[];
   const contactEmail = settingDoc?.contactEmail || "mrshanshuvo@gmail.com";
+  const resumeUrl = heroDoc?.resumeUrl || "/Resume_of_Shahid_Hasan_Shuvo.pdf";
 
   return (
     <>
       <VisitorTracker />
-      <Navbar />
+      <Navbar resumeUrl={resumeUrl} />
       <Hero />
       <About />
       <Services />
