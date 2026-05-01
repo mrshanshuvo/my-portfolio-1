@@ -33,10 +33,7 @@ export default function CertificationsView({
               <FaAward /> The Validation
             </motion.div>
             <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight whitespace-nowrap">
-              Academic &{" "}
-              <span className="text-amber-500">
-                Credentials
-              </span>
+              Academic & <span className="text-amber-500">Credentials</span>
             </h2>
           </div>
           <p className="text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
@@ -57,7 +54,11 @@ export default function CertificationsView({
               <Card className="flex items-center gap-6 p-6 rounded-3xl bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-amber-500/30 transition-all duration-300 group shadow-none">
                 <div className="w-16 h-16 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform overflow-hidden shrink-0">
                   {cert.image ? (
-                    <img src={cert.image} alt={cert.title} className="w-full h-full object-cover" />
+                    <img
+                      src={cert.image}
+                      alt={cert.title}
+                      className="w-full h-full object-cover"
+                    />
                   ) : (
                     <FaAward size={32} />
                   )}
