@@ -4,6 +4,7 @@ import { Blog } from "@/types";
 import { FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import Image from "next/image";
 
 interface BlogCardProps {
   blog: Blog;
@@ -43,11 +44,13 @@ export default function BlogCard({ blog, index }: BlogCardProps) {
           </div>
 
           {blog.image && (
-            <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-white/5">
-              <img
+            <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-slate-200 dark:border-white/5">
+              <Image
                 src={blog.image}
                 alt={blog.title}
-                className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                fill
+                className="object-cover transition-transform group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
           )}

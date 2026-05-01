@@ -175,7 +175,7 @@ export default function Contact({
             >
               <FaPaperPlane /> The Connection
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Get In{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-600">
                 Touch

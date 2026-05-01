@@ -35,7 +35,7 @@ export default function BlogClient({ blogs }: BlogClientProps) {
             >
               <FaPenNib /> The Journal
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Latest <span className="text-blue-500">Writing</span>
             </h2>
           </div>

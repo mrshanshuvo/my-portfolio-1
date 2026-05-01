@@ -7,8 +7,20 @@ export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(true); // safe default = hidden until confirmed otherwise
 
+  // Detect touch device after mount to prevent SSR/hydration mismatch
   useEffect(() => {
+    const hasTouch =
+      window.matchMedia("(pointer: coarse)").matches ||
+      navigator.maxTouchPoints > 0;
+    setIsTouchDevice(hasTouch);
+  }, []);
+
+  // Mouse tracking & hover detection
+  useEffect(() => {
+    if (isTouchDevice) return;
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       if (!isVisible) setIsVisible(true);
@@ -16,7 +28,6 @@ export default function CustomCursor() {
 
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
-
     const handleLinkHoverEnter = () => setIsHovering(true);
     const handleLinkHoverLeave = () => setIsHovering(false);
 
@@ -43,10 +54,10 @@ export default function CustomCursor() {
         el.removeEventListener("mouseleave", handleLinkHoverLeave);
       });
     };
-  }, [isVisible]);
+  }, [isTouchDevice, isVisible]);
 
-  // Don't render cursor on mobile devices
-  if (typeof window !== "undefined" && window.innerWidth < 768) return null;
+  // Don't render on touch devices
+  if (isTouchDevice) return null;
 
   return (
     <>

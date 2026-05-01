@@ -72,7 +72,7 @@ export default function AboutClient({ about }: Props) {
             >
               <FaRobot /> The Identity
             </motion.div>
-            <h2 className="font-display text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Cinematic{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-cyan-500">
                 Profile

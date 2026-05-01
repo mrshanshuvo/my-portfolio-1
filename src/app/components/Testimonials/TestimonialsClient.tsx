@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Testimonial } from "@/types";
 import { FaQuoteLeft, FaUserCircle } from "react-icons/fa";
 import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 
 interface TestimonialsClientProps {
   testimonials: Testimonial[];
@@ -32,7 +33,7 @@ export default function TestimonialsClient({
             >
               <FaQuoteLeft /> The Feedback
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Client <span className="text-blue-500">Testimonials</span>
             </h2>
           </div>
@@ -64,12 +65,14 @@ export default function TestimonialsClient({
                   </p>
 
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 overflow-hidden border border-slate-200 dark:border-white/10">
+                    <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 overflow-hidden border border-slate-200 dark:border-white/10 relative">
                       {item.avatar ? (
-                        <img
+                        <Image
                           src={item.avatar}
                           alt={item.name}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
+                          sizes="48px"
                         />
                       ) : (
                         <FaUserCircle size={24} />

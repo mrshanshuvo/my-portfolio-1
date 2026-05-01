@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Certification } from "../../../types";
 import { FaAward, FaExternalLinkAlt, FaCalendarAlt } from "react-icons/fa";
 import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 
 interface CertificationsViewProps {
   certifications: Certification[];
@@ -32,7 +33,7 @@ export default function CertificationsView({
             >
               <FaAward /> The Validation
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Academic & <span className="text-amber-500">Credentials</span>
             </h2>
           </div>
@@ -52,12 +53,14 @@ export default function CertificationsView({
               transition={{ delay: idx * 0.1 }}
             >
               <Card className="flex items-center gap-6 p-6 rounded-3xl bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 hover:border-amber-500/30 transition-all duration-300 group shadow-sm hover:shadow-xl">
-                <div className="w-16 h-16 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-500 group-hover:scale-110 transition-transform overflow-hidden shrink-0">
+                <div className="w-16 h-16 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-500 group-hover:scale-110 transition-transform overflow-hidden shrink-0 relative border border-amber-100 dark:border-amber-900/30">
                   {cert.image ? (
-                    <img
+                    <Image
                       src={cert.image}
                       alt={cert.title}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="64px"
                     />
                   ) : (
                     <FaAward size={32} />

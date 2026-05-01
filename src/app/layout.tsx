@@ -20,14 +20,49 @@ export async function generateMetadata(): Promise<Metadata> {
   await connectDB();
   const settings = await Setting.findOne().lean();
 
+  const title = settings?.siteName || "Shahid Hasan Shuvo – Full-Stack Developer & ML Engineer";
+  const description = settings?.siteDescription || "Full-Stack Developer & Machine Learning Enthusiast building high-performance, cinematic digital experiences.";
+  const ogImage = settings?.ogImage || "/favicons/android-chrome-512x512.png";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
   return {
-    title: settings?.siteName || "Shahid Hasan Shuvo – Portfolio",
-    description:
-      settings?.siteDescription || "Full-Stack Developer & ML Enthusiast",
+    metadataBase: new URL(siteUrl),
+    title: {
+      default: title,
+      template: `%s | Shahid Hasan Shuvo`,
+    },
+    description,
+    keywords: [
+      "Full Stack Developer",
+      "Machine Learning",
+      "Next.js",
+      "React",
+      "Python",
+      "TypeScript",
+      "Portfolio",
+      "Shahid Hasan Shuvo",
+    ],
+    authors: [{ name: "Shahid Hasan Shuvo" }],
+    creator: "Shahid Hasan Shuvo",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true },
+    },
     openGraph: {
-      title: settings?.siteName,
-      description: settings?.siteDescription,
-      images: settings?.ogImage ? [settings.ogImage] : [],
+      type: "website",
+      locale: "en_US",
+      title,
+      description,
+      siteName: title,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+      creator: "@shahidhshuvo",
     },
   };
 }
@@ -49,6 +84,9 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <ThemeProvider>
+          <a href="#main-content" className="skip-nav">
+            Skip to main content
+          </a>
           <ScrollProgress />
           <CustomCursor />
           <SmoothScroll>

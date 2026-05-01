@@ -18,9 +18,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = await ProjectModel.findOne({ slug }).lean();
   if (!project) return { title: "Project Not Found" };
+
+  const title = `${project.title} · Projects`;
+  const description = project.description;
+  const image = project.image || "/favicons/android-chrome-512x512.png";
+
   return {
-    title: `${project.title} · Portfolio`,
-    description: project.description,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      images: [{ url: image, width: 1200, height: 630, alt: project.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
   };
 }
 

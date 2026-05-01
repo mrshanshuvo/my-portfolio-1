@@ -25,14 +25,14 @@ export default function BlogArchiveClient({ blogs }: Props) {
   });
 
   return (
-    <div className="min-h-screen bg-slate-950 pt-32 pb-24">
+    <div className="min-h-screen bg-white dark:bg-slate-950 pt-32 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight"
+            className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white mb-6 tracking-tight"
           >
             Technical <span className="text-blue-500">Writing</span>
           </motion.h1>
@@ -40,7 +40,7 @@ export default function BlogArchiveClient({ blogs }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-slate-400 max-w-2xl mx-auto"
+            className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium"
           >
             Exploring the intersection of code, design, and artificial intelligence.
           </motion.p>
@@ -59,7 +59,7 @@ export default function BlogArchiveClient({ blogs }: Props) {
               placeholder="Search articles..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 bg-slate-900/50 border-white/10 text-white rounded-full h-12 focus:ring-blue-500 focus:border-blue-500"
+              className="pl-12 bg-white dark:bg-slate-900/50 border-slate-200 dark:border-white/10 text-slate-900 dark:text-white rounded-full h-12 focus:ring-blue-500 focus:border-blue-500 placeholder:text-slate-400"
             />
           </motion.div>
 
@@ -73,10 +73,10 @@ export default function BlogArchiveClient({ blogs }: Props) {
                 key={tag}
                 onClick={() => setActiveTag(tag)}
                 variant={activeTag === tag ? "default" : "outline"}
-                className={`rounded-full px-4 py-1 text-xs font-bold transition-all ${
+                className={`rounded-full px-4 py-1 text-xs font-black transition-all ${
                   activeTag === tag
                     ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
-                    : "text-slate-400 hover:border-blue-500 border-white/10 bg-white/5"
+                    : "text-slate-600 dark:text-slate-400 hover:border-blue-500 border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5"
                 }`}
               >
                 {tag}

@@ -35,7 +35,7 @@ export default function ProjectsClient({ projects }: Props) {
             >
               <FaStar /> The Showcase
             </motion.div>
-            <h2 className="font-display text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Featured{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-500">
                 Projects

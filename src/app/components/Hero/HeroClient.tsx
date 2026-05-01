@@ -100,7 +100,7 @@ export default function HeroClient({ hero }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="font-mono text-lg md:text-2xl text-emerald-600 dark:text-emerald-400 mb-8 h-8 min-h-8 uppercase tracking-widest"
+            className="font-mono text-lg md:text-2xl text-emerald-600 dark:text-emerald-400 mb-8 h-7 md:h-9 flex items-center justify-center uppercase tracking-widest overflow-hidden"
           >
             {typeSequence.length > 0 && (
               <TypeAnimation

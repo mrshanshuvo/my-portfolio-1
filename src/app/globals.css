@@ -66,6 +66,31 @@ html {
   scrollbar-color: rgba(100, 116, 139, 0.2) transparent;
 }
 
+/* Accessibility — Global focus ring using dynamic accent */
+:focus-visible {
+  outline: 2px solid var(--dynamic-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip to content link for screen readers */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--dynamic-accent);
+  color: white;
+  border-radius: 0 0 8px 8px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: top 0.2s;
+}
+.skip-nav:focus {
+  top: 0;
+}
+
 /* Custom scrollbar - Premium World Class */
 ::-webkit-scrollbar {
   width: 12px;

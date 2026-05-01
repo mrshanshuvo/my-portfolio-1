@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import About from "./components/About/About";
@@ -12,6 +13,11 @@ import Blog from "./components/Writing/Blog";
 import Certifications from "./components/Education/Certifications";
 import Testimonials from "./components/Testimonials/Testimonials";
 import VisitorTracker from "./components/Analytics/VisitorTracker";
+import {
+  SectionSkeleton,
+  TimelineSkeleton,
+  ListSkeleton,
+} from "./components/UI/Skeletons";
 
 import { connectDB } from "@/lib/mongodb";
 import SocialLinkModel from "@/models/SocialLink";
@@ -35,17 +41,37 @@ export default async function Home() {
     <>
       <VisitorTracker />
       <Navbar resumeUrl={resumeUrl} />
-      <Hero />
-      <About />
-      <Services />
-      <Workflow />
-      <Experience />
-      <Projects />
-      <Playground />
-      <Blog />
-      <Certifications />
-      <Testimonials />
-      <Contact socialLinks={socialLinks} contactEmail={contactEmail} />
+      <main id="main-content">
+        <Hero />
+        <Suspense fallback={<SectionSkeleton cols={1} />}>
+          <About />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton cols={3} />}>
+          <Services />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton cols={4} />}>
+          <Workflow />
+        </Suspense>
+        <Suspense fallback={<TimelineSkeleton />}>
+          <Experience />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton cols={3} />}>
+          <Projects />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton cols={2} />}>
+          <Playground />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton cols={3} />}>
+          <Blog />
+        </Suspense>
+        <Suspense fallback={<ListSkeleton count={6} />}>
+          <Certifications />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton cols={3} />}>
+          <Testimonials />
+        </Suspense>
+        <Contact socialLinks={socialLinks} contactEmail={contactEmail} />
+      </main>
       <Footer socialLinks={socialLinks} />
     </>
   );
