@@ -28,16 +28,17 @@ export default function BlogClient({ blogs }: BlogClientProps) {
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="flex items-center gap-3 text-blue-500 font-black uppercase tracking-[0.3em] text-sm mb-6"
+              className="flex items-center gap-3 text-blue-500 font-black uppercase tracking-[0.3em] text-sm mb-4"
             >
               <FaPenNib /> The Journal
             </motion.div>
-            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight whitespace-nowrap">
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight whitespace-nowrap">
               Latest <span className="text-blue-500">Writing</span>
             </h2>
           </div>
-          <p className="text-slate-400 max-w-xl md:text-right text-lg md:text-xl font-medium leading-relaxed line-clamp-2">
-            Sharing my technical insights on software engineering, machine intelligence, and the architectural future of modern technology.
+          <p className="text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
+            Sharing my technical insights on software engineering, machine
+            intelligence, and the architectural future of modern technology.
           </p>
         </motion.div>
 
@@ -58,8 +59,11 @@ export default function BlogClient({ blogs }: BlogClientProps) {
             href="/blog"
             className="group px-8 py-4 bg-slate-900/50 dark:bg-white text-white dark:text-slate-950 rounded-2xl text-lg font-black transition-all hover:scale-105 shadow-xl hover:shadow-blue-500/20 border border-white/10 dark:border-none flex items-center gap-3"
           >
-            Read All Articles 
-            <FaArrowRight className="group-hover:translate-x-2 transition-transform" size={16} />
+            Read All Articles
+            <FaArrowRight
+              className="group-hover:translate-x-2 transition-transform"
+              size={16}
+            />
           </Link>
         </motion.div>
       </div>

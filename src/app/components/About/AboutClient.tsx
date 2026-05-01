@@ -13,12 +13,7 @@ import { SiTensorflow, SiReact, SiNodedotjs } from "react-icons/si";
 import type { IconType } from "react-icons";
 import type { About } from "@/types";
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 interface Props {
   about: About;
@@ -73,19 +68,20 @@ export default function AboutClient({ about }: Props) {
               initial={{ scale: 0 }}
               animate={isInView ? { scale: 1 } : { scale: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex items-center gap-3 text-emerald-500 font-black uppercase tracking-[0.3em] text-sm mb-6"
+              className="flex items-center gap-3 text-emerald-500 font-black uppercase tracking-[0.3em] text-sm mb-4"
             >
               <FaRobot /> The Identity
             </motion.div>
-            <h2 className="font-display text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+            <h2 className="font-display text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Cinematic{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-cyan-500">
                 Profile
               </span>
             </h2>
           </div>
-          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl md:text-right font-medium leading-relaxed line-clamp-2">
-            Architecting high-performance digital experiences through the lens of modern software engineering and machine intelligence.
+          <p className="text-md md:text-lg text-slate-600 dark:text-slate-400 max-w-xl md:text-right font-medium leading-relaxed line-clamp-2">
+            Architecting high-performance digital experiences through the lens
+            of modern software engineering and machine intelligence.
           </p>
         </motion.div>
 

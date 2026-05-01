@@ -87,7 +87,7 @@ export default function HeroClient({ hero }: Props) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="font-display text-6xl md:text-8xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter leading-tight">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter leading-tight">
               {hero.name}{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-600 dark:from-emerald-400 dark:to-blue-500">
                 {hero.lastName}
@@ -133,7 +133,7 @@ export default function HeroClient({ hero }: Props) {
             <MagneticButton strength={40}>
               <Button
                 onClick={scrollToProjects}
-                className="group relative px-8 py-7 h-auto bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-full overflow-hidden transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
+                className="group relative px-6 py-2 sm:py-3 lg:py-4 h-auto bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-full overflow-hidden transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
               >
                 <div className="absolute inset-0 bg-linear-to-r from-emerald-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center gap-2 group-hover:text-white transition-colors duration-300">
@@ -156,7 +156,7 @@ export default function HeroClient({ hero }: Props) {
                     rel="noopener noreferrer"
                   />
                 }
-                className="px-8 py-7 h-auto border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-full transition-all duration-300 hover:border-slate-900 dark:hover:border-white hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5"
+                className="px-6 py-2 sm:py-3 lg:py-4 h-auto border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-full transition-all duration-300 hover:border-slate-900 dark:hover:border-white hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5"
               >
                 Download Resume
               </Button>

@@ -31,19 +31,20 @@ export default function ProjectsClient({ projects }: Props) {
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="flex items-center gap-3 text-emerald-500 font-black uppercase tracking-[0.3em] text-sm mb-6"
+              className="flex items-center gap-3 text-emerald-500 font-black uppercase tracking-[0.3em] text-sm mb-4"
             >
               <FaStar /> The Showcase
             </motion.div>
-            <h2 className="font-display text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
+            <h2 className="font-display text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Featured{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-blue-500">
                 Projects
               </span>
             </h2>
           </div>
-          <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl md:text-right font-medium leading-relaxed line-clamp-2">
-            A curated selection of my most impactful work, demonstrating technical depth and user-centric engineering solutions.
+          <p className="text-md md:text-lg text-slate-600 dark:text-slate-400 max-w-xl md:text-right font-medium leading-relaxed line-clamp-2">
+            A curated selection of my most impactful work, demonstrating
+            technical depth and user-centric engineering solutions.
           </p>
         </motion.div>
 
@@ -69,13 +70,18 @@ export default function ProjectsClient({ projects }: Props) {
             href="/projects"
             className="group px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-950 rounded-2xl text-lg font-black transition-all hover:scale-105 shadow-xl hover:shadow-emerald-500/20 flex items-center gap-3"
           >
-            View All Projects 
-            <FaExternalLinkAlt className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} />
+            View All Projects
+            <FaExternalLinkAlt
+              className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+              size={16}
+            />
           </Link>
         </motion.div>
 
         {projects.length === 0 && (
-          <p className="text-center text-slate-400 py-20">No featured projects yet.</p>
+          <p className="text-center text-slate-400 py-20">
+            No featured projects yet.
+          </p>
         )}
       </div>
     </section>

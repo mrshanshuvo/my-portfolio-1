@@ -10,7 +10,10 @@ interface WorkflowClientProps {
 
 export default function WorkflowClient({ workflow }: WorkflowClientProps) {
   return (
-    <section id="workflow" className="py-24 bg-slate-950/50 relative overflow-hidden">
+    <section
+      id="workflow"
+      className="py-24 bg-slate-950/50 relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -23,23 +26,27 @@ export default function WorkflowClient({ workflow }: WorkflowClientProps) {
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="flex items-center gap-3 text-emerald-500 font-black uppercase tracking-[0.3em] text-sm mb-6"
+              className="flex items-center gap-3 text-emerald-500 font-black uppercase tracking-[0.3em] text-sm mb-4"
             >
               <Icons.FaCodeBranch /> The Process
             </motion.div>
-            <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight whitespace-nowrap">
-              Development <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-teal-500">Lifecycle</span>
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight whitespace-nowrap">
+              Development{" "}
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-teal-500">
+                Lifecycle
+              </span>
             </h2>
           </div>
-          <p className="text-slate-400 max-w-xl md:text-right text-lg md:text-xl font-medium leading-relaxed line-clamp-2">
-            A systematic approach to engineering excellence, ensuring every project is delivered with precision and industrial-grade quality.
+          <p className="text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
+            A systematic approach to engineering excellence, ensuring every
+            project is delivered with precision and industrial-grade quality.
           </p>
         </motion.div>
 
         <div className="relative">
           {/* Connector Line */}
           <div className="absolute top-1/2 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-emerald-500/20 to-transparent hidden lg:block -translate-y-1/2" />
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8">
             {workflow.map((step, idx) => {
               const Icon = (Icons as any)[step.icon] || Icons.FaProjectDiagram;
@@ -58,11 +65,11 @@ export default function WorkflowClient({ workflow }: WorkflowClientProps) {
                       0{idx + 1}
                     </div>
                   </div>
-                  
+
                   <h3 className="text-xl font-black text-white mb-4 group-hover:text-emerald-400 transition-colors uppercase tracking-wider">
                     {step.title}
                   </h3>
-                  
+
                   <Card className="bg-transparent border-none shadow-none">
                     <CardContent className="p-0">
                       <p className="text-slate-400 text-sm leading-relaxed max-w-[250px] mx-auto">
