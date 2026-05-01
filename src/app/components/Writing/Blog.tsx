@@ -2,10 +2,10 @@ import { connectDB } from "@/lib/mongodb";
 import BlogModel from "@/models/Blog";
 import BlogClient from "./BlogClient";
 
-async function getBlogs() {
+async function getBlogs(): Promise<any[]> {
   await connectDB();
-  const blogs = await BlogModel.find().sort({ order: 1 }).lean();
-  return JSON.parse(JSON.stringify(blogs));
+  const raw = await BlogModel.find().sort({ createdAt: -1 }).limit(3).lean();
+  return JSON.parse(JSON.stringify(raw));
 }
 
 export default async function Blog() {

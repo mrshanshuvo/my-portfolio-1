@@ -5,7 +5,7 @@ import ProjectsClient from "./ProjectsClient";
 
 async function getProjects(): Promise<Project[]> {
   await connectDB();
-  const raw = await ProjectModel.find().sort({ order: 1, createdAt: -1 }).lean();
+  const raw = await ProjectModel.find({ featured: true }).sort({ order: 1, createdAt: -1 }).lean();
   return raw.map((p) => ({
     _id: p._id.toString(),
     title: p.title,

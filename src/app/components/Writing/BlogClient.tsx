@@ -1,9 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
 import { Blog } from "@/types";
+import Link from "next/link";
 import { FaPenNib, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
+import BlogCard from "./BlogCard";
+import { Button } from "@/components/ui/button";
 
 interface BlogClientProps {
   blogs: Blog[];
@@ -36,67 +40,36 @@ export default function BlogClient({ blogs }: BlogClientProps) {
             viewport={{ once: true }}
             className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed"
           >
-            Sharing my thoughts on software engineering, machine learning, and the future of technology.
+            Sharing my thoughts on software engineering, machine learning, and
+            the future of technology.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {blogs.map((blog, idx) => (
-            <motion.a
-              key={blog._id}
-              href={blog.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="group block"
-            >
-              <Card className="h-full rounded-[2.5rem] bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500 overflow-hidden shadow-none">
-                <CardHeader className="p-8 pb-0">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex gap-2">
-                      {blog.tags.slice(0, 2).map((tag, tIdx) => (
-                        <Badge key={tIdx} variant="outline" className="text-[10px] font-black text-blue-400 uppercase tracking-widest px-3 py-1 rounded-full bg-blue-400/10 border-none">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                    <div className="flex items-center gap-2 text-slate-500 text-xs font-bold">
-                      <FaCalendarAlt size={12} />
-                      {blog.date}
-                    </div>
-                  </div>
-
-                  {blog.image && (
-                    <div className="relative aspect-video rounded-2xl overflow-hidden mb-6 border border-white/5">
-                      <img
-                        src={blog.image}
-                        alt={blog.title}
-                        className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                      />
-                    </div>
-                  )}
-
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors line-clamp-2">
-                    {blog.title}
-                  </h3>
-                </CardHeader>
-                
-                <CardContent className="p-8 pt-0">
-                  <p className="text-slate-400 text-sm leading-relaxed mb-8 line-clamp-3">
-                    {blog.description}
-                  </p>
-
-                  <div className="flex items-center gap-2 text-blue-500 font-bold text-sm">
-                    Read Article <FaArrowRight className="group-hover:translate-x-2 transition-transform" />
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.a>
+            <BlogCard key={blog._id} blog={blog} index={idx} />
           ))}
         </div>
+
+        {/* View All Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex justify-center"
+        >
+          <Button
+            nativeButton={false}
+            render={<Link href="/blog" />}
+            className="group px-8 py-7 bg-slate-900/50 dark:bg-white text-white dark:text-slate-950 rounded-2xl text-lg font-black transition-all hover:scale-105 shadow-xl hover:shadow-blue-500/20 border border-white/10 dark:border-none"
+          >
+            Read All Articles
+            <FaArrowRight
+              className="ml-3 group-hover:translate-x-2 transition-transform"
+              size={16}
+            />
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

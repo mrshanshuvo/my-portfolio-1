@@ -2,9 +2,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import type { NavItem } from "@/types";
 import ThemeToggle from "../ThemeToggle";
-
 import { Button } from "@/components/ui/button";
 
 interface Props {
@@ -12,6 +13,8 @@ interface Props {
 }
 
 export default function Navbar({ resumeUrl }: Props) {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -26,6 +29,11 @@ export default function Navbar({ resumeUrl }: Props) {
   }, []);
 
   useEffect(() => {
+    if (pathname !== "/") {
+      setActiveSection("");
+      return;
+    }
+
     const sections = [
       "home",
       "about",
@@ -55,21 +63,25 @@ export default function Navbar({ resumeUrl }: Props) {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
-  const smoothScroll = (sectionId: string): void => {
+  const handleNavClick = (id: string): void => {
     setIsOpen(false);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
+    if (pathname === "/") {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+        });
 
-      if (window.history.pushState) {
-        window.history.pushState(null, "", `#${sectionId}`);
+        if (window.history.pushState) {
+          window.history.pushState(null, "", `#${id}`);
+        }
       }
+    } else {
+      router.push(`/#${id}`);
     }
   };
 
@@ -108,7 +120,7 @@ export default function Navbar({ resumeUrl }: Props) {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => smoothScroll("home")}
+                onClick={() => handleNavClick("home")}
                 className="flex items-center gap-3 group relative z-10"
                 aria-label="Scroll to home"
               >
@@ -130,7 +142,7 @@ export default function Navbar({ resumeUrl }: Props) {
                   {navItems.map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => smoothScroll(item.id)}
+                      onClick={() => handleNavClick(item.id)}
                       className="relative px-3 lg:px-4 py-2 group"
                       aria-current={
                         activeSection === item.id ? "page" : undefined
@@ -170,7 +182,6 @@ export default function Navbar({ resumeUrl }: Props) {
 
                 <div className="flex items-center gap-4">
                   <ThemeToggle />
-                  {/* Resume Button */}
                   <Button
                     nativeButton={false}
                     render={
@@ -228,7 +239,6 @@ export default function Navbar({ resumeUrl }: Props) {
             </div>
           </div>
 
-          {/* Mobile Menu */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -246,7 +256,7 @@ export default function Navbar({ resumeUrl }: Props) {
                   {navItems.map((item) => (
                     <button
                       key={item.id}
-                      onClick={() => smoothScroll(item.id)}
+                      onClick={() => handleNavClick(item.id)}
                       className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                         activeSection === item.id
                           ? scrolled

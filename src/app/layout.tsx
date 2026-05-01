@@ -30,7 +30,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   await connectDB();
   const settings = await Setting.findOne().lean();
   const accentColor = settings?.accentColor || "#10b981";

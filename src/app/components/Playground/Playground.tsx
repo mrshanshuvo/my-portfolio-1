@@ -2,10 +2,10 @@ import { connectDB } from "@/lib/mongodb";
 import DemoModel from "@/models/Demo";
 import PlaygroundClient from "./PlaygroundClient";
 
-async function getDemos() {
+async function getDemos(): Promise<any[]> {
   await connectDB();
-  const demos = await DemoModel.find().sort({ order: 1 }).lean();
-  return JSON.parse(JSON.stringify(demos));
+  const raw = await DemoModel.find().sort({ createdAt: -1 }).limit(4).lean();
+  return JSON.parse(JSON.stringify(raw));
 }
 
 export default async function Playground() {
