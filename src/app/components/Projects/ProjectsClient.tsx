@@ -56,14 +56,13 @@ export default function ProjectsClient({ projects }: Props) {
           viewport={{ once: true }}
           className="flex justify-center"
         >
-          <Button
-            nativeButton={false}
-            render={<Link href="/projects" />}
-            className="group px-8 py-7 bg-slate-900 dark:bg-white text-white dark:text-slate-950 rounded-2xl text-lg font-black transition-all hover:scale-105 shadow-xl hover:shadow-emerald-500/20"
+          <Link
+            href="/projects"
+            className="group px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-950 rounded-2xl text-lg font-black transition-all hover:scale-105 shadow-xl hover:shadow-emerald-500/20 flex items-center gap-3"
           >
             View All Projects 
-            <FaExternalLinkAlt className="ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} />
-          </Button>
+            <FaExternalLinkAlt className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} />
+          </Link>
         </motion.div>
 
         {projects.length === 0 && (

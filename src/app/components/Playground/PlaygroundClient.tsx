@@ -56,14 +56,13 @@ export default function PlaygroundClient({ demos }: PlaygroundClientProps) {
           viewport={{ once: true }}
           className="flex justify-center"
         >
-          <Button
-            nativeButton={false}
-            render={<Link href="/playground" />}
-            className="group px-8 py-7 bg-slate-900/50 dark:bg-white text-white dark:text-slate-950 rounded-2xl text-lg font-black transition-all hover:scale-105 shadow-xl hover:shadow-purple-500/20 border border-white/10 dark:border-none"
+          <Link
+            href="/playground"
+            className="group px-8 py-4 bg-slate-900/50 dark:bg-white text-white dark:text-slate-950 rounded-3xl text-lg font-black transition-all hover:scale-105 shadow-xl hover:shadow-purple-500/20 border border-white/10 dark:border-none flex items-center gap-3"
           >
             Explore Full Lab 
-            <FaArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" size={16} />
-          </Button>
+            <FaArrowRight className="group-hover:translate-x-2 transition-transform" size={16} />
+          </Link>
         </motion.div>
       </div>
     </section>
