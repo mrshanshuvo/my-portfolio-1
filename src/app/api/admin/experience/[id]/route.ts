@@ -10,7 +10,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   await connectDB();
   const { id } = await params;
   const body = await request.json();
-  const exp = await Experience.findByIdAndUpdate(id, body, { new: true, runValidators: true });
+  const exp = await Experience.findByIdAndUpdate(id, body, { returnDocument: "after", runValidators: true });
   if (!exp) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(exp);
 }

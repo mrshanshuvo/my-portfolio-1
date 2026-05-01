@@ -33,7 +33,7 @@ export async function PUT(request: Request) {
 
   // 1. Update Hero
   const hero = await Hero.findOneAndUpdate({}, heroData, {
-    new: true,
+    returnDocument: "after",
     upsert: true,
     runValidators: true,
   });

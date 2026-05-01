@@ -48,7 +48,7 @@ export async function PUT(request: Request) {
     techList: body.techList || [],
   };
   const about = await About.findOneAndUpdate({}, aboutData, {
-    new: true,
+    returnDocument: "after",
     upsert: true,
     runValidators: true,
   });

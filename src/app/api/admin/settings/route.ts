@@ -31,7 +31,7 @@ export async function PATCH(req: Request) {
     const settings = await Setting.findOneAndUpdate(
       {},
       { $set: body },
-      { upsert: true, new: true },
+      { upsert: true, returnDocument: "after" },
     );
 
     return NextResponse.json(settings);

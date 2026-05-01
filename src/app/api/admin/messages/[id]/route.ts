@@ -32,7 +32,7 @@ export async function PATCH(
     const { id } = await params;
     const { status } = await req.json();
     await connectDB();
-    const updated = await Message.findByIdAndUpdate(id, { status }, { new: true });
+    const updated = await Message.findByIdAndUpdate(id, { status }, { returnDocument: "after" });
     if (!updated) return NextResponse.json({ error: "Message not found" }, { status: 404 });
     return NextResponse.json(updated);
   } catch (error) {
