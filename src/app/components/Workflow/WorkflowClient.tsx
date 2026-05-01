@@ -12,7 +12,7 @@ export default function WorkflowClient({ workflow }: WorkflowClientProps) {
   return (
     <section
       id="workflow"
-      className="py-24 bg-slate-950/50 relative overflow-hidden"
+      className="py-24 bg-slate-50 dark:bg-slate-950/50 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
@@ -30,14 +30,14 @@ export default function WorkflowClient({ workflow }: WorkflowClientProps) {
             >
               <Icons.FaCodeBranch /> The Process
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight whitespace-nowrap">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Development{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-teal-500">
                 Lifecycle
               </span>
             </h2>
           </div>
-          <p className="text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
+          <p className="text-slate-600 dark:text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
             A systematic approach to engineering excellence, ensuring every
             project is delivered with precision and industrial-grade quality.
           </p>
@@ -59,20 +59,20 @@ export default function WorkflowClient({ workflow }: WorkflowClientProps) {
                   transition={{ delay: idx * 0.1 }}
                   className="relative flex flex-col items-center text-center group"
                 >
-                  <div className="relative z-10 w-24 h-24 rounded-full bg-slate-900 border-4 border-slate-950 shadow-[0_0_50px_rgba(16,185,129,0.1)] flex items-center justify-center text-emerald-400 mb-8 group-hover:scale-110 group-hover:border-emerald-500/30 transition-all duration-500">
+                  <div className="relative z-10 w-24 h-24 rounded-full bg-white dark:bg-slate-900 border-4 border-slate-100 dark:border-slate-950 shadow-[0_0_50px_rgba(16,185,129,0.1)] flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-8 group-hover:scale-110 group-hover:border-emerald-500/30 transition-all duration-500">
                     <Icon size={32} />
-                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-emerald-500 text-slate-950 text-xs font-black flex items-center justify-center border-4 border-slate-950">
+                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-emerald-500 text-white dark:text-slate-950 text-xs font-black flex items-center justify-center border-4 border-white dark:border-slate-950">
                       0{idx + 1}
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-black text-white mb-4 group-hover:text-emerald-400 transition-colors uppercase tracking-wider">
+                  <h3 className="text-xl font-black text-slate-900 dark:text-white mb-4 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors uppercase tracking-wider">
                     {step.title}
                   </h3>
 
                   <Card className="bg-transparent border-none shadow-none">
                     <CardContent className="p-0">
-                      <p className="text-slate-400 text-sm leading-relaxed max-w-[250px] mx-auto">
+                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-[250px] mx-auto">
                         {step.description}
                       </p>
                     </CardContent>

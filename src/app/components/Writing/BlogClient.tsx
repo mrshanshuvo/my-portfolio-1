@@ -15,7 +15,10 @@ interface BlogClientProps {
 
 export default function BlogClient({ blogs }: BlogClientProps) {
   return (
-    <section id="blog" className="py-24 bg-slate-950 relative overflow-hidden">
+    <section
+      id="blog"
+      className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -32,11 +35,11 @@ export default function BlogClient({ blogs }: BlogClientProps) {
             >
               <FaPenNib /> The Journal
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight whitespace-nowrap">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Latest <span className="text-blue-500">Writing</span>
             </h2>
           </div>
-          <p className="text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
+          <p className="text-slate-600 dark:text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
             Sharing my technical insights on software engineering, machine
             intelligence, and the architectural future of modern technology.
           </p>
@@ -57,7 +60,7 @@ export default function BlogClient({ blogs }: BlogClientProps) {
         >
           <Link
             href="/blog"
-            className="group px-8 py-4 bg-slate-900/50 dark:bg-white text-white dark:text-slate-950 rounded-2xl text-lg font-black transition-all hover:scale-105 shadow-xl hover:shadow-blue-500/20 border border-white/10 dark:border-none flex items-center gap-3"
+            className="group px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-950 rounded-2xl text-lg font-black transition-all hover:scale-105 shadow-xl hover:shadow-blue-500/20 flex items-center gap-3"
           >
             Read All Articles
             <FaArrowRight

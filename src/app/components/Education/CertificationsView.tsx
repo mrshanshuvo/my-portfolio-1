@@ -32,11 +32,11 @@ export default function CertificationsView({
             >
               <FaAward /> The Validation
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight whitespace-nowrap">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Academic & <span className="text-amber-500">Credentials</span>
             </h2>
           </div>
-          <p className="text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
+          <p className="text-slate-600 dark:text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
             A validation of my continuous commitment to learning and staying at
             the forefront of technology.
           </p>
@@ -51,8 +51,8 @@ export default function CertificationsView({
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
             >
-              <Card className="flex items-center gap-6 p-6 rounded-3xl bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-amber-500/30 transition-all duration-300 group shadow-none">
-                <div className="w-16 h-16 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform overflow-hidden shrink-0">
+              <Card className="flex items-center gap-6 p-6 rounded-3xl bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 hover:border-amber-500/30 transition-all duration-300 group shadow-sm hover:shadow-xl">
+                <div className="w-16 h-16 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-500 group-hover:scale-110 transition-transform overflow-hidden shrink-0">
                   {cert.image ? (
                     <img
                       src={cert.image}
@@ -64,10 +64,10 @@ export default function CertificationsView({
                   )}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-white font-bold mb-1 group-hover:text-amber-400 transition-colors">
+                  <h3 className="text-slate-900 dark:text-white font-bold mb-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
                     {cert.title}
                   </h3>
-                  <p className="text-slate-400 text-sm mb-2 font-medium">
+                  <p className="text-slate-600 dark:text-slate-400 text-sm mb-2 font-medium">
                     {cert.issuer}
                   </p>
                   <div className="flex items-center gap-4">

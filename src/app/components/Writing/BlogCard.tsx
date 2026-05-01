@@ -22,7 +22,7 @@ export default function BlogCard({ blog, index }: BlogCardProps) {
       transition={{ delay: index * 0.1 }}
       className="group block"
     >
-      <Card className="h-full rounded-[2.5rem] bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500 overflow-hidden shadow-none">
+      <Card className="h-full rounded-[2.5rem] bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 hover:border-blue-500/30 transition-all duration-500 overflow-hidden shadow-sm hover:shadow-xl">
         <CardHeader className="p-8 pb-0">
           <div className="flex items-center justify-between mb-6">
             <div className="flex gap-2">
@@ -36,7 +36,7 @@ export default function BlogCard({ blog, index }: BlogCardProps) {
                 </Badge>
               ))}
             </div>
-            <div className="flex items-center gap-2 text-slate-500 text-xs font-bold">
+            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-bold">
               <FaCalendarAlt size={12} />
               {blog.date}
             </div>
@@ -52,13 +52,13 @@ export default function BlogCard({ blog, index }: BlogCardProps) {
             </div>
           )}
 
-          <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors line-clamp-2">
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-blue-500 transition-colors line-clamp-2">
             {blog.title}
           </h3>
         </CardHeader>
 
         <CardContent className="p-8 pt-0">
-          <p className="text-slate-400 text-sm leading-relaxed mb-8 line-clamp-3">
+          <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-8 line-clamp-3">
             {blog.description}
           </p>
 

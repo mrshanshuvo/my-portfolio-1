@@ -31,14 +31,14 @@ export default function ServicesClient({ services }: ServicesClientProps) {
             >
               <Icons.FaShieldAlt /> The Solutions
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight whitespace-nowrap">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Technical{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-indigo-500">
                 Expertise
               </span>
             </h2>
           </div>
-          <p className="text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
+          <p className="text-slate-600 dark:text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
             Leveraging cutting-edge technologies to deliver high-performance
             solutions tailored to your specific engineering requirements.
           </p>
@@ -56,20 +56,20 @@ export default function ServicesClient({ services }: ServicesClientProps) {
                 transition={{ delay: idx * 0.1 }}
                 whileHover={{ y: -10 }}
               >
-                <Card className="group relative h-full rounded-[2.5rem] bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-emerald-500/30 transition-all duration-500 overflow-hidden">
+                <Card className="group relative h-full rounded-[2.5rem] bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 hover:border-emerald-500/30 transition-all duration-500 overflow-hidden shadow-sm hover:shadow-xl">
                   <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   <CardHeader className="relative z-10 p-8 pb-0">
-                    <div className="w-16 h-16 rounded-2xl bg-slate-950 flex items-center justify-center text-emerald-400 mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 border border-white/5 shadow-2xl">
+                    <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-950 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 border border-slate-200 dark:border-white/5 shadow-2xl">
                       <Icon size={32} />
                     </div>
-                    <CardTitle className="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                    <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                       {service.title}
                     </CardTitle>
                   </CardHeader>
 
                   <CardContent className="relative z-10 p-8 pt-4">
-                    <p className="text-slate-400 leading-relaxed mb-6">
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
                       {service.description}
                     </p>
 
@@ -77,7 +77,7 @@ export default function ServicesClient({ services }: ServicesClientProps) {
                       {service.features.map((feature, fIdx) => (
                         <li
                           key={fIdx}
-                          className="flex items-center gap-3 text-sm text-slate-300"
+                          className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300"
                         >
                           <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                           {feature}

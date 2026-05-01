@@ -32,11 +32,11 @@ export default function TestimonialsClient({
             >
               <FaQuoteLeft /> The Feedback
             </motion.div>
-            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight whitespace-nowrap">
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight whitespace-nowrap">
               Client <span className="text-blue-500">Testimonials</span>
             </h2>
           </div>
-          <p className="text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
+          <p className="text-slate-600 dark:text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
             Don't just take my word for it. Here's what my clients and
             colleagues have to say about our collaboration.
           </p>
@@ -52,19 +52,19 @@ export default function TestimonialsClient({
               transition={{ delay: idx * 0.1 }}
               className="break-inside-avoid"
             >
-              <Card className="relative p-8 rounded-[2rem] bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500 group shadow-none">
+              <Card className="relative p-8 rounded-[2rem] bg-white dark:bg-slate-900/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 hover:border-blue-500/30 transition-all duration-500 group shadow-sm hover:shadow-xl">
                 <FaQuoteLeft
                   className="text-blue-500/20 mb-6 group-hover:text-blue-500/40 transition-colors"
                   size={40}
                 />
 
                 <CardContent className="p-0">
-                  <p className="text-slate-200 text-lg leading-relaxed mb-8 italic">
+                  <p className="text-slate-700 dark:text-slate-200 text-lg leading-relaxed mb-8 italic">
                     "{item.content}"
                   </p>
 
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-slate-500 overflow-hidden border border-white/10">
+                    <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 overflow-hidden border border-slate-200 dark:border-white/10">
                       {item.avatar ? (
                         <img
                           src={item.avatar}
@@ -76,8 +76,8 @@ export default function TestimonialsClient({
                       )}
                     </div>
                     <div>
-                      <h4 className="text-white font-bold">{item.name}</h4>
-                      <p className="text-slate-500 text-xs font-medium uppercase tracking-wider">
+                      <h4 className="text-slate-900 dark:text-white font-bold">{item.name}</h4>
+                      <p className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">
                         {item.role} {item.company && `@ ${item.company}`}
                       </p>
                     </div>
