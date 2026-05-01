@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 import dns from "dns";
 
 // Fix Node.js DNS resolution issues on Windows
-try {
-  dns.setServers(["8.8.8.8", "8.8.4.4"]);
-} catch (error) {
-  console.error("Failed to set DNS servers:", error);
-}
+// try {
+//   dns.setServers(["8.8.8.8", "8.8.4.4"]);
+// } catch (error) {
+//   console.error("Failed to set DNS servers:", error);
+// }
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 
