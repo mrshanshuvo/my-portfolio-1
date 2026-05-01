@@ -36,6 +36,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body
         className={`${geistSans.className} ${geistMono.className} antialiased bg-white text-gray-900`}
         style={{ "--dynamic-accent": accentColor } as any}
+        suppressHydrationWarning
       >
         <RecaptchaProvider>{children}</RecaptchaProvider>
       </body>

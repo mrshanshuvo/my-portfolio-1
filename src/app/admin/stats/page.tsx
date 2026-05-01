@@ -31,20 +31,20 @@ export default function AdminStatsPage() {
   }
 
   useEffect(() => {
-    fetch("/api/admin/about")
+    fetch("/api/admin/stats")
       .then((r) => r.json())
       .then((d) => {
-        setStats(d.stats || []);
+        setStats(Array.isArray(d) ? d : []);
         setLoading(false);
       });
   }, []);
 
   async function handleSave() {
     setSaving(true);
-    const res = await fetch("/api/admin/about", {
+    const res = await fetch("/api/admin/stats", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ stats }),
+      body: JSON.stringify(stats),
     });
     setSaving(false);
     if (res.ok) showToast("Stats updated!");

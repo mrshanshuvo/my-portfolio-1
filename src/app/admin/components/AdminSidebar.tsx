@@ -14,6 +14,7 @@ import {
   FaChevronRight,
   FaRocket,
   FaChartLine,
+  FaChartBar,
   FaGraduationCap,
   FaLink,
   FaQuoteLeft,
@@ -62,6 +63,12 @@ const navItems = [
     label: "Biography",
     icon: FaUser,
     color: "text-pink-400",
+  },
+  {
+    href: "/admin/stats",
+    label: "Stats & Milestones",
+    icon: FaChartBar,
+    color: "text-amber-400",
   },
   {
     type: "label",

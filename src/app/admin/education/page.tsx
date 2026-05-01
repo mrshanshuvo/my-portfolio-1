@@ -37,20 +37,20 @@ export default function AdminEducationPage() {
   }
 
   useEffect(() => {
-    fetch("/api/admin/about")
+    fetch("/api/admin/education")
       .then((r) => r.json())
       .then((d) => {
-        setEducation(d.education || []);
+        setEducation(Array.isArray(d) ? d : []);
         setLoading(false);
       });
   }, []);
 
   async function handleSave() {
     setSaving(true);
-    const res = await fetch("/api/admin/about", {
+    const res = await fetch("/api/admin/education", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ education }),
+      body: JSON.stringify(education),
     });
     setSaving(false);
     if (res.ok) showToast("Education saved!");

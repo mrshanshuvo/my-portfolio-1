@@ -12,6 +12,7 @@ import {
   FaArrowRight,
   FaRocket,
   FaChartLine,
+  FaChartBar,
   FaEnvelope,
   FaQuoteLeft,
   FaAward,
@@ -177,6 +178,15 @@ const sections = [
     iconColor: "text-purple-400",
   },
   {
+    href: "/admin/stats",
+    label: "Stats & Milestones",
+    desc: "Showcase your achievements in numbers (projects, years, etc.)",
+    icon: FaChartBar,
+    color: "amber",
+    gradient: "from-amber-500/20 to-amber-600/5 border-amber-500/20",
+    iconColor: "text-amber-400",
+  },
+  {
     href: "/admin/skills",
     label: "Skills & Tech",
     desc: "Manage your technical expertise and proficiency levels",
@@ -318,7 +328,7 @@ export default async function AdminDashboard() {
     {
       label: "Professional Identity",
       items: sections.filter((s) =>
-        ["Identity", "Social Links", "Biography", "Skills & Tech"].includes(
+        ["Identity", "Social Links", "Biography", "Stats & Milestones", "Skills & Tech"].includes(
           s.label,
         ),
       ),

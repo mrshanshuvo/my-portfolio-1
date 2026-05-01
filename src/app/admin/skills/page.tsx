@@ -68,21 +68,20 @@ export default function AdminSkillsPage() {
   }
 
   useEffect(() => {
-    fetch("/api/admin/about")
+    fetch("/api/admin/skills")
       .then((r) => r.json())
       .then((d) => {
-        setSkills(d.skills || []);
+        setSkills(Array.isArray(d) ? d : []);
         setLoading(false);
       });
   }, []);
 
   async function handleSave() {
     setSaving(true);
-    // Use the granular about endpoint which handles skills
-    const res = await fetch("/api/admin/about", {
+    const res = await fetch("/api/admin/skills", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ skills }),
+      body: JSON.stringify(skills),
     });
     setSaving(false);
     if (res.ok) showToast("Skills saved!");

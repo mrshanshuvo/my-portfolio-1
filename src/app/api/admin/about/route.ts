@@ -40,7 +40,8 @@ export async function PUT(request: Request) {
   await connectDB();
   const body = await request.json();
 
-  // 1. Update About
+  // Only manage what this route owns: bio text, highlights, techList.
+  // Skills → /api/admin/skills, Stats → /api/admin/stats, Education → /api/admin/education
   const aboutData = {
     aboutBio: `${body.bio1 || ""}\n\n${body.bio2 || ""}`.trim(),
     highlights: body.highlights || [],
@@ -51,48 +52,6 @@ export async function PUT(request: Request) {
     upsert: true,
     runValidators: true,
   });
-
-  // 2. Update Skills
-  if (Array.isArray(body.skills)) {
-    await Skill.deleteMany({});
-    if (body.skills.length > 0) {
-      await Skill.insertMany(body.skills.map((s: any) => ({
-        name: s.name,
-        tech: s.tech,
-        level: s.level,
-        iconName: s.iconName,
-        order: s.order || 0
-      })));
-    }
-  }
-
-  // 3. Update Stats
-  if (Array.isArray(body.stats)) {
-    await Stat.deleteMany({});
-    if (body.stats.length > 0) {
-      await Stat.insertMany(body.stats.map((s: any) => ({
-        number: s.number,
-        label: s.label,
-        order: s.order || 0
-      })));
-    }
-  }
-
-  // 4. Update Education
-  if (Array.isArray(body.education)) {
-    await Experience.deleteMany({ type: "education" });
-    for (const edu of body.education) {
-      await Experience.create({
-        title: edu.degree,
-        org: edu.institution,
-        duration: edu.period,
-        details: [edu.details],
-        type: "education",
-        color: "blue",
-        order: 0,
-      });
-    }
-  }
 
   return NextResponse.json({ success: true, about });
 }
