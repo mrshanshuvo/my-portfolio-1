@@ -22,7 +22,7 @@ export default function AdminLayout({
         </div>
 
         <AdminSidebar />
-        <main className="flex-1 relative z-10 overflow-auto custom-scrollbar">
+        <main className="flex-1 relative z-10 overflow-auto custom-scrollbar" data-lenis-prevent>
           {children}
         </main>
       </div>

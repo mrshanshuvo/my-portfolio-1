@@ -182,7 +182,10 @@ export default function AdminSidebar() {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 px-4 py-2 space-y-1.5 overflow-y-auto custom-scrollbar">
+      <nav 
+        className="flex-1 px-4 py-2 space-y-1.5 overflow-y-auto custom-scrollbar min-h-0"
+        data-lenis-prevent
+      >
         <div className="px-4 mb-4">
           <p className="text-[10px] font-bold text-slate-600 uppercase tracking-[0.2em]">
             Management
