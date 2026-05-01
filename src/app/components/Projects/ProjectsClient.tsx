@@ -189,6 +189,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             style={{ transform: "translateZ(50px)" }}
           >
             <Button
+              nativeButton={false}
               render={<Link href={`/projects/${project.slug}`} />}
               className="flex-1 text-center px-4 py-6 bg-slate-900 dark:bg-white hover:bg-emerald-600 dark:hover:bg-emerald-500 text-white dark:text-slate-900 dark:hover:text-white text-sm font-bold rounded-xl transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1"
             >
@@ -198,6 +199,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <Button
                 variant="outline"
                 size="icon"
+                nativeButton={false}
                 render={
                   <a
                     href={project.github}
@@ -215,6 +217,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <Button
                 variant="outline"
                 size="icon"
+                nativeButton={false}
                 render={
                   <a
                     href={project.live}

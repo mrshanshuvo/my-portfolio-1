@@ -148,6 +148,7 @@ export default function HeroClient({ hero }: Props) {
             <MagneticButton strength={20}>
               <Button
                 variant="outline"
+                nativeButton={false}
                 render={
                   <a
                     href={hero.resumeUrl}

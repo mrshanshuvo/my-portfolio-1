@@ -172,6 +172,7 @@ export default function Navbar({ resumeUrl }: Props) {
                   <ThemeToggle />
                   {/* Resume Button */}
                   <Button
+                    nativeButton={false}
                     render={
                       <a
                         href={resumeUrl}
