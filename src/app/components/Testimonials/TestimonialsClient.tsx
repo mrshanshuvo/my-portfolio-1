@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Testimonial } from "@/types";
 import { FaQuoteLeft, FaUserCircle } from "react-icons/fa";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface TestimonialsClientProps {
   testimonials: Testimonial[];
@@ -38,29 +39,33 @@ export default function TestimonialsClient({ testimonials }: TestimonialsClientP
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="break-inside-avoid relative p-8 rounded-[2rem] bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500 group"
+              className="break-inside-avoid"
             >
-              <FaQuoteLeft className="text-blue-500/20 mb-6 group-hover:text-blue-500/40 transition-colors" size={40} />
-              
-              <p className="text-slate-200 text-lg leading-relaxed mb-8 italic">
-                "{item.content}"
-              </p>
-
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-slate-500 overflow-hidden border border-white/10">
-                  {item.avatar ? (
-                    <img src={item.avatar} alt={item.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <FaUserCircle size={24} />
-                  )}
-                </div>
-                <div>
-                  <h4 className="text-white font-bold">{item.name}</h4>
-                  <p className="text-slate-500 text-xs font-medium uppercase tracking-wider">
-                    {item.role} {item.company && `@ ${item.company}`}
+              <Card className="relative p-8 rounded-[2rem] bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-blue-500/30 transition-all duration-500 group shadow-none">
+                <FaQuoteLeft className="text-blue-500/20 mb-6 group-hover:text-blue-500/40 transition-colors" size={40} />
+                
+                <CardContent className="p-0">
+                  <p className="text-slate-200 text-lg leading-relaxed mb-8 italic">
+                    "{item.content}"
                   </p>
-                </div>
-              </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-slate-500 overflow-hidden border border-white/10">
+                      {item.avatar ? (
+                        <img src={item.avatar} alt={item.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <FaUserCircle size={24} />
+                      )}
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold">{item.name}</h4>
+                      <p className="text-slate-500 text-xs font-medium uppercase tracking-wider">
+                        {item.role} {item.company && `@ ${item.company}`}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
         </div>

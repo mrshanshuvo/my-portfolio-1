@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { WorkflowStep } from "@/types";
 import * as Icons from "react-icons/fa";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface WorkflowClientProps {
   workflow: WorkflowStep[];
@@ -56,9 +57,14 @@ export default function WorkflowClient({ workflow }: WorkflowClientProps) {
                   <h3 className="text-xl font-black text-white mb-4 group-hover:text-emerald-400 transition-colors uppercase tracking-wider">
                     {step.title}
                   </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed max-w-[250px]">
-                    {step.description}
-                  </p>
+                  
+                  <Card className="bg-transparent border-none shadow-none">
+                    <CardContent className="p-0">
+                      <p className="text-slate-400 text-sm leading-relaxed max-w-[250px] mx-auto">
+                        {step.description}
+                      </p>
+                    </CardContent>
+                  </Card>
                 </motion.div>
               );
             })}

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Service } from "@/types";
 import * as Icons from "react-icons/fa";
-import { IconType } from "react-icons";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ServicesClientProps {
   services: Service[];
@@ -52,30 +52,34 @@ export default function ServicesClient({ services }: ServicesClientProps) {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
                 whileHover={{ y: -10 }}
-                className="group relative p-8 rounded-[2.5rem] bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-emerald-500/30 transition-all duration-500"
               >
-                <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-slate-950 flex items-center justify-center text-emerald-400 mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 border border-white/5 shadow-2xl">
-                    <Icon size={32} />
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-emerald-400 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-400 leading-relaxed mb-6">
-                    {service.description}
-                  </p>
+                <Card className="group relative h-full rounded-[2.5rem] bg-slate-900/40 backdrop-blur-xl border border-white/5 hover:border-emerald-500/30 transition-all duration-500 overflow-hidden">
+                  <div className="absolute inset-0 bg-linear-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  <ul className="space-y-3">
-                    {service.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-3 text-sm text-slate-300">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  <CardHeader className="relative z-10 p-8 pb-0">
+                    <div className="w-16 h-16 rounded-2xl bg-slate-950 flex items-center justify-center text-emerald-400 mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 border border-white/5 shadow-2xl">
+                      <Icon size={32} />
+                    </div>
+                    <CardTitle className="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+                  
+                  <CardContent className="relative z-10 p-8 pt-4">
+                    <p className="text-slate-400 leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+                    
+                    <ul className="space-y-3">
+                      {service.features.map((feature, fIdx) => (
+                        <li key={fIdx} className="flex items-center gap-3 text-sm text-slate-300">
+                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
               </motion.div>
             );
           })}
