@@ -111,7 +111,7 @@ export default function AdminWorkflowPage() {
               Workflow & Methodology
             </h1>
             <p className="text-slate-400">
-              Showcase your development process (The "How").
+              Showcase your development process (The &quot;How&quot;).
             </p>
           </div>
           <Button

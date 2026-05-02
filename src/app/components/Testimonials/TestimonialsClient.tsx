@@ -38,7 +38,7 @@ export default function TestimonialsClient({
             </h2>
           </div>
           <p className="text-slate-600 dark:text-slate-400 max-w-xl md:text-right text-md md:text-lg font-medium leading-relaxed line-clamp-2">
-            Don't just take my word for it. Here's what my clients and
+            Don&apos;t just take my word for it. Here&apos;s what my clients and
             colleagues have to say about our collaboration.
           </p>
         </motion.div>
@@ -61,7 +61,7 @@ export default function TestimonialsClient({
 
                 <CardContent className="p-0">
                   <p className="text-slate-700 dark:text-slate-200 text-lg leading-relaxed mb-8 italic">
-                    "{item.content}"
+                    &quot;{item.content}&quot;
                   </p>
 
                   <div className="flex items-center gap-4">
@@ -79,7 +79,9 @@ export default function TestimonialsClient({
                       )}
                     </div>
                     <div>
-                      <h4 className="text-slate-900 dark:text-white font-bold">{item.name}</h4>
+                      <h4 className="text-slate-900 dark:text-white font-bold">
+                        {item.name}
+                      </h4>
                       <p className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">
                         {item.role} {item.company && `@ ${item.company}`}
                       </p>

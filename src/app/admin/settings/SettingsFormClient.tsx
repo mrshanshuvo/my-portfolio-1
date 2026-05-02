@@ -133,7 +133,7 @@ export default function SettingsForm({
             <div>
               <p className="text-white font-bold text-sm">Open for Hiring</p>
               <p className="text-slate-500 text-[10px] uppercase tracking-wider font-bold">
-                Toggle "Hire Me" badges across the site.
+                Toggle &quot;Hire Me&quot; badges across the site.
               </p>
             </div>
             <button
