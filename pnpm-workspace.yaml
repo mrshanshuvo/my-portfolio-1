@@ -1,5 +1,5 @@
-onlyBuiltDependencies:
-  - '@tailwindcss/oxide'
-  - canvas
-  - sharp
-  - unrs-resolver
+allowBuilds:
+  esbuild: true
+  msw: true
+  sharp: true
+  unrs-resolver: true
