@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import dns from "dns";
 
 // Fix Node.js DNS resolution issues on Windows
 // try {
@@ -7,14 +6,6 @@ import dns from "dns";
 // } catch (error) {
 //   console.error("Failed to set DNS servers:", error);
 // }
-
-const MONGODB_URI = process.env.MONGODB_URI!;
-
-if (!MONGODB_URI) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable in .env.local",
-  );
-}
 
 // Extend the NodeJS global type to cache the mongoose connection
 declare global {
@@ -32,11 +23,20 @@ if (!cached) {
 }
 
 export async function connectDB(): Promise<mongoose.Connection> {
+  // Guard is inside the function so it only throws at runtime (on actual DB
+  // calls), not at module-load time during Next.js static page collection.
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    throw new Error(
+      "Please define the MONGODB_URI environment variable in your Vercel project settings (or .env.local for local dev).",
+    );
+  }
+
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
     cached.promise = mongoose
-      .connect(MONGODB_URI, { bufferCommands: false })
+      .connect(uri, { bufferCommands: false })
       .then((m) => m.connection);
   }
 
